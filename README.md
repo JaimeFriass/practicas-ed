@@ -1,1 +1,1 @@
-# practicas-ec
+# Prácticas ED
