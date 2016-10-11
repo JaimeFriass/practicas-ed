@@ -59,8 +59,6 @@ int main(int argc, char * argv[]){
   cout << std::chrono::duration_cast<std::chrono::nanoseconds>(tdespues-tantes).count() << "ns" << endl;
 
 
-  
-  //poh na
     
   return 0;
 
