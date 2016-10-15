@@ -46,10 +46,9 @@ void lee_fichero( const char * nf, vector<string> & V) {
  return la posicion en la que se encuentra la palabra, POS_NULA en caso contrario
  */
 
-void Ordenacion_insercción( vector<string> & v, string & s ){
+void Ordenacion_insercción( vector<string> & v ){
 	String tmp;
  int i, j;
- int N = v.length;
  for (i=1; i<v.size();i++){
 	 tmp=v[i];
 	 for(j=i;(j>0)&&( tmp<v[j-1] );j--)
