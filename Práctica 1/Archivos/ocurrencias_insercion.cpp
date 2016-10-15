@@ -47,7 +47,7 @@ void lee_fichero( const char * nf, vector<string> & V) {
  */
 
 void Ordenacion_insercción( vector<string> & v ){
-	String tmp;
+	string tmp;
  int i, j;
  for (i=1; i<v.size();i++){
 	 tmp=v[i];
@@ -55,7 +55,8 @@ void Ordenacion_insercción( vector<string> & v ){
 		 v[j]=v[j-1];
 	 v[j]=tmp;
  }
-	
+}
+
 	/* Contar ocurrencias de un string en el vector V
 	 V: vector sobre el que queremos buscar
 	 ini: primera posicion desde la que buscar
