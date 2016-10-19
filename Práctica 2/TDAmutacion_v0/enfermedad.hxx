@@ -13,21 +13,21 @@ enfermedad::enfermedad(){
 }
 
 enfermedad::enfermedad(const string & name, const string & ID, const string & database){
-	this.name = name;
-	this.ID = ID;
-	this.database = database;
+	this -> name = name;
+	this -> ID = ID;
+	this -> database = database;
 }
 
 void enfermedad::setName(const string & name){
-	this.name = name;
+	this -> name = name;
 }
 
 void enfermedad::setID(const string & ID){
-	this.ID = ID;
+	this -> ID = ID;
 }
 
 void enfermedad::setDatabase(const string & database){
-	this.database = database;
+	this -> database = database;
 }
 
 string enfermedad::getName( ){
@@ -44,16 +44,16 @@ string enfermedad::getDatabase( ){
 
 enfermedad & enfemedad::operator = (const enfermedad & e){
 	if (this != *e){
-		this.ID = e.getID();
-		this.name = e.getName();
-		this.database = e.getDatabase();
+		this -> ID = e.getID();
+		this -> name = e.getName();
+		this -> database = e.getDatabase();
 	}
 	
 	return this;
 }
 
 string enfermedad::toString() const {
-	return this.name + " : " + this.ID + "\tDB: " + this.database + "\n";
+	return this -> name + " : " + this -> ID + "\tDB: " + this -> database + "\n";
 }
 
 bool enfermedad::operator == (const enfermedad & e) const{
@@ -75,7 +75,7 @@ bool enfermedad::operator != (const enfermedad & e){
 }
 
 bool enfermedad::operator<(const enfermedad & e) const {
-	return (name < e.name);
+	return (name < e.getName());
 }
 
 bool enfermedad::nameContains(const string & str){
