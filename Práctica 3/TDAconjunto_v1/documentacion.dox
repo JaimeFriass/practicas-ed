@@ -1,0 +1,85 @@
+/*! \mainpage  Documentación Práctica
+ *
+\version v1
+\author  Carlos Cano y Juan F. Huete
+
+\tableofcontents
+
+\section introsec Introducción
+
+En la práctica anterior hemos creado el TDA Mutación y TDA Enfermedad. El objetivo de esta práctica es crear un TDA contenedor para almacenar y gestionar un conjunto de mutaciones. 
+
+\section conjunto Conjunto como TDA contenedor de información 
+
+Nuestro conjunto será un contenedor que permite almacenar la información de la base de datos de mutaciones. Para un mejor acceso, los elementos deben estar ordenados según chr/posición,  en orden creciente.  
+Como TDA, lo vamos a dotar de un conjunto restringido de métodos (inserción de elementos, consulta de un elemento por chr/pos o por ID, etc.). Este conjunto "simulará" un set de la stl, con algunas claras diferencias pues, entre otros,  no estará dotado de la capacidad de iterar (recorrer) a través de sus elementos, que se hará en las siguientes prácticas.
+
+Asociado al conjunto, tendremos los tipos
+\code 
+conjunto::value_type // tipo de dato almacenado en el conjunto
+
+conjunto::size_type  // numero de elementos del conjunto
+
+conjunto::iterator  // iterador sobre los elementos del conjunto
+
+conjunto::const_iterator //Iterador constante
+\endcode 
+que permiten hacer referencia a los elementos almacenados en cada una de las posiciones y el número de elementos del conjunto, respectivamente.
+Es requisito que el tipo conjunto::value_type tenga definidos los operadores operator< y operator= .
+
+\section rep Representación
+
+El alumno deberá realizar una implementación utilizando como base el TDA vector de la STL. 
+En particular, la representación que se utiliza es un VECTOR ORDENADO de entradas, teniendo en cuenta el valor de los atributos chr/pos, tal y como se especificó al definir el operator< en el TDA Enfermedad.
+ 
+\subsection fact_sec2 Función de Abstracción :
+
+Función de Abstracción:
+AF: Rep => Abs
+   
+    dado C =(vector<mutaciones> vm ) ==> Conjunto BD;
+
+Un objeto abstracto, BD, representando una colección ORDENADA de mutaciones según chr/pos, se instancia en la clase conjunto como un vector ordenado de mutaciones. 
+
+
+ 
+\subsection inv_sec2 Invariante de la Representación:
+
+
+Propiedades que debe cumplir cualquier objeto 
+
+\code
+BD.size() == C.vm.size();
+
+Para todo i, 0 <= i < C.vm.size() se cumple
+	C.vm[i].chr está en ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT")
+  C.vm[i].pos > 0;
+Para todo i, 0 <= i < C.vm.size()-1 se cumple:
+  a) si C.vm[i].chr == C.vm[i+1].chr, entonces: C.vm[i].pos < C.vm[i+1].pos
+  b) si C.vm[i].chr != C.vm[i+1].chr, entonces  C.vm[i].chr < C.vm[i+1].chr 
+  (donde el orden para el número de cromosoma se rige por "1"<"2"<"3"<...<"22"<"X"<"Y"<"MT")
+
+\endcode
+
+
+\section sec_tar "Se Entrega / Se Pide"
+
+\subsection ssEntrega Se entrega
+
+\li conjunto.h Plantilla con la especificación del TDA conjunto.
+\li Función de abstracción e Invariante de respresentación del TDA conjunto.
+\li principal.cpp Plantilla del fichero con el main del programa. Este programa debe tomar como entrada el fichero de datos "clinvar_20160831.vcf", cargar las mutaciones en un conjunto de mutaciones y exhibir la funcionalidad del TDA Conjunto.
+
+\subsection ssPide Se Pide
+
+\li conjunto.hxx Implementación del TDA conjunto.
+\li principal.cpp Completar su implementación. 
+\li Analizar la eficiencia teórica y empírica de las operaciones de inserción, búsqueda y borrado en el conjunto. 
+
+\section fecha "Fecha Límite de Entrega"
+
+La fecha límite de entrega será el 6 de Noviembre a las 23:50 hrs.
+
+
+*/
+
