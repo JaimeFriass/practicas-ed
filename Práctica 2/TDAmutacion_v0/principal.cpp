@@ -30,14 +30,12 @@ bool load(vector<mutacion> &  vm, const string & s) {
 
     //leo la tabla de mutaciones, una línea cada vez
     while ( !fe.eof() ){ 
-      getline(fe,cadena,'\n');
-      if (!fe.eof()) {
         //cout << "leo:: "<< cadena << endl;
         // Invoco el constructor de mutación que recibe una cadena completa, la parsea y crea la mutación.
         mutacion mut = mutacion(cadena);
         // Insertar mutación en el vector
         vm.push_back(mut); 
-      }
+        getline(fe,cadena,'\n');
     }
     fe.close();
     return true;
