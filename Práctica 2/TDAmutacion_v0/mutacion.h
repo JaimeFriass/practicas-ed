@@ -127,31 +127,68 @@ public:
  	/**
         @brief Devuelve si una mutación es común o no.
         @returns common	bool de si es común o no
-       */
+        */
 	bool getCommon () const;
  	/**
         @brief Devuelve el vector de las frecuencias de cada base.
         @returns caf	vector de las frecuencias
-       */
+        */
 	const vector<float> & getCaf () const;
  	/**
-        @brief Cambia el valor de ID
-        @param id	id de la mutación
-       */
+        @brief Devuelve el vector de las enfermedades.
+        @returns enfermedad	vector de las enfermedades
+        */
 	const vector<enfermedad> & getEnfermedades () const;
+ 	/**
+        @brief Devuelve el vector de enteros que conforman la relevancia clínica.
+        @returns clnsig	vector de enteros con la relevancia clínica.
+        */
 	const vector<int> & getClnsig () const;
 	
+ 	/**
+        @brief Devuelve la relevancia clínica convertida en el string hola
+        @returns hola	string con la relevancia clínica.
+        */
 	string imprime_Ref() const;	//Añado este método para imprimir el vector ref_alt
+ 	/**
+        @brief Devuelve la referencia de los genes convertida en el string hola
+        @returns hola	string con la referencia
+        */
 	string imprime_Genes() const;	//Lo mismo para genes
+ 	/**
+        @brief Devuelve la frecuencia de cada base.
+        @returns hola	string con la frecuencia
+        */
 	string imprime_Caf() const;	//eequilicuá
 	
+ 	/**
+        @brief Sobrecarga el operador = para ajustarlo a una mutación
+	@param m	mutación a la que se iguala
+        @returns *this
+        */
 	mutacion & operator=(const mutacion & m);
+ 	/**
+        @brief Sobrecarga el operador == para compararlo con una mutación
+	@param m	mutación a comparar
+	@returns iguales
+        */
 	bool operator==(const mutacion & m) const;
+ 	/**
+        @brief ESobrecarga el operador < para comparar una mutación
+	@param m	mutación a comparar
+	@returns menor
+        */
 	bool operator<(const mutacion & m) const;      //El orden viene determinado por Chr y pos. El primer criterio es el número de cromosoma. El orden para el número de cromosoma se rige por "1"<"2"<"3"<...<"22"<"X"<"Y"<"MT". Dos mutaciones del mismo cromosoma deben ordenarse según su posición, de menor posición a mayor (orden natural de enteros).
 	
 };
 
-ostream& operator<< ( ostream& , const mutacion& );   //Imprimir TODOS los campos del objeto mutación.
+ /**
+@brief Sobrecarga el operador << para imprimir mutaciones.
+@param os
+@param m	mutación a imprimir
+@returns os	flujo de impresión
+        */
+ostream& operator<< ( ostream& os, const mutacion& m);   //Imprimir TODOS los campos del objeto mutación.
 
 
 #include "mutacion.hxx"
