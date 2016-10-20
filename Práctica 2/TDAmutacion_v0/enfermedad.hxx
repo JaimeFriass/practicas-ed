@@ -1,5 +1,3 @@
-enfermedad.hxx
-
 #include <string>
 #include "enfermedad.h"
 #include <iostream>
@@ -43,7 +41,7 @@ string enfermedad::getDatabase( ){
 }
 
 enfermedad & enfemedad::operator = (const enfermedad & e){
-	if (this != *e){
+	if (this != &e){
 		this -> ID = e.getID();
 		this -> name = e.getName();
 		this -> database = e.getDatabase();
