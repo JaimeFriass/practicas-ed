@@ -35,27 +35,109 @@ private:
 	
 public:
 	
+	/**
+        @brief Inicia una mutacion vacía.
+       */
 	mutacion();
+	/**
+        @brief Crea una mutación a partir de otra.
+        @param mutacion 	mutación a copiar
+     
+        Copia los valores de la mutación pasada como argumento y crea una nueva a partir de ellos.
+        */
 	mutacion(const mutacion& m);
+	/**
+        @brief Crea una mutación a partir de un string.
+        @param mutacion 	cadena string con los datos miembro de la clase
+     
+        Se le pasa un string como argumento y se recorre este guardando los correspondientes datos miembro.
+        */
 	mutacion(const string & str);   //para crear objeto mutacion a partir de la cadena que contiene una línea completa del fichero de entrada
- 
+ 	/**
+        @brief Cambia el valor de ID
+        @param id	id de la mutación
+       */
 	void setID(const string & id);
+ 	/**
+        @brief Cambia el valor del cromosoma
+        @param chr	nuevo cromosoma
+       */
 	void setChr(const string & chr);
+ 	/**
+        @brief Cambia el valor de la posición
+        @param pos	posicion nueva
+       */
 	void setPos(const unsigned int & pos);
+ 	/**
+        @brief Cambia el valor del genoma básico
+        @param ref_alt	vector de string que contiene el genoma tipo
+       */
 	void setRef_alt(const vector<string> & ref_alt);
+ 	/**
+        @brief Cambia el valor de los genes
+        @param genes	vector con los genes
+       */
 	void setGenes (const vector<string> & genes);
+ 	/**
+        @brief Cambia el valor del bool de si es común o no la mutación
+        @param common	nuevo bool
+       */
 	void setCommon (const bool & common);
+ 	/**
+        @brief Cambia el valor de la frecuencia de cada base
+        @param caf	nuevo vector con frecuencias
+       */
 	void setCaf (const vector<float> & caf);
+ 	/**
+        @brief Cambia el valor del vector de enfermedades
+        @param enfermedades	nuevo vector con enfermedades
+       */
 	void setEnfermedades (const vector<enfermedad> & enfermedades);
+ 	/**
+        @brief Cambia la relevancia clínica.
+        @param clnsig	nuevo vector de enteros
+       */
 	void setClnsig (const vector<int> & clnsig);
 	
+ 	/**
+        @brief Devuelve el ID de la mutación
+        @returns ID	valor del id de la mutación
+       */
 	string getID( ) const;
+ 	/**
+        @brief Devuelve el identificador del cromosoma
+        @returns chr	identificador del cromosoma
+       */
 	string getChr( ) const;
+ 	/**
+        @brief Devuelve la posición del cromosoma.
+        @returns pos	posición del cromosoma
+       */
 	unsigned int getPos( ) const;
+ 	/**
+        @brief Devuelve el vector del genoma básico
+        @returns ref_alt	vector del genoma básico
+       */
 	const vector<string> & getRef_alt () const;
+ 	/**
+        @brief Devuelve el vector de los genes.
+        @returns genes	vector de los genes
+       */
 	const vector<string> & getGenes () const;
+ 	/**
+        @brief Devuelve si una mutación es común o no.
+        @returns common	bool de si es común o no
+       */
 	bool getCommon () const;
+ 	/**
+        @brief Devuelve el vector de las frecuencias de cada base.
+        @returns caf	vector de las frecuencias
+       */
 	const vector<float> & getCaf () const;
+ 	/**
+        @brief Cambia el valor de ID
+        @param id	id de la mutación
+       */
 	const vector<enfermedad> & getEnfermedades () const;
 	const vector<int> & getClnsig () const;
 	
