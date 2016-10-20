@@ -19,16 +19,16 @@ mutacion::mutacion(const mutacion& m){
 	pos = m.getPos();
 	caf = m.getCaf();
 	enfermedades = m.getEnfermedades();
-	ref_alt = m.getRel_alt();
+	ref_alt = m.getRef_alt();
 	genes = m.getGenes();
-	common = m.getCommon;
-	clnsig = getClosing();
+	common = m.getCommon();
+	clnsig = getClnsig();
 }
 
 //para crear objeto mutacion a partir de la cadena que contiene una línea completa del fichero de entrada
 mutacion::mutacion(const string & str){
 	string strID, str_chr, strpos, strcaf, strenfermedades, strref, strgenes, strcommon, strclnsig;
-	for (int i = 0; i < str.length; i++)
+	for (int i = 0; i < str.length(); i++){
 		while (str[i] != '\t')
 			strID = strID + str[i];
 	i++;
@@ -58,6 +58,8 @@ mutacion::mutacion(const string & str){
 	i++;
 	while (str[i] != '\t')
 		strclnsig = strclnsig + str[i];
+	i++;
+	}
 }
 
 void mutacion::setID(const string & id){
@@ -65,7 +67,8 @@ void mutacion::setID(const string & id){
 }
 
 void mutacion::setChr(const string & chr){
-	if((atoi(chr) >= 1 && atoi(chr) <= 22) || strcmp(this -> chr, "X") == 0 || strcmp(this -> chr, "Y") == 0 || strcmp(this -> chr, "MT") == 0){
+	size_t lastChar;
+	if((stoi(chr, &lastChar, 10) >= 1 && stoi(chr, &lastChar, 10) <= 22) || (this -> chr).compare("X") == 0 || (this -> chr).compare("Y") == 0 || (this -> chr).compare("MT") == 0){
 		(this -> chr) = chr;
 	}
 }
@@ -113,8 +116,8 @@ void mutacion::setEnfermedades (const vector<enfermedad> & enfermedades){
 }
 
 void mutacion::setClnsig (const vector<int> & clnsig){
-	for(int i = 0; i < clnsing.size(); i++){
-		this -> clsing.pushback(clnsing[i]);
+	for(int i = 0; i < clnsig.size(); i++){
+		this -> clnsig.push_back(clnsig[i]);
 	}
 }
 
@@ -134,7 +137,7 @@ const vector<string> & mutacion::getRef_alt () const{
 	return ref_alt;
 }
 
-const vector<string> & mutacgetGenes () const{
+const vector<string> & mutacion::getGenes() const{
 	return genes;
 }
 
@@ -147,12 +150,12 @@ const vector<float> & mutacion::getCaf () const{
 	return caf;
 }
 
-vector<enfermedad> & mutacion::getEnfermedades () const{
+const vector<enfermedad> & mutacion::getEnfermedades () const{
 	return enfermedades;
 }
 
 const vector<int> & mutacion::getClnsig () const{
-	return getClnsig;
+	return clnsig;
 }
 
 mutacion & mutacion::operator = (const mutacion & m){
@@ -163,12 +166,12 @@ mutacion & mutacion::operator = (const mutacion & m){
 		setRef_alt(m.getRef_alt());
 		setGenes(m.getGenes());
 		setCommon(m.getCommon());
-		setCaf(,.getCaf());
+		setCaf(m.getCaf());
 		setEnfermedades(m.getEnfermedades());
 		setClnsig(m.getClnsig());
 	}
 	
-	return this;
+	return *this;
 }
 
 bool mutacion::operator == (const mutacion & m) const{
@@ -182,7 +185,7 @@ bool mutacion::operator == (const mutacion & m) const{
 		   common == m.common &&
 		   m.caf.size() == caf.size() &&
 		   enfermedades.size() == m.enfermedades.size() &&
-		   clnsig.size() == m.clsing.size() )
+		   clnsig.size() == m.clnsig.size() )
 			iguales = true;
 	}
 	else
@@ -191,11 +194,11 @@ bool mutacion::operator == (const mutacion & m) const{
 	return iguales;
 }
 
-bool operator < (const mutacion & m) const{
+bool mutacion::operator < (const mutacion & m) const{
 	bool menor = false;
 	
 	if(this != &m){
-		if (pos < m.getPos()){
+		if ((getPos()) < m.getPos()){
 			if(chr.compare(m.getChr()) < 0){
 				menor = true;
 			}
@@ -205,10 +208,40 @@ bool operator < (const mutacion & m) const{
 	return menor;
 }
 
+string mutacion::imprime_Ref() const{
+	string hola;
+	
+	for (int i = 0; i < ref_alt.size(); i++){
+		hola = hola + ref_alt[i];
+	}
+	
+	return hola;
+}
 
-ostream& operator<< ( ostream& os, const mutacion&) {
-	os << ID << "\t" << chr << "\t" << pos << "\t" << ref_alt << "\t" << genes
-	<< "\t" << common << "\t" << caf << "\t" << enfermedades << "\t"
-	<< clnsig << endl;
+string mutacion::imprime_Genes() const{
+	string hola;
+	
+	for (int i = 0; i < genes.size(); i++){
+		hola = hola + genes[i];
+	}
+	
+	return hola;
+}
+
+string mutacion::imprime_Caf() const{
+	string hola;
+	
+	for (int i = 0; i < genes.size(); i++){
+		hola = hola + to_string(caf[i]);
+	}
+	
+	return hola;
+}
+
+ostream& operator<< ( ostream& os, const mutacion& m) {
+	os << m.getID() << "\t" << m.getChr() << "\t" << m.getPos() << "\t" << m.imprime_Ref() << "\t" << m.imprime_Genes()
+	<< "\t" << m.getCommon() << "\t" << m.imprime_Caf() << "\t" << m.getEnfermedades() << "\t"
+	<< m.getEnfermedades() << endl;
+	
 	return os;
 }

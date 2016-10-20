@@ -28,26 +28,26 @@ void enfermedad::setDatabase(const string & database){
 	this -> database = database;
 }
 
-string enfermedad::getName( ){
+string enfermedad::getName() const{
 	return name;
 }
 
-string enfermedad::getID(){
+string  enfermedad::getID() const{
 	return ID;
 }
 
-string enfermedad::getDatabase( ){
+string enfermedad::getDatabase() const{
 	return database;
 }
 
-enfermedad & enfemedad::operator = (const enfermedad & e){
+enfermedad & enfermedad::operator = (const enfermedad & e){
 	if (this != &e){
 		this -> ID = e.getID();
 		this -> name = e.getName();
 		this -> database = e.getDatabase();
 	}
 	
-	return this;
+	return *this;
 }
 
 string enfermedad::toString() const {
@@ -57,7 +57,7 @@ string enfermedad::toString() const {
 bool enfermedad::operator == (const enfermedad & e) const{
 	bool igual = false;
 	
-	if(this != *e){
+	if(this != &e){
 		if(name.size() == e.name.size() && ID.size() == e.ID.size() && database.size() == e.database.size() )
 			igual = true;
 	}
@@ -68,18 +68,18 @@ bool enfermedad::operator == (const enfermedad & e) const{
 }
 
 
-bool enfermedad::operator != (const enfermedad & e){
-	return !(this == e);
+bool enfermedad::operator != (const enfermedad & e) const{
+	return !(this == &e);
 }
 
 bool enfermedad::operator<(const enfermedad & e) const {
 	return (name < e.getName());
 }
 
-bool enfermedad::nameContains(const string & str){
+bool enfermedad::nameContains(const string & str) const{
 	bool dentro = false;
 	
-	if (str == NULL){
+	if (str == ""){
 		dentro = true;
 	}
 	
@@ -90,7 +90,7 @@ bool enfermedad::nameContains(const string & str){
 	return dentro;
 }
 
-ostream operator << ( ostream& os, const enfermedad & e){
+ostream& operator << ( ostream& os, const enfermedad & e){
 	os << e.getName() << " " << e.getID() << "\n" << e.getDatabase() << endl;
 	
 	return os;
