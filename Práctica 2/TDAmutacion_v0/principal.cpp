@@ -57,7 +57,7 @@ int cuentaMutacionesEnfermedad(vector<mutacion> &  vm, const string & s) {
 	
 	for (int i = 0; i < vm.size(); i++){    //recorrer vector de mutaciones vm
 		// para cada mutación, obtener sus enfermedades asociadas:
-		enfermedades = ;
+		enfermedades.push_back(vm[i].getEnfermedades());
 		
 		int j = 0;
 		//recorrer el vector de enfermedades para ver si hay alguna cuyo nombre contiene s
