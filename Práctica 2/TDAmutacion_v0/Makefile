@@ -7,8 +7,8 @@ CPPFLAGS = g++ -std=c++11 -g -Wall
 
 #Creación de ejecutables
 
-principal : enfermedad.o mutacion.o principal.o
-	$(CPPFLAGS) -o principal principal.o mutacion.o enfermedad.o
+principal : principal.o
+	$(CPPFLAGS) -o principal principal.o
 
 #Creación de archivos objeto
 
