@@ -28,47 +28,150 @@ mutacion::mutacion(const mutacion& m){
 //para crear objeto mutacion a partir de la cadena que contiene una línea completa del fichero de entrada
 mutacion::mutacion(const string & str){
 	string strID, str_chr, strpos, strcaf, strenfermedades, strref, strgenes, strcommon, strclnsig;
-	for (int i = 0; i < str.length(); i++){
-		while (str[i] != '\t')
-			strID = strID + str[i];
-	i++;
-	while (str[i] != '\t')
+	int i = 0;
+	
+	// Se lee la información y se guarda en cadenas de texto
+	
+	while (str[i] != '\t'){
 		str_chr = str_chr + str[i];
-	i++;
-	while (str[i] != '\t')
-		strpos = strpos + str[i];
-	i++;
-	while (str[i] != '\t')
-		strcaf = strcaf + str[i];
-	i++;
-	while (str[i] != '\t')
-		strpos = strpos + str[i];
-	i++;
-	while (str[i] != '\t')
-		strenfermedades = strenfermedades + str[i];
-	i++;
-	while (str[i] != '\t')
-		strref = strref + str[i];
-	i++;
-	while (str[i] != '\t')
-		strgenes = strgenes + str[i];
-	i++;
-	while (str[i] != '\t')
-		strcommon = strcommon + str[i];
-	i++;
-	while (str[i] != '\t')
-		strclnsig = strclnsig + str[i];
-	i++;
+		i++;
 	}
+	
+	i++;
+	
+	while (str[i] != '\t'){
+		strpos = strpos + str[i];
+		i++;
+	}
+	
+	i++;
+	
+	while (str[i] != '\t'){
+		strID = strID + str[i];
+		i++;
+	}
+	
+	i++;
+	
+	while (str[i] != '.'){
+		strref = strref + str[i];
+		i++;
+	}
+	
+	i += 4;
+	
+	for (int j = 0; i < 6; j++){
+		while (str[i] != ';'){
+			i++;
+		}
+	}
+	
+	while (str[i] != ';'){
+		strgenes = strgenes + str[i];
+		i++;
+	}
+	
+	i++;
+	
+	while (str[i] != ';'){
+		strcaf = strcaf + str[i];
+		i++;
+	}
+	
+	while (str[i] != ';'){
+		strcommon = strcommon + str[i];
+		i++;
+	}
+	
+	i++;
+	
+	for (int j = 0; j < 3; i++){
+		while (str[i] != ';'){
+			strenfermedades = strenfermedades + str[i];
+			i++;
+		}
+		
+	}
+	
+	i++;
+	
+	while (str[i] != ';'){
+		strclnsig = strclnsig + str[i];
+	}
+	
+	
+	// Asignación de las cadenas de texto a sus respectivos datos
+	
+	ID = strID;
+	chr = str_chr;
+	pos = stoi(strpos);
+	ref_alt.push_back(strref);
+	genes.push_back(strgenes);
+	
+	// Guardar Common
+	
+	if(strcommon == "COMMON=0"){
+		common = 0;
+	}
+	else{
+		common = 1;
+	}
+	
+	// Guardar las enfermedades en el vector
+	
+	string aniadir;
+	enfermedad nueva;
+	for (int i = 0; i < strenfermedades.length(); i++){
+		if(strenfermedades[i] == ';'){
+			nueva.setID(aniadir);
+			
+			aniadir = "";
+			
+			i++;
+		}
+		
+		aniadir = aniadir + strenfermedades[i];
+	}
+	enfermedades.push_back(nueva);
+	
+	// Guardar caf
+	
+	float primero, segundo;
+	string strpr, strsg;
+	bool siguiente = false;
+	for (int j = 5; j < strcaf.length(); j++){
+		if (strcaf[j] == ','){
+			siguiente = true;
+			j++;
+		}
+		
+		if (siguiente){
+			strsg = strsg + strcaf[j];
+		}
+		
+		if( !siguiente ){
+			strpr = strpr + strcaf[j];
+		}
+	}
+	primero = stof(strpr);
+	segundo = stof(strsg);
+	caf.push_back(primero);
+	caf.push_back(segundo);
+	
+	// Guardar clnsig
+	
+	string entero;
+	entero = strclnsig[7];
+	clnsig.push_back( stoi(entero) );
+	
 }
 
 void mutacion::setID(const string & id){
-	ID=id;
+	ID = id;
 }
 
 void mutacion::setChr(const string & chr){
-	size_t lastChar;
-	if((stoi(chr, &lastChar, 10) >= 1 && stoi(chr, &lastChar, 10) <= 22) || (this -> chr).compare("X") == 0 || (this -> chr).compare("Y") == 0 || (this -> chr).compare("MT") == 0){
+	if((stoi(chr) >= 1 && stoi(chr) <= 22) || (this -> chr).compare("X") == 0 || (this -> chr).compare("Y") == 0 || (this -> chr).compare("MT") == 0){
 		(this -> chr) = chr;
 	}
 }
