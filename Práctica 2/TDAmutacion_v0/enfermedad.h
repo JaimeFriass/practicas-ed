@@ -8,6 +8,7 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -47,6 +48,8 @@ public:
  bool operator<(const enfermedad & e) const;	//Orden alfabético por campo name.
 	
  bool nameContains(const string & str) const;   //Devuelve True si str está incluido en el nombre de la enfermedad, aunque no se trate del nombre completo. No debe ser sensible a mayúsculas/minúsculas.
+	
+ string imprime_Enf() const;	//Guarda la enfermedad en un string
 	
 };
 

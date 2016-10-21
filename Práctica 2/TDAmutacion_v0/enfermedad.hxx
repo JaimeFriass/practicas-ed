@@ -1,6 +1,7 @@
 #include <string>
 #include "enfermedad.h"
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -88,6 +89,14 @@ bool enfermedad::nameContains(const string & str) const{
 	}
 	
 	return dentro;
+}
+
+string enfermedad::imprime_Enf() const{
+	string hola;
+	
+	hola = getName() + " " + getID() + " " + getDatabase();
+	
+	return hola;
 }
 
 ostream& operator << ( ostream& os, const enfermedad & e){

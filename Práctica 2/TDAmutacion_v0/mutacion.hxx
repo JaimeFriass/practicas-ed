@@ -212,7 +212,7 @@ string mutacion::imprime_Ref() const{
 	string hola;
 	
 	for (int i = 0; i < ref_alt.size(); i++){
-		hola = hola + ref_alt[i];
+		hola = hola + " " + ref_alt[i];
 	}
 	
 	return hola;
@@ -222,7 +222,7 @@ string mutacion::imprime_Genes() const{
 	string hola;
 	
 	for (int i = 0; i < genes.size(); i++){
-		hola = hola + genes[i];
+		hola = hola + " " + genes[i];
 	}
 	
 	return hola;
@@ -232,7 +232,17 @@ string mutacion::imprime_Caf() const{
 	string hola;
 	
 	for (int i = 0; i < genes.size(); i++){
-		hola = hola + to_string(caf[i]);
+		hola = hola + " " + to_string(caf[i]);
+	}
+	
+	return hola;
+}
+
+string mutacion::imprime_Enfermedades() const{
+	string hola;
+	
+	for(int i = 0; i < enfermedades.size(); i++){
+		hola = hola + " " + enfermedades[i].imprime_Enf();
 	}
 	
 	return hola;
@@ -240,8 +250,7 @@ string mutacion::imprime_Caf() const{
 
 ostream& operator<< ( ostream& os, const mutacion& m) {
 	os << m.getID() << "\t" << m.getChr() << "\t" << m.getPos() << "\t" << m.imprime_Ref() << "\t" << m.imprime_Genes()
-	<< "\t" << m.getCommon() << "\t" << m.imprime_Caf() << "\t" << m.getEnfermedades() << "\t"
-	<< m.getEnfermedades() << endl;
+	<< "\t" << m.getCommon() << "\t" << m.imprime_Caf() << "\t" << m.imprime_Enfermedades() << "\t" << endl;
 	
 	return os;
 }
