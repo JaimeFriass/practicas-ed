@@ -28,8 +28,11 @@ bool load(vector<mutacion> &  vm, const string & s) {
 	 }while (cadena.find("#")==0 && !fe.eof());
 	 
 	 //leo la tabla de mutaciones, una línea cada vez
+	 int i = 1;
 	 while ( !fe.eof() ){
 		 cout << "leo:: "<< cadena << endl;
+		 cout << "\nLineas leidas: " << i << endl;
+		 i++;
 		 // Invoco el constructor de mutación que recibe una cadena completa, la parsea y crea la mutación.
 		 mutacion mut = mutacion(cadena);
 		 // Insertar mutación en el vector
@@ -80,7 +83,6 @@ int cuentaMutacionesEnfermedad(vector<mutacion> &  vm, const string & s) {
 
 
 int main(int argc, char *argv[]){
-	
 	vector<mutacion> vectorSNPs;
 	string query_str;
 	

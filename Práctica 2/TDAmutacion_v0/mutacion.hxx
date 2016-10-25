@@ -27,144 +27,166 @@ mutacion::mutacion(const mutacion& m){
 
 //para crear objeto mutacion a partir de la cadena que contiene una línea completa del fichero de entrada
 mutacion::mutacion(const string & str){
-	string strID, str_chr, strpos, strcaf, strenfermedades, strref, strgenes, strcommon, strclnsig;
-	int i = 0;
+	bool extras = false;
+	int j = 0;
+	unsigned long i = 0;
 	
-	// Se lee la información y se guarda en cadenas de texto
+	// OBTENER CHR
+	(*this).chr = str.substr(0,1);
 	
-	while (str[i] != '\t'){
-		str_chr = str_chr + str[i];
+	// OBTENER POS
+	// En el substring que va desde el primer dígito de pos hasta rs, busca el
+	// tabulador que marca el final de pos.
+	string aux = str.substr(2,str.substr(2,str.find("rs")).find('\t'));
+	(*this).pos = atoi(aux.c_str());
+	
+	// OBTENER ID
+	i = str.find("rs");
+	(*this).ID = "";
+	while(str[i] != '\t'){
+		(*this).ID += str[i];
 		i++;
 	}
 	
+	// OBTENER REF_ALT
 	i++;
-	
-	while (str[i] != '\t'){
-		strpos = strpos + str[i];
+	aux = "";
+	while(str[i] != '\t'){
+		aux += str[i];
 		i++;
 	}
-	
+	(*this).ref_alt.push_back(aux);
 	i++;
-	
-	while (str[i] != '\t'){
-		strID = strID + str[i];
+	aux = "";
+	while(str[i] != '\t'){
+		aux += str[i];
 		i++;
 	}
+	(*this).ref_alt.push_back(aux);
 	
-	i++;
+	// OBTENER GENES
+	i = str.find("GENEINFO");
+	unsigned long sigPyC = str.substr(i, str.size() - i).find(";");
+	aux = str.substr(i +9, sigPyC -9);
 	
-	while (str[i] != '.'){
-		strref = strref + str[i];
-		i++;
-	}
-	
-	i += 4;
-	
-	for (int j = 0; i < 6; j++){
-		while (str[i] != ';'){
-			i++;
+	for(int k = 0; k < aux.size(); k++){
+		if(aux[k] == '|'){
+			(*this).genes.push_back(aux.substr(j, k-j));
+			extras = true;
+			j = k +1;
 		}
 	}
+	if(extras)
+		(*this).genes.push_back(aux.substr(j,aux.size() -1));
+	else
+		(*this).genes.push_back(aux);
+ 
+	// OBTENER COMMON
+	i = str.find("COMMON");
+	if(str[i +7] == '1')
+		(*this).common = true;
+	else
+		(*this).common = false;
 	
-	while (str[i] != ';'){
-		strgenes = strgenes + str[i];
-		i++;
+	// OBTENER CAF
+	j = 0;
+	extras = false;
+	i = str.find("CAF");
+	if(i !=-1){
+		sigPyC = str.substr(i, str.size() -i).find(";");
+		aux = str.substr(i +4, sigPyC -4);
+		for(int k = 0; k < aux.size(); k++){
+			if(aux[k] == ','){
+				(*this).caf.push_back(atof(aux.substr(j, k - j).c_str()));
+				j = k +1;
+				extras = true;
+			}
+		}
+		if(extras)
+			(*this).caf.push_back(atof(aux.substr(j, aux.size()-j).c_str()));
+		else
+			(*this).caf.push_back(atof(aux.c_str()));
 	}
 	
-	i++;
+	// OBTENER ENFERMEDADES Y CLNSIG
 	
-	while (str[i] != ';'){
-		strcaf = strcaf + str[i];
-		i++;
-	}
-	
-	while (str[i] != ';'){
-		strcommon = strcommon + str[i];
-		i++;
-	}
-	
-	i++;
-	
-	for (int j = 0; j < 3; i++){
-		while (str[i] != ';'){
-			strenfermedades = strenfermedades + str[i];
-			i++;
+	unsigned long posCln = str.find("CLNSIG"); // Códigos CLNSIG
+	unsigned long posName = str.find("CLNDBN"); // Nombres enf
+	unsigned long posID = str.find("CLNDSDBID"); // ID enf
+	unsigned long posDB = str.find("CLNDSDB"); // Database Enf
+	j = 0;
+	extras = false;
+ 
+	if(posName != -1){
+		sigPyC = str.substr(posName, str.size() -posName).find(";");
+		string nomEnf = str.substr(posName + 7, sigPyC -7);
+		
+		sigPyC = str.substr(posID, str.size() -posID).find(";");
+		string iDenf = str.substr(posID +10, sigPyC -10);
+		
+		sigPyC = str.substr(posDB, str.size() -posDB).find(";");
+		string dBenf = str.substr(posDB +8, sigPyC - 8);
+		vector<string> auxNombre, auxID, auxDB;
+		
+		
+		for(int k = 0; k < nomEnf.size(); k++){ // pilla nombres
+			if(nomEnf[k] == '|'){
+				auxNombre.push_back(nomEnf.substr(j, k -j));
+				j = k +1;
+				extras = true;
+			}
+		}
+		if(extras)
+			auxNombre.push_back(nomEnf.substr(j, nomEnf.size()-j));
+		else
+			auxNombre.push_back(nomEnf);
+		j = 0;
+		extras = false;
+		
+		for(int k = 0; k < iDenf.size(); k++){	// pilla ID
+			if(iDenf[k] == '|'){
+				auxID.push_back(iDenf.substr(j, k -j));
+				j = k +1;
+				extras = true;
+			}
+		}
+		if(extras)
+			auxID.push_back(iDenf.substr(j, nomEnf.size()-j));
+		else
+			auxID.push_back(iDenf);
+		j = 0;
+		extras = false;
+		
+		for(int k = 0; k < dBenf.size(); k++){	// pilla DB
+			if(dBenf[k] == '|'){
+				auxDB.push_back(dBenf.substr(j, k -j));
+				j = k +1;
+				extras = true;
+			}
+		}
+		if(extras)
+			auxDB.push_back(dBenf.substr(j, nomEnf.size()-j));
+		else
+			auxDB.push_back(dBenf);
+		j = 0;
+		extras = false;
+		
+		for(int k = 0; k < auxNombre.size(); k++){
+			enfermedad auxEnf(auxNombre[k], auxID[k], auxDB[k]);
+			(*this).enfermedades.push_back(auxEnf);
 		}
 		
-	}
-	
-	i++;
-	
-	while (str[i] != ';'){
-		strclnsig = strclnsig + str[i];
-	}
-	
-	
-	// Asignación de las cadenas de texto a sus respectivos datos
-	
-	ID = strID;
-	chr = str_chr;
-	pos = stoi(strpos);
-	ref_alt.push_back(strref);
-	genes.push_back(strgenes);
-	
-	// Guardar Common
-	
-	if(strcommon == "COMMON=0"){
-		common = 0;
-	}
-	else{
-		common = 1;
-	}
-	
-	// Guardar las enfermedades en el vector
-	
-	string aniadir;
-	enfermedad nueva;
-	for (int i = 0; i < strenfermedades.length(); i++){
-		if(strenfermedades[i] == ';'){
-			nueva.setID(aniadir);
-			
-			aniadir = "";
-			
-			i++;
-		}
+		sigPyC = str.substr(posCln, str.size() - posCln).find(";");
+		string strCln = str.substr(posCln +7, sigPyC - 7);
+		if(strCln.size() > 1)
+			for(int k = 0; k < enfermedades.size(); k+=2)
+				(*this).clnsig.push_back((int)strCln[k]-48);
 		
-		aniadir = aniadir + strenfermedades[i];
 	}
-	enfermedades.push_back(nueva);
-	
-	// Guardar caf
-	
-	float primero, segundo;
-	string strpr, strsg;
-	bool siguiente = false;
-	for (int j = 5; j < strcaf.length(); j++){
-		if (strcaf[j] == ','){
-			siguiente = true;
-			j++;
-		}
-		
-		if (siguiente){
-			strsg = strsg + strcaf[j];
-		}
-		
-		if( !siguiente ){
-			strpr = strpr + strcaf[j];
-		}
-	}
-	primero = stof(strpr);
-	segundo = stof(strsg);
-	caf.push_back(primero);
-	caf.push_back(segundo);
-	
-	// Guardar clnsig
-	
-	string entero;
-	entero = strclnsig[7];
-	clnsig.push_back( stoi(entero) );
 	
 }
+
+//Métodos consultores
 
 void mutacion::setID(const string & id){
 	ID = id;
@@ -261,6 +283,8 @@ const vector<int> & mutacion::getClnsig () const{
 	return clnsig;
 }
 
+//Sobrecarga de operadores
+
 mutacion & mutacion::operator = (const mutacion & m){
 	if (this != &m){
 		setID(m.getID());
@@ -310,6 +334,8 @@ bool mutacion::operator < (const mutacion & m) const{
 	
 	return menor;
 }
+
+//Métodos auxiliares
 
 string mutacion::imprime_Ref() const{
 	string hola;
