@@ -92,7 +92,7 @@ mutacion::mutacion(const string & str){
 	j = 0;
 	extras = false;
 	i = str.find("CAF");
-	if(i !=-1){
+	if(i != -1){
 		sigPyC = str.substr(i, str.size() -i).find(";");
 		aux = str.substr(i +4, sigPyC -4);
 		for(int k = 0; k < aux.size(); k++){
@@ -106,6 +106,9 @@ mutacion::mutacion(const string & str){
 			(*this).caf.push_back(atof(aux.substr(j, aux.size()-j).c_str()));
 		else
 			(*this).caf.push_back(atof(aux.c_str()));
+	}
+	else{
+		(*this).caf.push_back(0.0);
 	}
 	
 	// OBTENER ENFERMEDADES Y CLNSIG
