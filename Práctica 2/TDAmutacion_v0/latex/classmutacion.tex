@@ -1,0 +1,566 @@
+\hypertarget{classmutacion}{}\subsection{Referencia de la Clase mutacion}
+\label{classmutacion}\index{mutacion@{mutacion}}
+
+
+Clase mutacion, asociada a la definición de una mutación/\+S\+NP.  
+
+
+
+
+{\ttfamily \#include $<$mutacion.\+h$>$}
+
+\subsubsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmutacion_a01cb8b2307eacbfb415f99373ff3c64a}{mutacion} ()
+\begin{DoxyCompactList}\small\item\em Inicia una mutacion vacía. \end{DoxyCompactList}\item 
+\hyperlink{classmutacion_a6bcb17c723a359ffac7dda8d5d427dfe}{mutacion} (const \hyperlink{classmutacion}{mutacion} \&m)
+\begin{DoxyCompactList}\small\item\em Crea una mutación a partir de otra. \end{DoxyCompactList}\item 
+\hyperlink{classmutacion_a8c5cc5b5146c511b9a1d6976156389c3}{mutacion} (const string \&str)
+\begin{DoxyCompactList}\small\item\em Crea una mutación a partir de un string. \end{DoxyCompactList}\item 
+void \hyperlink{classmutacion_af6288453d3cb4e29b8be304ca262b170}{set\+ID} (const string \&id)
+\begin{DoxyCompactList}\small\item\em Cambia el valor de ID. \end{DoxyCompactList}\item 
+void \hyperlink{classmutacion_a147ee1f35c78ab0b7cf891067bf2e336}{set\+Chr} (const string \&\hyperlink{classmutacion_a57651966b952f782240ff9cff72c5d2f}{chr})
+\begin{DoxyCompactList}\small\item\em Cambia el valor del cromosoma. \end{DoxyCompactList}\item 
+void \hyperlink{classmutacion_a2667189a28d3ac983a8f63ca92e81fba}{set\+Pos} (const unsigned int \&\hyperlink{classmutacion_ae1487b8648d0eaad68de5e4e5a87f3ff}{pos})
+\begin{DoxyCompactList}\small\item\em Cambia el valor de la posición. \end{DoxyCompactList}\item 
+void \hyperlink{classmutacion_a66b8d594a0bddbe4262f7a13ef551d07}{set\+Ref\+\_\+alt} (const vector$<$ string $>$ \&\hyperlink{classmutacion_abeb13e023fc9a34120106bccf58d5086}{ref\+\_\+alt})
+\begin{DoxyCompactList}\small\item\em Cambia el valor del genoma básico. \end{DoxyCompactList}\item 
+void \hyperlink{classmutacion_a91fd0ad088ac82897ccad36598b43830}{set\+Genes} (const vector$<$ string $>$ \&\hyperlink{classmutacion_a65fb9e2186d1c54d490289661b141aa1}{genes})
+\begin{DoxyCompactList}\small\item\em Cambia el valor de los genes. \end{DoxyCompactList}\item 
+void \hyperlink{classmutacion_ab62d36e9bad78d43ace74fdaec909ca6}{set\+Common} (const bool \&\hyperlink{classmutacion_a6dabfef6167d64030f095887b15f65dd}{common})
+\begin{DoxyCompactList}\small\item\em Cambia el valor del bool de si es común o no la mutación. \end{DoxyCompactList}\item 
+void \hyperlink{classmutacion_a52b79ec257cc96ad5c38a34ac4f2e827}{set\+Caf} (const vector$<$ float $>$ \&\hyperlink{classmutacion_aeb2ac56009900d9319873d00ee80e090}{caf})
+\begin{DoxyCompactList}\small\item\em Cambia el valor de la frecuencia de cada base. \end{DoxyCompactList}\item 
+void \hyperlink{classmutacion_acaad50a2aab9f6df3994a491eab44a86}{set\+Enfermedades} (const vector$<$ \hyperlink{classenfermedad}{enfermedad} $>$ \&\hyperlink{classmutacion_a0decaa0406675999e766f913e6347d79}{enfermedades})
+\begin{DoxyCompactList}\small\item\em Cambia el valor del vector de enfermedades. \end{DoxyCompactList}\item 
+void \hyperlink{classmutacion_ad69eed035c3c25f23bc587d9e6f99c05}{set\+Clnsig} (const vector$<$ int $>$ \&\hyperlink{classmutacion_adc0290c4a6db7f4c7341b0183c7ef534}{clnsig})
+\begin{DoxyCompactList}\small\item\em Cambia la relevancia clínica. \end{DoxyCompactList}\item 
+string \hyperlink{classmutacion_a81a090846e289f5b04cca22df458fbd2}{get\+ID} () const
+\begin{DoxyCompactList}\small\item\em Devuelve el ID de la mutación. \end{DoxyCompactList}\item 
+string \hyperlink{classmutacion_a08cafaefc6dc2c49424c414dad7e823a}{get\+Chr} () const
+\begin{DoxyCompactList}\small\item\em Devuelve el identificador del cromosoma. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{classmutacion_ab11e8cb7dc7b07befe3ec4f7c48ee941}{get\+Pos} () const
+\begin{DoxyCompactList}\small\item\em Devuelve la posición del cromosoma. \end{DoxyCompactList}\item 
+const vector$<$ string $>$ \& \hyperlink{classmutacion_a7ca5dbd9bbf12a7d581bffca550692cb}{get\+Ref\+\_\+alt} () const
+\begin{DoxyCompactList}\small\item\em Devuelve el vector del genoma básico. \end{DoxyCompactList}\item 
+const vector$<$ string $>$ \& \hyperlink{classmutacion_ac5e49b51d205e1de51ea8a4e405405c1}{get\+Genes} () const
+\begin{DoxyCompactList}\small\item\em Devuelve el vector de los genes. \end{DoxyCompactList}\item 
+bool \hyperlink{classmutacion_a8aef0548762119d1a4c0109477b3f182}{get\+Common} () const
+\begin{DoxyCompactList}\small\item\em Devuelve si una mutación es común o no. \end{DoxyCompactList}\item 
+const vector$<$ float $>$ \& \hyperlink{classmutacion_a51b13ad53a652970d7983d4c21e9e73b}{get\+Caf} () const
+\begin{DoxyCompactList}\small\item\em Devuelve el vector de las frecuencias de cada base. \end{DoxyCompactList}\item 
+const vector$<$ \hyperlink{classenfermedad}{enfermedad} $>$ \& \hyperlink{classmutacion_adf4c260fe49a9cc152bfe4be855304e4}{get\+Enfermedades} () const
+\begin{DoxyCompactList}\small\item\em Devuelve el vector de las enfermedades. \end{DoxyCompactList}\item 
+const vector$<$ int $>$ \& \hyperlink{classmutacion_a216068275eb221c01ce336de99b6d517}{get\+Clnsig} () const
+\begin{DoxyCompactList}\small\item\em Devuelve el vector de enteros que conforman la relevancia clínica. \end{DoxyCompactList}\item 
+string \hyperlink{classmutacion_a1533331f8cccf92c2b6468c0ec21a391}{imprime\+\_\+\+Ref} () const
+\begin{DoxyCompactList}\small\item\em Devuelve la relevancia clínica convertida en el string hola. \end{DoxyCompactList}\item 
+string \hyperlink{classmutacion_a9da6a306521e0ed298ec1f178ecc91cc}{imprime\+\_\+\+Genes} () const
+\begin{DoxyCompactList}\small\item\em Devuelve la referencia de los genes convertida en el string hola. \end{DoxyCompactList}\item 
+string \hyperlink{classmutacion_a820234fdc96bcce212c1ff3c2f42d084}{imprime\+\_\+\+Caf} () const
+\begin{DoxyCompactList}\small\item\em Devuelve la frecuencia de cada base. \end{DoxyCompactList}\item 
+string \hyperlink{classmutacion_a5814ecb09adcac85f44d6e5fd1f6faf7}{imprime\+\_\+\+Enfermedades} () const
+\begin{DoxyCompactList}\small\item\em Devuelve la las enfermedades asociadas. \end{DoxyCompactList}\item 
+\hyperlink{classmutacion}{mutacion} \& \hyperlink{classmutacion_aa38c36e397000cbef22a5933f56d59ed}{operator=} (const \hyperlink{classmutacion}{mutacion} \&m)
+\begin{DoxyCompactList}\small\item\em Sobrecarga el operador = para ajustarlo a una mutación. \end{DoxyCompactList}\item 
+bool \hyperlink{classmutacion_a0c67e3d41ce47338856954f60815bacd}{operator==} (const \hyperlink{classmutacion}{mutacion} \&m) const
+\begin{DoxyCompactList}\small\item\em Sobrecarga el operador == para compararlo con una mutación. \end{DoxyCompactList}\item 
+bool \hyperlink{classmutacion_a5619b00cf3de4fc510c081d2d1841cd2}{operator$<$} (const \hyperlink{classmutacion}{mutacion} \&m) const
+\begin{DoxyCompactList}\small\item\em E\+Sobrecarga el operador $<$ para comparar una mutación. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsubsection*{Atributos privados}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{classmutacion_aafc39218473e0f21eb0c3dc05dd4f35e}{ID}
+\item 
+string \hyperlink{classmutacion_a57651966b952f782240ff9cff72c5d2f}{chr}
+\item 
+unsigned int \hyperlink{classmutacion_ae1487b8648d0eaad68de5e4e5a87f3ff}{pos}
+\item 
+vector$<$ string $>$ \hyperlink{classmutacion_abeb13e023fc9a34120106bccf58d5086}{ref\+\_\+alt}
+\item 
+vector$<$ string $>$ \hyperlink{classmutacion_a65fb9e2186d1c54d490289661b141aa1}{genes}
+\item 
+bool \hyperlink{classmutacion_a6dabfef6167d64030f095887b15f65dd}{common}
+\item 
+vector$<$ float $>$ \hyperlink{classmutacion_aeb2ac56009900d9319873d00ee80e090}{caf}
+\item 
+vector$<$ \hyperlink{classenfermedad}{enfermedad} $>$ \hyperlink{classmutacion_a0decaa0406675999e766f913e6347d79}{enfermedades}
+\item 
+vector$<$ int $>$ \hyperlink{classmutacion_adc0290c4a6db7f4c7341b0183c7ef534}{clnsig}
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Descripción detallada}
+Clase mutacion, asociada a la definición de una mutación/\+S\+NP. 
+
+\hyperlink{classmutacion_a01cb8b2307eacbfb415f99373ff3c64a}{mutacion\+::mutacion}, .....
+
+\begin{DoxyRefDesc}{Tareas pendientes}
+\item[\hyperlink{todo__todo000002}{Tareas pendientes}]Implementa esta clase, junto con su documentación asociada\end{DoxyRefDesc}
+
+
+\subsubsection{Documentación del constructor y destructor}
+\hypertarget{classmutacion_a01cb8b2307eacbfb415f99373ff3c64a}{}\label{classmutacion_a01cb8b2307eacbfb415f99373ff3c64a} 
+\index{mutacion@{mutacion}!mutacion@{mutacion}}
+\index{mutacion@{mutacion}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{mutacion()}{mutacion()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily mutacion\+::mutacion (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Inicia una mutacion vacía. 
+
+\hypertarget{classmutacion_a6bcb17c723a359ffac7dda8d5d427dfe}{}\label{classmutacion_a6bcb17c723a359ffac7dda8d5d427dfe} 
+\index{mutacion@{mutacion}!mutacion@{mutacion}}
+\index{mutacion@{mutacion}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{mutacion()}{mutacion()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily mutacion\+::mutacion (\begin{DoxyParamCaption}\item[{const \hyperlink{classmutacion}{mutacion} \&}]{m }\end{DoxyParamCaption})}
+
+
+
+Crea una mutación a partir de otra. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em m} & mutación a copiar\\
+\hline
+\end{DoxyParams}
+Copia los valores de la mutación pasada como argumento y crea una nueva a partir de ellos. \hypertarget{classmutacion_a8c5cc5b5146c511b9a1d6976156389c3}{}\label{classmutacion_a8c5cc5b5146c511b9a1d6976156389c3} 
+\index{mutacion@{mutacion}!mutacion@{mutacion}}
+\index{mutacion@{mutacion}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{mutacion()}{mutacion()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily mutacion\+::mutacion (\begin{DoxyParamCaption}\item[{const string \&}]{str }\end{DoxyParamCaption})}
+
+
+
+Crea una mutación a partir de un string. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em str} & cadena string con los datos miembro de la clase\\
+\hline
+\end{DoxyParams}
+Se le pasa un string como argumento y se recorre este guardando los correspondientes datos miembro. 
+
+\subsubsection{Documentación de las funciones miembro}
+\hypertarget{classmutacion_a51b13ad53a652970d7983d4c21e9e73b}{}\label{classmutacion_a51b13ad53a652970d7983d4c21e9e73b} 
+\index{mutacion@{mutacion}!get\+Caf@{get\+Caf}}
+\index{get\+Caf@{get\+Caf}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{get\+Caf()}{getCaf()}}
+{\footnotesize\ttfamily const vector$<$float$>$\& mutacion\+::get\+Caf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve el vector de las frecuencias de cada base. 
+
+\begin{DoxyReturn}{Devuelve}
+caf vector de las frecuencias 
+\end{DoxyReturn}
+\hypertarget{classmutacion_a08cafaefc6dc2c49424c414dad7e823a}{}\label{classmutacion_a08cafaefc6dc2c49424c414dad7e823a} 
+\index{mutacion@{mutacion}!get\+Chr@{get\+Chr}}
+\index{get\+Chr@{get\+Chr}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{get\+Chr()}{getChr()}}
+{\footnotesize\ttfamily string mutacion\+::get\+Chr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve el identificador del cromosoma. 
+
+\begin{DoxyReturn}{Devuelve}
+chr identificador del cromosoma 
+\end{DoxyReturn}
+\hypertarget{classmutacion_a216068275eb221c01ce336de99b6d517}{}\label{classmutacion_a216068275eb221c01ce336de99b6d517} 
+\index{mutacion@{mutacion}!get\+Clnsig@{get\+Clnsig}}
+\index{get\+Clnsig@{get\+Clnsig}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{get\+Clnsig()}{getClnsig()}}
+{\footnotesize\ttfamily const vector$<$int$>$\& mutacion\+::get\+Clnsig (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve el vector de enteros que conforman la relevancia clínica. 
+
+\begin{DoxyReturn}{Devuelve}
+clnsig vector de enteros con la relevancia clínica. 
+\end{DoxyReturn}
+\hypertarget{classmutacion_a8aef0548762119d1a4c0109477b3f182}{}\label{classmutacion_a8aef0548762119d1a4c0109477b3f182} 
+\index{mutacion@{mutacion}!get\+Common@{get\+Common}}
+\index{get\+Common@{get\+Common}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{get\+Common()}{getCommon()}}
+{\footnotesize\ttfamily bool mutacion\+::get\+Common (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve si una mutación es común o no. 
+
+\begin{DoxyReturn}{Devuelve}
+common bool de si es común o no 
+\end{DoxyReturn}
+\hypertarget{classmutacion_adf4c260fe49a9cc152bfe4be855304e4}{}\label{classmutacion_adf4c260fe49a9cc152bfe4be855304e4} 
+\index{mutacion@{mutacion}!get\+Enfermedades@{get\+Enfermedades}}
+\index{get\+Enfermedades@{get\+Enfermedades}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{get\+Enfermedades()}{getEnfermedades()}}
+{\footnotesize\ttfamily const vector$<$\hyperlink{classenfermedad}{enfermedad}$>$\& mutacion\+::get\+Enfermedades (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve el vector de las enfermedades. 
+
+\begin{DoxyReturn}{Devuelve}
+enfermedad vector de las enfermedades 
+\end{DoxyReturn}
+\hypertarget{classmutacion_ac5e49b51d205e1de51ea8a4e405405c1}{}\label{classmutacion_ac5e49b51d205e1de51ea8a4e405405c1} 
+\index{mutacion@{mutacion}!get\+Genes@{get\+Genes}}
+\index{get\+Genes@{get\+Genes}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{get\+Genes()}{getGenes()}}
+{\footnotesize\ttfamily const vector$<$string$>$\& mutacion\+::get\+Genes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve el vector de los genes. 
+
+\begin{DoxyReturn}{Devuelve}
+genes vector de los genes 
+\end{DoxyReturn}
+\hypertarget{classmutacion_a81a090846e289f5b04cca22df458fbd2}{}\label{classmutacion_a81a090846e289f5b04cca22df458fbd2} 
+\index{mutacion@{mutacion}!get\+ID@{get\+ID}}
+\index{get\+ID@{get\+ID}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{get\+I\+D()}{getID()}}
+{\footnotesize\ttfamily string mutacion\+::get\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve el ID de la mutación. 
+
+\begin{DoxyReturn}{Devuelve}
+ID valor del id de la mutación 
+\end{DoxyReturn}
+\hypertarget{classmutacion_ab11e8cb7dc7b07befe3ec4f7c48ee941}{}\label{classmutacion_ab11e8cb7dc7b07befe3ec4f7c48ee941} 
+\index{mutacion@{mutacion}!get\+Pos@{get\+Pos}}
+\index{get\+Pos@{get\+Pos}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{get\+Pos()}{getPos()}}
+{\footnotesize\ttfamily unsigned int mutacion\+::get\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve la posición del cromosoma. 
+
+\begin{DoxyReturn}{Devuelve}
+pos posición del cromosoma 
+\end{DoxyReturn}
+\hypertarget{classmutacion_a7ca5dbd9bbf12a7d581bffca550692cb}{}\label{classmutacion_a7ca5dbd9bbf12a7d581bffca550692cb} 
+\index{mutacion@{mutacion}!get\+Ref\+\_\+alt@{get\+Ref\+\_\+alt}}
+\index{get\+Ref\+\_\+alt@{get\+Ref\+\_\+alt}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{get\+Ref\+\_\+alt()}{getRef\_alt()}}
+{\footnotesize\ttfamily const vector$<$string$>$\& mutacion\+::get\+Ref\+\_\+alt (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve el vector del genoma básico. 
+
+\begin{DoxyReturn}{Devuelve}
+ref\+\_\+alt vector del genoma básico 
+\end{DoxyReturn}
+\hypertarget{classmutacion_a820234fdc96bcce212c1ff3c2f42d084}{}\label{classmutacion_a820234fdc96bcce212c1ff3c2f42d084} 
+\index{mutacion@{mutacion}!imprime\+\_\+\+Caf@{imprime\+\_\+\+Caf}}
+\index{imprime\+\_\+\+Caf@{imprime\+\_\+\+Caf}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{imprime\+\_\+\+Caf()}{imprime\_Caf()}}
+{\footnotesize\ttfamily string mutacion\+::imprime\+\_\+\+Caf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve la frecuencia de cada base. 
+
+\begin{DoxyReturn}{Devuelve}
+hola string con la frecuencia 
+\end{DoxyReturn}
+\hypertarget{classmutacion_a5814ecb09adcac85f44d6e5fd1f6faf7}{}\label{classmutacion_a5814ecb09adcac85f44d6e5fd1f6faf7} 
+\index{mutacion@{mutacion}!imprime\+\_\+\+Enfermedades@{imprime\+\_\+\+Enfermedades}}
+\index{imprime\+\_\+\+Enfermedades@{imprime\+\_\+\+Enfermedades}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{imprime\+\_\+\+Enfermedades()}{imprime\_Enfermedades()}}
+{\footnotesize\ttfamily string mutacion\+::imprime\+\_\+\+Enfermedades (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve la las enfermedades asociadas. 
+
+\begin{DoxyReturn}{Devuelve}
+hola string con las enfermedades 
+\end{DoxyReturn}
+\hypertarget{classmutacion_a9da6a306521e0ed298ec1f178ecc91cc}{}\label{classmutacion_a9da6a306521e0ed298ec1f178ecc91cc} 
+\index{mutacion@{mutacion}!imprime\+\_\+\+Genes@{imprime\+\_\+\+Genes}}
+\index{imprime\+\_\+\+Genes@{imprime\+\_\+\+Genes}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{imprime\+\_\+\+Genes()}{imprime\_Genes()}}
+{\footnotesize\ttfamily string mutacion\+::imprime\+\_\+\+Genes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve la referencia de los genes convertida en el string hola. 
+
+\begin{DoxyReturn}{Devuelve}
+hola string con la referencia 
+\end{DoxyReturn}
+\hypertarget{classmutacion_a1533331f8cccf92c2b6468c0ec21a391}{}\label{classmutacion_a1533331f8cccf92c2b6468c0ec21a391} 
+\index{mutacion@{mutacion}!imprime\+\_\+\+Ref@{imprime\+\_\+\+Ref}}
+\index{imprime\+\_\+\+Ref@{imprime\+\_\+\+Ref}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{imprime\+\_\+\+Ref()}{imprime\_Ref()}}
+{\footnotesize\ttfamily string mutacion\+::imprime\+\_\+\+Ref (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Devuelve la relevancia clínica convertida en el string hola. 
+
+\begin{DoxyReturn}{Devuelve}
+hola string con la relevancia clínica. 
+\end{DoxyReturn}
+\hypertarget{classmutacion_a5619b00cf3de4fc510c081d2d1841cd2}{}\label{classmutacion_a5619b00cf3de4fc510c081d2d1841cd2} 
+\index{mutacion@{mutacion}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool mutacion\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{classmutacion}{mutacion} \&}]{m }\end{DoxyParamCaption}) const}
+
+
+
+E\+Sobrecarga el operador $<$ para comparar una mutación. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em m} & mutación a comparar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+menor 
+\end{DoxyReturn}
+\hypertarget{classmutacion_aa38c36e397000cbef22a5933f56d59ed}{}\label{classmutacion_aa38c36e397000cbef22a5933f56d59ed} 
+\index{mutacion@{mutacion}!operator=@{operator=}}
+\index{operator=@{operator=}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \hyperlink{classmutacion}{mutacion}\& mutacion\+::operator= (\begin{DoxyParamCaption}\item[{const \hyperlink{classmutacion}{mutacion} \&}]{m }\end{DoxyParamCaption})}
+
+
+
+Sobrecarga el operador = para ajustarlo a una mutación. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em m} & mutación a la que se iguala \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+$\ast$this 
+\end{DoxyReturn}
+\hypertarget{classmutacion_a0c67e3d41ce47338856954f60815bacd}{}\label{classmutacion_a0c67e3d41ce47338856954f60815bacd} 
+\index{mutacion@{mutacion}!operator==@{operator==}}
+\index{operator==@{operator==}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool mutacion\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{classmutacion}{mutacion} \&}]{m }\end{DoxyParamCaption}) const}
+
+
+
+Sobrecarga el operador == para compararlo con una mutación. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em m} & mutación a comparar \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+iguales 
+\end{DoxyReturn}
+\hypertarget{classmutacion_a52b79ec257cc96ad5c38a34ac4f2e827}{}\label{classmutacion_a52b79ec257cc96ad5c38a34ac4f2e827} 
+\index{mutacion@{mutacion}!set\+Caf@{set\+Caf}}
+\index{set\+Caf@{set\+Caf}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{set\+Caf()}{setCaf()}}
+{\footnotesize\ttfamily void mutacion\+::set\+Caf (\begin{DoxyParamCaption}\item[{const vector$<$ float $>$ \&}]{caf }\end{DoxyParamCaption})}
+
+
+
+Cambia el valor de la frecuencia de cada base. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em caf} & nuevo vector con frecuencias \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmutacion_a147ee1f35c78ab0b7cf891067bf2e336}{}\label{classmutacion_a147ee1f35c78ab0b7cf891067bf2e336} 
+\index{mutacion@{mutacion}!set\+Chr@{set\+Chr}}
+\index{set\+Chr@{set\+Chr}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{set\+Chr()}{setChr()}}
+{\footnotesize\ttfamily void mutacion\+::set\+Chr (\begin{DoxyParamCaption}\item[{const string \&}]{chr }\end{DoxyParamCaption})}
+
+
+
+Cambia el valor del cromosoma. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em chr} & nuevo cromosoma \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmutacion_ad69eed035c3c25f23bc587d9e6f99c05}{}\label{classmutacion_ad69eed035c3c25f23bc587d9e6f99c05} 
+\index{mutacion@{mutacion}!set\+Clnsig@{set\+Clnsig}}
+\index{set\+Clnsig@{set\+Clnsig}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{set\+Clnsig()}{setClnsig()}}
+{\footnotesize\ttfamily void mutacion\+::set\+Clnsig (\begin{DoxyParamCaption}\item[{const vector$<$ int $>$ \&}]{clnsig }\end{DoxyParamCaption})}
+
+
+
+Cambia la relevancia clínica. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em clnsig} & nuevo vector de enteros \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmutacion_ab62d36e9bad78d43ace74fdaec909ca6}{}\label{classmutacion_ab62d36e9bad78d43ace74fdaec909ca6} 
+\index{mutacion@{mutacion}!set\+Common@{set\+Common}}
+\index{set\+Common@{set\+Common}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{set\+Common()}{setCommon()}}
+{\footnotesize\ttfamily void mutacion\+::set\+Common (\begin{DoxyParamCaption}\item[{const bool \&}]{common }\end{DoxyParamCaption})}
+
+
+
+Cambia el valor del bool de si es común o no la mutación. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em common} & nuevo bool \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmutacion_acaad50a2aab9f6df3994a491eab44a86}{}\label{classmutacion_acaad50a2aab9f6df3994a491eab44a86} 
+\index{mutacion@{mutacion}!set\+Enfermedades@{set\+Enfermedades}}
+\index{set\+Enfermedades@{set\+Enfermedades}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{set\+Enfermedades()}{setEnfermedades()}}
+{\footnotesize\ttfamily void mutacion\+::set\+Enfermedades (\begin{DoxyParamCaption}\item[{const vector$<$ \hyperlink{classenfermedad}{enfermedad} $>$ \&}]{enfermedades }\end{DoxyParamCaption})}
+
+
+
+Cambia el valor del vector de enfermedades. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em enfermedades} & nuevo vector con enfermedades \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmutacion_a91fd0ad088ac82897ccad36598b43830}{}\label{classmutacion_a91fd0ad088ac82897ccad36598b43830} 
+\index{mutacion@{mutacion}!set\+Genes@{set\+Genes}}
+\index{set\+Genes@{set\+Genes}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{set\+Genes()}{setGenes()}}
+{\footnotesize\ttfamily void mutacion\+::set\+Genes (\begin{DoxyParamCaption}\item[{const vector$<$ string $>$ \&}]{genes }\end{DoxyParamCaption})}
+
+
+
+Cambia el valor de los genes. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em genes} & vector con los genes \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmutacion_af6288453d3cb4e29b8be304ca262b170}{}\label{classmutacion_af6288453d3cb4e29b8be304ca262b170} 
+\index{mutacion@{mutacion}!set\+ID@{set\+ID}}
+\index{set\+ID@{set\+ID}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{set\+I\+D()}{setID()}}
+{\footnotesize\ttfamily void mutacion\+::set\+ID (\begin{DoxyParamCaption}\item[{const string \&}]{id }\end{DoxyParamCaption})}
+
+
+
+Cambia el valor de ID. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em id} & id de la mutación \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmutacion_a2667189a28d3ac983a8f63ca92e81fba}{}\label{classmutacion_a2667189a28d3ac983a8f63ca92e81fba} 
+\index{mutacion@{mutacion}!set\+Pos@{set\+Pos}}
+\index{set\+Pos@{set\+Pos}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{set\+Pos()}{setPos()}}
+{\footnotesize\ttfamily void mutacion\+::set\+Pos (\begin{DoxyParamCaption}\item[{const unsigned int \&}]{pos }\end{DoxyParamCaption})}
+
+
+
+Cambia el valor de la posición. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em pos} & posicion nueva \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmutacion_a66b8d594a0bddbe4262f7a13ef551d07}{}\label{classmutacion_a66b8d594a0bddbe4262f7a13ef551d07} 
+\index{mutacion@{mutacion}!set\+Ref\+\_\+alt@{set\+Ref\+\_\+alt}}
+\index{set\+Ref\+\_\+alt@{set\+Ref\+\_\+alt}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{set\+Ref\+\_\+alt()}{setRef\_alt()}}
+{\footnotesize\ttfamily void mutacion\+::set\+Ref\+\_\+alt (\begin{DoxyParamCaption}\item[{const vector$<$ string $>$ \&}]{ref\+\_\+alt }\end{DoxyParamCaption})}
+
+
+
+Cambia el valor del genoma básico. 
+
+
+\begin{DoxyParams}{Parámetros}
+{\em ref\+\_\+alt} & vector de string que contiene el genoma tipo \\
+\hline
+\end{DoxyParams}
+
+
+\subsubsection{Documentación de los datos miembro}
+\hypertarget{classmutacion_aeb2ac56009900d9319873d00ee80e090}{}\label{classmutacion_aeb2ac56009900d9319873d00ee80e090} 
+\index{mutacion@{mutacion}!caf@{caf}}
+\index{caf@{caf}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{caf}{caf}}
+{\footnotesize\ttfamily vector$<$float$>$ mutacion\+::caf\hspace{0.3cm}{\ttfamily [private]}}
+
+\hypertarget{classmutacion_a57651966b952f782240ff9cff72c5d2f}{}\label{classmutacion_a57651966b952f782240ff9cff72c5d2f} 
+\index{mutacion@{mutacion}!chr@{chr}}
+\index{chr@{chr}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{chr}{chr}}
+{\footnotesize\ttfamily string mutacion\+::chr\hspace{0.3cm}{\ttfamily [private]}}
+
+\hypertarget{classmutacion_adc0290c4a6db7f4c7341b0183c7ef534}{}\label{classmutacion_adc0290c4a6db7f4c7341b0183c7ef534} 
+\index{mutacion@{mutacion}!clnsig@{clnsig}}
+\index{clnsig@{clnsig}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{clnsig}{clnsig}}
+{\footnotesize\ttfamily vector$<$int$>$ mutacion\+::clnsig\hspace{0.3cm}{\ttfamily [private]}}
+
+\hypertarget{classmutacion_a6dabfef6167d64030f095887b15f65dd}{}\label{classmutacion_a6dabfef6167d64030f095887b15f65dd} 
+\index{mutacion@{mutacion}!common@{common}}
+\index{common@{common}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{common}{common}}
+{\footnotesize\ttfamily bool mutacion\+::common\hspace{0.3cm}{\ttfamily [private]}}
+
+\hypertarget{classmutacion_a0decaa0406675999e766f913e6347d79}{}\label{classmutacion_a0decaa0406675999e766f913e6347d79} 
+\index{mutacion@{mutacion}!enfermedades@{enfermedades}}
+\index{enfermedades@{enfermedades}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{enfermedades}{enfermedades}}
+{\footnotesize\ttfamily vector$<$\hyperlink{classenfermedad}{enfermedad}$>$ mutacion\+::enfermedades\hspace{0.3cm}{\ttfamily [private]}}
+
+\hypertarget{classmutacion_a65fb9e2186d1c54d490289661b141aa1}{}\label{classmutacion_a65fb9e2186d1c54d490289661b141aa1} 
+\index{mutacion@{mutacion}!genes@{genes}}
+\index{genes@{genes}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{genes}{genes}}
+{\footnotesize\ttfamily vector$<$string$>$ mutacion\+::genes\hspace{0.3cm}{\ttfamily [private]}}
+
+\hypertarget{classmutacion_aafc39218473e0f21eb0c3dc05dd4f35e}{}\label{classmutacion_aafc39218473e0f21eb0c3dc05dd4f35e} 
+\index{mutacion@{mutacion}!ID@{ID}}
+\index{ID@{ID}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{ID}{ID}}
+{\footnotesize\ttfamily string mutacion\+::\+ID\hspace{0.3cm}{\ttfamily [private]}}
+
+\hypertarget{classmutacion_ae1487b8648d0eaad68de5e4e5a87f3ff}{}\label{classmutacion_ae1487b8648d0eaad68de5e4e5a87f3ff} 
+\index{mutacion@{mutacion}!pos@{pos}}
+\index{pos@{pos}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{pos}{pos}}
+{\footnotesize\ttfamily unsigned int mutacion\+::pos\hspace{0.3cm}{\ttfamily [private]}}
+
+\hypertarget{classmutacion_abeb13e023fc9a34120106bccf58d5086}{}\label{classmutacion_abeb13e023fc9a34120106bccf58d5086} 
+\index{mutacion@{mutacion}!ref\+\_\+alt@{ref\+\_\+alt}}
+\index{ref\+\_\+alt@{ref\+\_\+alt}!mutacion@{mutacion}}
+\paragraph{\texorpdfstring{ref\+\_\+alt}{ref\_alt}}
+{\footnotesize\ttfamily vector$<$string$>$ mutacion\+::ref\+\_\+alt\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{mutacion_8h}{mutacion.\+h}\end{DoxyCompactItemize}

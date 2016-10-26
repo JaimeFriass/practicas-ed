@@ -1,0 +1,199 @@
+\begin{DoxyVersion}{Versión}
+v0 
+\end{DoxyVersion}
+\begin{DoxyAuthor}{Autor}
+Jesús Jiménez Sánchez, María Nazaret Ruiz Jaldo y Jaime Frías Funes
+\end{DoxyAuthor}
+\hypertarget{index_introsec}{}\subsection{Introducción}\label{index_introsec}
+En esta practica se pretende avanzar en el uso de las estructuras de datos mediante el diseño de distintos tipos de datos para manejar la información asociada a una base de datos de mutaciones del genoma humano con relevancia clínica (Clin\+Var-\/dbsnp).\hypertarget{index_background}{}\subsubsection{Contexto}\label{index_background}
+El ácido desoxirribonucleico, abreviado como A\+DN, es un ácido nucleico que contiene las instrucciones genéticas usadas en el desarrollo y funcionamiento de todos los organismos vivos conocidos y algunos virus, y es responsable de su transmisión hereditaria. En ocasiones, se compara al A\+DN con un programa de ordenador, ya que contiene las instrucciones necesarias para construir otros componentes de las células, como las proteínas y las moléculas de A\+RN, que son las responsables del funcionamiento celular. Los segmentos de A\+DN que llevan esta información genética son llamados genes.
+
+Podemos representar el A\+DN como una secuencia de nucleótidos (Adenina A, Timina T, Citosina C, Guanina G). La disposición secuencial de estas cuatro bases a lo largo de la cadena es la que codifica la información genética. Por ejemplo, podemos representar una pequeña cadena de A\+DN como\+: \char`\"{}\+A\+C\+C\+C\+A\+G\+T\+C\+G\+G\+A\+T\+T\+T\char`\"{}.
+
+En los organismos vivos, el A\+DN no suele existir como una molécula individual, sino como una pareja de moléculas que se enroscan sobre sí mismas formando una especie de escalera de caracol, denominada doble hélice. Esta estructura se sustenta en la complementariedad de sus bases (Citosina-\/\+Guanina y Adenina-\/\+Timina). Al ser las bases complementarias, podemos representar el A\+DN sin perder información especificando sólo una de sus cadenas.
+
+El genoma humano es una secuencia de A\+DN contenida en 23 pares de cromosomas en el núcleo de cada célula humana (de cada pareja de cromosomas, uno es heredado del padre y otro de la madre). Los cromosomas 1 a 22 se numeran en orden creciente de tamaño. La pareja de cromosomas 23, también llamados cromosomas sexuales, se compone de un cromosoma X (de la madre) y uno X o Y (del padre).
+
+El tamaño total del genoma humano haploide (es decir, considerando sólo uno de cada pareja de cromosomas) es de aproximadamente 3200 millones de pares de bases de A\+DN. Dado que una base se representa con un Byte (\textquotesingle{}A\textquotesingle{}, \textquotesingle{}C\textquotesingle{}, \textquotesingle{}G\textquotesingle{}, \textquotesingle{}T\textquotesingle{}), el tamaño aproximado de la secuencia completa de un genoma humano haploide es de 3 G\+Bytes.
+
+Dos seres humanos del mismo sexo comparten un porcentaje muy elevado (99,5\%) de su secuencia de A\+DN, pero estas secuencias no son idénticas. Estos millones de pequeñas variaciones en el genoma, junto con la influencia de factores del medio, son los responsables de que exhibamos distintos fenotipos, es decir, distintos rasgos físicos y conductales. Una variación en el genoma, por sustitución, inserción o deleción de bases, se llama mutación o polimorfismo, y la principal fuente de variabilidad entre dos genomas humanos es el polimorfismo de una sola base (Single Nucleotide Polimorphism, S\+NP).
+
+Un S\+NP es, por tanto, un cambio de una base en una misma posición entre dos genomas humanos. Un S\+NP suele representarse indicando el número de cromosoma en el que se localiza el cambio, la posición dentro del cromosoma, y el cambio de base respecto al genoma humano de referencia (el primer genoma humano para el que se conoce la secuencia, que se terminó de secuenciar por primera vez en 2001). Por ejemplo, el siguiente S\+NP indica un cambio en la posición 1014143 del cromosoma 1, que en el genoma humano de referencia presenta una \textquotesingle{}C\textquotesingle{} y en otros genomas presenta una \textquotesingle{}T\textquotesingle{}\+:
+
+
+\begin{DoxyCode}
+1 1014143 C T
+\end{DoxyCode}
+
+
+Los S\+NP constituyen hasta el 90\% de todas las variaciones genómicas humanas. Estas variaciones en la secuencia del A\+DN pueden afectar a la respuesta de los individuos a enfermedades, bacterias, virus, productos químicos, fármacos, etc.. De este modo, su estudio es de gran utilidad en la denominada Medicina Personalizada o Medicina de Precisión\+: el desarrollo de métodos de prevención, diagnóstico y tratamiento (fármacos) de forma individualizada para cada paciente.
+
+Los estudios genéticos personalizados se basan en décadas de descubrimientos científicos publicados en la literatura especializada que muestran evidencia de que la presencia de un determinado S\+NP en el genoma de un individuo puede hacerle propenso a padecer una cierta enfermedad. La base de datos Clin\+Var-\/db\+S\+NP recoge esta información.
+
+Para leer más sobre el contexto del problema\+: \begin{DoxyItemize}
+\item \href{https://es.wikipedia.org/wiki/}{\tt https\+://es.\+wikipedia.\+org/wiki/}Ácido\+\_\+desoxirribonucleico \item \href{https://es.wikipedia.org/wiki/Genoma_humano}{\tt https\+://es.\+wikipedia.\+org/wiki/\+Genoma\+\_\+humano} \item \href{https://es.wikipedia.org/wiki/Polimorfismo_de_nucle}{\tt https\+://es.\+wikipedia.\+org/wiki/\+Polimorfismo\+\_\+de\+\_\+nucle}ótido\+\_\+único\end{DoxyItemize}
+\hypertarget{index_baseDatos}{}\subsubsection{Conjunto de Datos}\label{index_baseDatos}
+El conjunto de datos con el que trabajaremos es la base de datos completa Clin\+Var-\/db\+S\+NP descargada de la web del National Institute of Health (N\+IH) de los Estados Unidos\+: \href{https://www.ncbi.nlm.nih.gov/clinvar/}{\tt https\+://www.\+ncbi.\+nlm.\+nih.\+gov/clinvar/} . Esta base de datos se puede obtener en formato V\+CF v4.\+0 (fichero\+: clinvar\+\_\+20160831.\+vcf), que representa de forma tabular más de 130.\+000 mutaciones (S\+N\+Ps) conocidos hasta la fecha y su relación clínica con alguna enfermedad.
+
+El fichero comienza con una cabecera (líneas que se inician con \textquotesingle{}\#\#\textquotesingle{}) que describe cada uno de los campos de la base de datos. A partir de la línea 67 se listan las entradas de la BD, con un S\+NP por línea, y los campos delimitados por tabulador (\textquotesingle{}\textbackslash{}t\textquotesingle{}). Nota\+: algunos campos no relevantes se han omitido en este ejemplo para facilitar su lectura (los campos omitidos se han reemplazado por \mbox{[}...\mbox{]}).
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#CHROM  POS ID  REF ALT QUAL  FILTER  INFO}
+
+1 1014143 rs786201005 C T . . RS=786201005;[...];GENEINFO=ISG15:9636; CLNSIG=5; CLNDSDB=MedGen:OMIM; 
+      CLNDSDBID=CN221808:616126; CLNDBN=Immunodeficiency\_38\_with\_basal\_ganglia\_calcification; [...]
+
+1 1014316 rs672601345 C CG  . . RS=672601345;[...];GENEINFO=ISG15:9636;CLNSIG=5; CLNDSDB=MedGen:OMIM; 
+      CLNDSDBID=CN221808:616126; CLNDBN=Immunodeficiency\_38\_with\_basal\_ganglia\_calcification; [...]
+
+1 1053827 rs74685771  G A,C,T . . RS=74685771;[...];GENEINFO=AGRN:375790;[...]; CLNSIG=3; CLNDSDB=MedGen; 
+      CLNDSDBID=CN169374; CLNDBN=not\_specified; [...]
+
+1 11847114  rs202102042 C T . . RS=202102042;[...]GENEINFO=NPPA:4878|NPPA-AS1:100379251;[...]; CLNSIG=5; 
+      CLNDSDB=MedGen:OMIM; CLNDSDBID=C3810401:615745; CLNDBN=Atrial\_standstill\_2; [...]; CAF=0.9998,0.0001997;COMMON
+      =0
+
+1 11847311  rs755212754 G A . . RS=755212754;[...]GENEINFO=NPPA:4878|NPPA-AS1:100379251;[...]; CLNSIG=3; 
+      CLNDSDB=MedGen:OMIM; CLNDSDBID=C2677294:612201; CLNDBN=Atrial\_fibrillation\(\backslash\)x2c\_familial\(\backslash\)x2c\_6; [...]
+
+13  32316475  rs80359298  CAA C . . RS=80359298;[...];GENEINFO=BRCA2:675;[...]; CLNSIG=1|5; CLNDSDB=MedGen:
+      OMIM:SNOMED\_CT|MedGen:OMIM; CLNDSDBID=C0346153:114480:254843006|C2675520:612555; CLNDBN=
+      Familial\_cancer\_of\_breast|Breast-ovarian\_cancer\(\backslash\)x2c\_familial\_2;[...]
+\end{DoxyCode}
+
+
+Los campos de interés en cada línea son los siguientes\+: \begin{DoxyItemize}
+\item C\+H\+R\+OM\+: Número de cromosoma. \item P\+OS\+: Posición del S\+NP dentro del cromosoma (comienza a numerarse en 1). \item ID\+: Identificador único del S\+NP (\textquotesingle{}rs\+X\+X\+XX\textquotesingle{}). \item R\+EF\+: Base(s) que aparecen en esa posición en el genoma humano de referencia. En caso de que aparezca una pequeña cadena de varias bases (ejemplo\+: \char`\"{}\+A\+T\+T\+G\+G\+A\+G\char`\"{}), el S\+NP que se indica reemplaza esta secuencia de bases por una sola. \item A\+LT\+: la(s) base(s) alternativa(s) que se han observado en la población. Si se han observado distintas mutaciones para la misma posición, estás se indican delimitadas por coma (ejemplo\+: \char`\"{}\+A,\+C,\+T\char`\"{}). \item I\+N\+FO\+: Este campo representa información adicional sobre el S\+NP en forma de listado de atributos separados por \textquotesingle{};\textquotesingle{}. Entre estos atributos, destacamos por su interés los siguientes\+:
+\begin{DoxyItemize}
+\item G\+E\+N\+E\+I\+N\+FO\+: Nombre e identificador del gen que contiene este S\+NP. Ejemplo\+: G\+E\+N\+E\+I\+N\+FO=I\+S\+G15\+:9636 (Nombre del gen\+: I\+S\+G15, Identificador del gen\+: 9636). En caso de que se trate de varios genes, se separan con \textquotesingle{}$\vert$\textquotesingle{} o \textquotesingle{},\textquotesingle{}. Ejemplo\+: G\+E\+N\+E\+I\+N\+FO=B3\+G\+A\+L\+T6\+:126792$\vert$\+S\+D\+F4\+:51150
+\item C\+AF\+: Frecuencia con que se observa cada base descrita en este S\+NP en la población. Ejemplo\+: C\+AF=0.\+9912,0.\+008786 indica que la base de la referencia se observa con frecuencia 0.\+9912 y la base alternativa con frecuencia 0.\+008786. El primer valor de C\+AF corresponde a frecuencia de la base R\+EF, los siguientes a las bases indicadas en A\+LT, en el mismo orden.
+\item C\+O\+M\+M\+ON\+: Indica si es un S\+NP común en la población (0 -\/ no, 1 -\/ si).
+\item C\+L\+N\+S\+IG\+: relevancia clínica del S\+NP\+: 0/1 -\/ Incierta, Desconocida, 2 -\/ Benigno, 3 -\/ Probablemente benigno, 4 -\/ Probablemente patógeno, 5 -\/ Patógeno, 6 -\/ Relevante en respuesta a fármaco, 7 -\/ Histocompatibilidad, 255 -\/ Otro. En caso de que el S\+NP esté asociado con varias enfermedades se mostrará un código C\+L\+N\+S\+IG para cada enfermedad (delimitados por \textquotesingle{}$\vert$\textquotesingle{} o \textquotesingle{},\textquotesingle{}), o un solo código C\+L\+N\+S\+IG, indicando que la relevancia clínica del S\+NP es la misma para todas las enfermedades.
+\item C\+L\+N\+D\+BN\+: Nombre de la enfermedad asociada al S\+NP. También se suministran el ID único de la enfermedad (C\+L\+N\+D\+S\+D\+B\+ID) y la base de datos que provee este ID (C\+L\+N\+D\+S\+DB). En caso de que un S\+NP esté asociado a varias enfermedades, éstas se separan con \textquotesingle{}$\vert$\textquotesingle{} o \textquotesingle{},\textquotesingle{}. El siguiente ejemplo hace referencia a tres enfermedades\+: C\+L\+N\+D\+S\+DB=Med\+Gen$\vert$\+Med\+Gen\+:O\+M\+I\+M$\vert$\+Med\+Gen; C\+L\+N\+D\+S\+D\+B\+ID=C\+N178850$\vert$\+C3809288\+:615373$\vert$\+C\+N169374; C\+L\+N\+D\+BN=Dilated\+\_\+cardiomyopathy\+\_\+1\+L\+L$\vert$\+Left\+\_\+ventricular\+\_\+noncompaction\+\_\+8$\vert$not\+\_\+specified;
+\end{DoxyItemize}\end{DoxyItemize}
+\hypertarget{index_enfermedad}{}\subsection{T\+D\+A enfermedad}\label{index_enfermedad}
+Para relacionar S\+N\+Ps con enfermedades proponemos la creación de una clase enfermedad, que deberá tener entre otros los métodos abajo indicados. La especificación de la clase enfermedad se realizará en el fichero \hyperlink{enfermedad_8h}{enfermedad.\+h} y la implementación de la clase enfermedad en el fichero \hyperlink{enfermedad_8hxx}{enfermedad.\+hxx}.
+
+
+\begin{DoxyCode}
+\textcolor{keyword}{class }\hyperlink{classenfermedad}{enfermedad} \{
+\textcolor{keyword}{private}:
+  \textcolor{keywordtype}{string}  \hyperlink{classenfermedad_ad7c4204057028a73bde6022678c6813e}{name};       \textcolor{comment}{// nombre de la enfermedad. Almacenar completo en minúscula. }
+  \textcolor{keywordtype}{string}  \hyperlink{classenfermedad_a689cdbd469ecc28e045bda2f62a229d2}{ID};         \textcolor{comment}{// ID único para la enfermedad}
+  \textcolor{keywordtype}{string}  \hyperlink{classenfermedad_a3684b7ec850d4c9357dd21bdd5e02803}{database};   \textcolor{comment}{// Base de datos que provee el ID}
+
+\textcolor{keyword}{public}:
+ \hyperlink{classenfermedad_a60eb5e620b0bf9a53d4f0980031aeefd}{enfermedad} (); \textcolor{comment}{//Constructor de enfermedad por defecto}
+ \hyperlink{classenfermedad_a60eb5e620b0bf9a53d4f0980031aeefd}{enfermedad} (\textcolor{keyword}{const} \textcolor{keywordtype}{string} & name, \textcolor{keyword}{const} \textcolor{keywordtype}{string} & ID, \textcolor{keyword}{const} \textcolor{keywordtype}{string} & database); 
+
+ \textcolor{keywordtype}{void} \hyperlink{classenfermedad_a18f621d13de01c0b06a05757ddd8a087}{setName}(\textcolor{keyword}{const} \textcolor{keywordtype}{string} & name);
+ \textcolor{keywordtype}{void} \hyperlink{classenfermedad_a5ad52bdce8de9ac4fe25b460dc699af4}{setID}(\textcolor{keyword}{const} \textcolor{keywordtype}{string} & ID);
+ \textcolor{keywordtype}{void} \hyperlink{classenfermedad_ac1f009307d52232420a72264e9c2ce3f}{setDatabase}(\textcolor{keyword}{const} \textcolor{keywordtype}{string} & database);
+
+ \textcolor{keywordtype}{string} \hyperlink{classenfermedad_ac45bc03880429b312ba05c6277d5043f}{getName}( );
+ \textcolor{keywordtype}{string} \hyperlink{classenfermedad_aed3bb5ee6da05d6ccd56e648da3ae429}{getID}( );
+ \textcolor{keywordtype}{string} \hyperlink{classenfermedad_afdc354a1fe894cc0ce209bcdccf86421}{getDatabase}( );
+ 
+ \hyperlink{classenfermedad}{enfermedad} & \hyperlink{classenfermedad_a795be16b7e3e6a858211ff20a62c9d85}{operator=}(\textcolor{keyword}{const} \hyperlink{classenfermedad}{enfermedad} & e);
+ \textcolor{keywordtype}{string} \hyperlink{classenfermedad_a79487a17f935b7d0e7b90e1a9a8f983c}{toString}() \textcolor{keyword}{const};
+
+\textcolor{comment}{// Operadores relacionales}
+ \textcolor{keywordtype}{bool} \hyperlink{classenfermedad_a8e73dc135566f6ef73c2d66ca4dcf04a}{operator==}(\textcolor{keyword}{const} \hyperlink{classenfermedad}{enfermedad} & e) \textcolor{keyword}{const}; 
+ \textcolor{keywordtype}{bool} \hyperlink{classenfermedad_a9315018e351b2c435129eaccfab97c7f}{operator!=}(\textcolor{keyword}{const} \hyperlink{classenfermedad}{enfermedad} & e)\textcolor{keyword}{const};
+ \textcolor{keywordtype}{bool} \hyperlink{classenfermedad_a0b532e9e14c36ca4431cf50620c871ed}{operator<}(\textcolor{keyword}{const} \hyperlink{classenfermedad}{enfermedad} & e) \textcolor{keyword}{const};  \textcolor{comment}{//Orden alfabético por campo name. }
+
+ \textcolor{keywordtype}{bool} \hyperlink{classenfermedad_a430d035077d6acff0b1ddbd07c2ff205}{nameContains}(\textcolor{keyword}{const} \textcolor{keywordtype}{string} & str) \textcolor{keyword}{const};   \textcolor{comment}{//Devuelve True si str está incluido en el
+       nombre de la enfermedad, aunque no se trate del nombre completo. No debe ser sensible a mayúsculas/minúsculas. }
+
+\}
+
+ ostream& \hyperlink{enfermedad_8h_a6cabaa51c1fab8960486e2c2e51071f0}{operator<< }( ostream& os, \textcolor{keyword}{const} \hyperlink{classenfermedad}{enfermedad} & e); \textcolor{comment}{//imprime enfermedad }
+
+\textcolor{preprocessor}{#include "\hyperlink{enfermedad_8hxx}{enfermedad.hxx}"} \textcolor{comment}{// Incluimos la implementacion.}
+\end{DoxyCode}
+
+
+Así, podremos trabajar con enfermedades como indica el siguiente código 
+\begin{DoxyCode}
+...
+enfermedad e1(\textcolor{stringliteral}{"Breast-ovarian\_cancer\(\backslash\)x2c\_familial\_2"}, \textcolor{stringliteral}{"C2675520:612555"}, \textcolor{stringliteral}{"MedGen:OMIM"});
+\hyperlink{classenfermedad}{enfermedad} e2(\textcolor{stringliteral}{"Prostate\_cancer\(\backslash\)x2c\_susceptibility\_to"}, \textcolor{stringliteral}{""}, \textcolor{stringliteral}{""});
+\hyperlink{classenfermedad}{enfermedad} e3 = e1; 
+...
+if (e1.nameContains(\textcolor{stringliteral}{"cancer"})) 
+  cout << e1 << \textcolor{stringliteral}{" es un tipo de cancer. "}; 
+...
+\end{DoxyCode}
+\hypertarget{index_mutation}{}\subsection{Mutación}\label{index_mutation}
+A igual que con la clase enfermedad, la especificación del tipo mutación y su implementación se realizará en los ficheros \hyperlink{mutacion_8h}{mutacion.\+h} y mutacion.\+hxx, respectivamente, y debe tener la información de los atributos (con su representacion asociada)
+
+\begin{DoxyItemize}
+\item chr\+: identificador del cromosoma (string). Los cromosomas válidos son\+: \char`\"{}1\char`\"{}, \char`\"{}2\char`\"{}, \char`\"{}3\char`\"{}, \char`\"{}4\char`\"{}, \char`\"{}5\char`\"{}, \char`\"{}6\char`\"{}, \char`\"{}7\char`\"{}, \char`\"{}8\char`\"{}, \char`\"{}9\char`\"{}, \char`\"{}10\char`\"{}, \char`\"{}11\char`\"{}, \char`\"{}12\char`\"{}, \char`\"{}13\char`\"{}, \char`\"{}14\char`\"{}, \char`\"{}15\char`\"{}, \char`\"{}16\char`\"{}, \char`\"{}17\char`\"{}, \char`\"{}18\char`\"{}, \char`\"{}19\char`\"{}, \char`\"{}20\char`\"{}, \char`\"{}21\char`\"{}, \char`\"{}22\char`\"{}, \char`\"{}\+X\char`\"{}, \char`\"{}\+Y\char`\"{}, \char`\"{}\+M\+T\char`\"{}. \item pos\+: identificador de la posición dentro del cromosoma (unsigned int). \item ID\+: identificador del S\+N\+P/mutación (string). \item ref\+\_\+alt\+: base(s) en el genoma de referencia y alternativa(s) posible(s) (vector de string). La primera posición la ocupará el string con la(s) base(s) del genoma de referencia, y, a continuación, aparecerán la(s) base(s) alternativas en el mismo orden que se indica en el fichero. Ejemplos\+: 
+\begin{DoxyCode}
+X 154032548 rs61754422  C A,G,T
+ref\_alt: [\textcolor{stringliteral}{"C"}, \textcolor{stringliteral}{"A"}, \textcolor{stringliteral}{"G"}, \textcolor{stringliteral}{"T"}]
+
+1 1338032 rs797044840 GTAGGCAGG GC
+ref\_alt: [\textcolor{stringliteral}{"GTAGGCAGG"}, \textcolor{stringliteral}{"GC"}]
+\end{DoxyCode}
+\end{DoxyItemize}
+\begin{DoxyItemize}
+\item genes\+: gen(es) asociado(s) al S\+NP (vector de string). Ejemplo\+: 
+\begin{DoxyCode}
+1 11847311  rs755212754 G A . . [...]GENEINFO=NPPA:4878|NPPA-AS1:100379251;[...]
+genes: [\textcolor{stringliteral}{"NPPA:4878"}, \textcolor{stringliteral}{"NPPA-AS1:100379251"}]
+\end{DoxyCode}
+ \item common\+: indica si el S\+NP es común en la población (bool). \item caf\+: frecuencia de cada base del S\+NP en la población (vector de float). En primer lugar debe indicarse la frecuencia de la base \textquotesingle{}ref\textquotesingle{} (posición 0 de ref-\/alt), seguida por las frecuencias de las bases alternativas indicadas en \textquotesingle{}ref-\/alt\textquotesingle{}, en el mismo orden. Ejemplo\+: 
+\begin{DoxyCode}
+1 11847114  rs202102042 C T . . RS=202102042;[...];CAF=0.9998,0.0001997;COMMON=0
+ref\_alt: [\textcolor{stringliteral}{"C"}, \textcolor{stringliteral}{"T"}]
+caf: [0.9998, 0.0001997]
+common: False
+\end{DoxyCode}
+ \item enfermedades\+: enfermedades asociadas al S\+NP (vector de enfermedad). \item clnsig\+: relevancia clínica del S\+NP para cada enfermedad utilizando el código numérico del campo C\+L\+N\+S\+IG (vector de int). En caso de que existan varias enfermedades asociadas a la mutación, cada una de ellas puede presentar diferente código C\+L\+N\+S\+IG, por lo se deben almacenar en el vector clnsig en el mismo orden que las enfermedades asociadas. En caso de presentarse sólo un código C\+L\+N\+S\+IG y varias enfermedades, este código se aplica a todas ellas. Ejemplo\+: 
+\begin{DoxyCode}
+13  32316475  rs80359298  CAA C . . RS=80359298;[...];CLNSIG=1|5;CLNDSDB=MedGen:OMIM:SNOMED\_CT|MedGen:OMIM;
+      CLNDSDBID=C0346153:114480:254843006|C2675520:612555;CLNDBN=Familial\_cancer\_of\_breast|Breast-
+      ovarian\_cancer\(\backslash\)x2c\_familial\_2;[...]
+
+enfermedades: [ \hyperlink{classenfermedad}{enfermedad}(\textcolor{stringliteral}{"Familial\_cancer\_of\_breast"},\textcolor{stringliteral}{"C0346153:114480:254843006"}, \textcolor{stringliteral}{"
+      MedGen:OMIM:SNOMED\_CT"}), 
+                \hyperlink{classenfermedad}{enfermedad}(\textcolor{stringliteral}{"Breast-ovarian\_cancer\(\backslash\)x2c\_familial\_2"}, \textcolor{stringliteral}{"C2675520:612555"}, \textcolor{stringliteral}{"
+      MedGen:OMIM"})]
+clnsig: [1,5] 
+\end{DoxyCode}
+\end{DoxyItemize}
+
+\begin{DoxyCode}
+\textcolor{comment}{// Fichero mutacion.h  }
+\textcolor{keyword}{class }\hyperlink{classmutacion}{mutacion} \{
+ ....
+\}
+
+\textcolor{preprocessor}{#include "mutacion.hxx"} \textcolor{comment}{// Incluimos la implementacion}
+\end{DoxyCode}
+\hypertarget{index_sec_tar}{}\subsection{\char`\"{}\+Se Entrega / Se Pide\char`\"{}}\label{index_sec_tar}
+\hypertarget{index_ssEntrega}{}\subsubsection{Se entrega}\label{index_ssEntrega}
+En esta práctica se entrega los fuentes necesarios para generar la documentación de este proyecto así como el código necesario para resolver este problema. En concreto los ficheros que se entregan son\+:
+
+\begin{DoxyItemize}
+\item documentacion.\+pdf Documentación de la práctica en pdf. \item \hyperlink{documentacion_8dox}{documentacion.\+dox} Este fichero contiene el fichero de configuración de doxygen necesario para generar la documentación del proyecto (html y pdf). Para ello, basta con ejecutar desde la línea de comando 
+\begin{DoxyCode}
+doxygen doxPractica.txt
+\end{DoxyCode}
+ La documentación en html la podemos encontrar en el fichero ./html/index.html. Para generar la documentación en latex es suficiente con hacer los siguientes pasos\+: 
+\begin{DoxyCode}
+cd latex
+make
+\end{DoxyCode}
+ obteniendo como resultado el fichero refman.\+pdf que incluye toda la documentación generada.\end{DoxyItemize}
+\begin{DoxyItemize}
+\item \hyperlink{mutacion_8h}{mutacion.\+h} Plantilla para la especificación del T\+DA mutación \item mutacion.\+hxx Plantilla para la implementación del T\+DA mutación \item \hyperlink{enfermedad_8h}{enfermedad.\+h} Plantilla para la especificación del T\+DA enfermedad \item \hyperlink{enfermedad_8hxx}{enfermedad.\+hxx} Plantilla para la implementación del T\+DA enfermedad\end{DoxyItemize}
+\begin{DoxyItemize}
+\item \hyperlink{principal_8cpp}{principal.\+cpp} Fichero donde se incluye el main del programa. Este programa toma como entrada el fichero de datos \char`\"{}clinvar\+\_\+20160831.\+vcf\char`\"{}, carga las mutaciones en un vector, muestra el número total de mutaciones leídas del fichero y el número de mutaciones que están asociadas a una enfermedad que indica el usuario.\end{DoxyItemize}
+\hypertarget{index_ssPide}{}\subsubsection{Se Pide}\label{index_ssPide}
+\begin{DoxyItemize}
+\item Diseñar la función de abstracción e invariante de la representación del tipo enfermedad. \item Diseñar la función de abstracción e invariante de la representación del tipo mutación. \item Implementar el código asociado a los ficheros .hxx. \item Implementar el código asociado a \hyperlink{principal_8cpp}{principal.\+cpp}.\end{DoxyItemize}
+\hypertarget{index_fecha}{}\subsection{\char`\"{}\+Fecha Límite de Entrega\char`\"{}}\label{index_fecha}
+La fecha límite de entrega será el 23 de Octubre a las 23\+:50 hrs. 

@@ -1,0 +1,62 @@
+\hypertarget{principal_8cpp}{}\subsection{Referencia del Archivo principal.\+cpp}
+\label{principal_8cpp}\index{principal.\+cpp@{principal.\+cpp}}
+{\ttfamily \#include \char`\"{}mutacion.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+\subsubsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{principal_8cpp_aff87f713d8949bae17b25aade0c820bc}{load} (vector$<$ \hyperlink{classmutacion}{mutacion} $>$ \&vm, const string \&s)
+\begin{DoxyCompactList}\small\item\em lee un fichero de mutaciones, linea a linea \end{DoxyCompactList}\item 
+int \hyperlink{principal_8cpp_a61f9d7c309afbf7234d83ddf441c2ac9}{cuenta\+Mutaciones\+Enfermedad} (vector$<$ \hyperlink{classmutacion}{mutacion} $>$ \&vm, const string \&s)
+\begin{DoxyCompactList}\small\item\em Recorre un vector de mutaciones y devuelve cuántas de estas mutaciones están asociadas a un nombre de enfermedad s. \end{DoxyCompactList}\item 
+int \hyperlink{principal_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsubsection{Documentación de las funciones}
+\hypertarget{principal_8cpp_a61f9d7c309afbf7234d83ddf441c2ac9}{}\label{principal_8cpp_a61f9d7c309afbf7234d83ddf441c2ac9} 
+\index{principal.\+cpp@{principal.\+cpp}!cuenta\+Mutaciones\+Enfermedad@{cuenta\+Mutaciones\+Enfermedad}}
+\index{cuenta\+Mutaciones\+Enfermedad@{cuenta\+Mutaciones\+Enfermedad}!principal.\+cpp@{principal.\+cpp}}
+\paragraph{\texorpdfstring{cuenta\+Mutaciones\+Enfermedad()}{cuentaMutacionesEnfermedad()}}
+{\footnotesize\ttfamily int cuenta\+Mutaciones\+Enfermedad (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{classmutacion}{mutacion} $>$ \&}]{vm,  }\item[{const string \&}]{s }\end{DoxyParamCaption})}
+
+
+
+Recorre un vector de mutaciones y devuelve cuántas de estas mutaciones están asociadas a un nombre de enfermedad s. 
+
+
+\begin{DoxyParams}[1]{Parámetros}
+\mbox{\tt in}  & {\em vm} & vector de mutaciones \\
+\hline
+\mbox{\tt in}  & {\em s} & texto asociado al nombre de la enfermedad. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+int número de mutaciones asociadas a enfermedades cuyo nombre contiene s 
+\end{DoxyReturn}
+\hypertarget{principal_8cpp_aff87f713d8949bae17b25aade0c820bc}{}\label{principal_8cpp_aff87f713d8949bae17b25aade0c820bc} 
+\index{principal.\+cpp@{principal.\+cpp}!load@{load}}
+\index{load@{load}!principal.\+cpp@{principal.\+cpp}}
+\paragraph{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily bool load (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{classmutacion}{mutacion} $>$ \&}]{vm,  }\item[{const string \&}]{s }\end{DoxyParamCaption})}
+
+
+
+lee un fichero de mutaciones, linea a linea 
+
+
+\begin{DoxyParams}[1]{Parámetros}
+\mbox{\tt in}  & {\em s} & nombre del fichero \\
+\hline
+\mbox{\tt in,out}  & {\em vm} & vector sobre el que se lee \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+true si la lectura ha sido correcta, false en caso contrario 
+\end{DoxyReturn}
+\hypertarget{principal_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{}\label{principal_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{principal.\+cpp@{principal.\+cpp}!main@{main}}
+\index{main@{main}!principal.\+cpp@{principal.\+cpp}}
+\paragraph{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
