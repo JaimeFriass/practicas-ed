@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.6"/>
+<title>TDA Mutación y TDA Enfermedad: Documentación Práctica</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">TDA Mutación y TDA Enfermedad
+   &#160;<span id="projectnumber">V0</span>
+   </div>
+   <div id="projectbrief">TDA Mutación y TDA Enfermedad</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.6 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li class="current"><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="pages.html"><span>Páginas&#160;relacionadas</span></a></li>
+      <li><a href="annotated.html"><span>Clases</span></a></li>
+      <li><a href="files.html"><span>Archivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Todo</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Clases</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Archivos</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Funciones</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Páginas</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Documentación Práctica </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Tabla de contenidos</h3>
+<ul><li class="level1"><a href="#introsec">Introducción</a><ul><li class="level2"><a href="#background">Contexto</a></li>
+<li class="level2"><a href="#baseDatos">Conjunto de Datos</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#enfermedad">TDA enfermedad</a></li>
+<li class="level1"><a href="#mutation">Mutación</a></li>
+<li class="level1"><a href="#sec_tar">"Se Entrega / Se Pide"</a><ul><li class="level2"><a href="#ssEntrega">Se entrega</a></li>
+<li class="level2"><a href="#ssPide">Se Pide</a></li>
+</ul>
+</li>
+<li class="level1"><a href="#fecha">"Fecha Límite de Entrega"</a></li>
+</ul>
+</div>
+<div class="textblock"><dl class="section version"><dt>Versión</dt><dd>v0 </dd></dl>
+<dl class="section author"><dt>Autor</dt><dd>Carlos Cano y Juan F. Huete</dd></dl>
+<h1><a class="anchor" id="introsec"></a>
+Introducción</h1>
+<p>En esta practica se pretende avanzar en el uso de las estructuras de datos mediante el diseño de distintos tipos de datos para manejar la información asociada a una base de datos de mutaciones del genoma humano con relevancia clínica (ClinVar-dbsnp).</p>
+<h2><a class="anchor" id="background"></a>
+Contexto</h2>
+<p>El ácido desoxirribonucleico, abreviado como ADN, es un ácido nucleico que contiene las instrucciones genéticas usadas en el desarrollo y funcionamiento de todos los organismos vivos conocidos y algunos virus, y es responsable de su transmisión hereditaria. En ocasiones, se compara al ADN con un programa de ordenador, ya que contiene las instrucciones necesarias para construir otros componentes de las células, como las proteínas y las moléculas de ARN, que son las responsables del funcionamiento celular. Los segmentos de ADN que llevan esta información genética son llamados genes.</p>
+<p>Podemos representar el ADN como una secuencia de nucleótidos (Adenina A, Timina T, Citosina C, Guanina G). La disposición secuencial de estas cuatro bases a lo largo de la cadena es la que codifica la información genética. Por ejemplo, podemos representar una pequeña cadena de ADN como: "ACCCAGTCGGATTT".</p>
+<p>En los organismos vivos, el ADN no suele existir como una molécula individual, sino como una pareja de moléculas que se enroscan sobre sí mismas formando una especie de escalera de caracol, denominada doble hélice. Esta estructura se sustenta en la complementariedad de sus bases (Citosina-Guanina y Adenina-Timina). Al ser las bases complementarias, podemos representar el ADN sin perder información especificando sólo una de sus cadenas.</p>
+<p>El genoma humano es una secuencia de ADN contenida en 23 pares de cromosomas en el núcleo de cada célula humana (de cada pareja de cromosomas, uno es heredado del padre y otro de la madre). Los cromosomas 1 a 22 se numeran en orden creciente de tamaño. La pareja de cromosomas 23, también llamados cromosomas sexuales, se compone de un cromosoma X (de la madre) y uno X o Y (del padre).</p>
+<p>El tamaño total del genoma humano haploide (es decir, considerando sólo uno de cada pareja de cromosomas) es de aproximadamente 3200 millones de pares de bases de ADN. Dado que una base se representa con un Byte ('A', 'C', 'G', 'T'), el tamaño aproximado de la secuencia completa de un genoma humano haploide es de 3 GBytes.</p>
+<p>Dos seres humanos del mismo sexo comparten un porcentaje muy elevado (99,5%) de su secuencia de ADN, pero estas secuencias no son idénticas. Estos millones de pequeñas variaciones en el genoma, junto con la influencia de factores del medio, son los responsables de que exhibamos distintos fenotipos, es decir, distintos rasgos físicos y conductales. Una variación en el genoma, por sustitución, inserción o deleción de bases, se llama mutación o polimorfismo, y la principal fuente de variabilidad entre dos genomas humanos es el polimorfismo de una sola base (Single Nucleotide Polimorphism, SNP).</p>
+<p>Un SNP es, por tanto, un cambio de una base en una misma posición entre dos genomas humanos. Un SNP suele representarse indicando el número de cromosoma en el que se localiza el cambio, la posición dentro del cromosoma, y el cambio de base respecto al genoma humano de referencia (el primer genoma humano para el que se conoce la secuencia, que se terminó de secuenciar por primera vez en 2001). Por ejemplo, el siguiente SNP indica un cambio en la posición 1014143 del cromosoma 1, que en el genoma humano de referencia presenta una 'C' y en otros genomas presenta una 'T':</p>
+<div class="fragment"><div class="line">1 1014143 C T</div>
+</div><!-- fragment --><p>Los SNP constituyen hasta el 90% de todas las variaciones genómicas humanas. Estas variaciones en la secuencia del ADN pueden afectar a la respuesta de los individuos a enfermedades, bacterias, virus, productos químicos, fármacos, etc.. De este modo, su estudio es de gran utilidad en la denominada Medicina Personalizada o Medicina de Precisión: el desarrollo de métodos de prevención, diagnóstico y tratamiento (fármacos) de forma individualizada para cada paciente.</p>
+<p>Los estudios genéticos personalizados se basan en décadas de descubrimientos científicos publicados en la literatura especializada que muestran evidencia de que la presencia de un determinado SNP en el genoma de un individuo puede hacerle propenso a padecer una cierta enfermedad. La base de datos ClinVar-dbSNP recoge esta información.</p>
+<p>Para leer más sobre el contexto del problema: </p>
+<ul>
+<li><a href="https://es.wikipedia.org/wiki/">https://es.wikipedia.org/wiki/</a>Ácido_desoxirribonucleico </li>
+<li><a href="https://es.wikipedia.org/wiki/Genoma_humano">https://es.wikipedia.org/wiki/Genoma_humano</a> </li>
+<li><a href="https://es.wikipedia.org/wiki/Polimorfismo_de_nucle">https://es.wikipedia.org/wiki/Polimorfismo_de_nucle</a>ótido_único</li>
+</ul>
+<h2><a class="anchor" id="baseDatos"></a>
+Conjunto de Datos</h2>
+<p>El conjunto de datos con el que trabajaremos es la base de datos completa ClinVar-dbSNP descargada de la web del National Institute of Health (NIH) de los Estados Unidos: <a href="https://www.ncbi.nlm.nih.gov/clinvar/">https://www.ncbi.nlm.nih.gov/clinvar/</a> . Esta base de datos se puede obtener en formato VCF v4.0 (fichero: clinvar_20160831.vcf), que representa de forma tabular más de 130.000 mutaciones (SNPs) conocidos hasta la fecha y su relación clínica con alguna enfermedad.</p>
+<p>El fichero comienza con una cabecera (líneas que se inician con '##') que describe cada uno de los campos de la base de datos. A partir de la línea 67 se listan las entradas de la BD, con un SNP por línea, y los campos delimitados por tabulador ('\t'). Nota: algunos campos no relevantes se han omitido en este ejemplo para facilitar su lectura (los campos omitidos se han reemplazado por [...]).</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#CHROM  POS ID  REF ALT QUAL  FILTER  INFO</span></div>
+<div class="line"><span class="preprocessor"></span></div>
+<div class="line">1 1014143 rs786201005 C T . . RS=786201005;[...];GENEINFO=ISG15:9636; CLNSIG=5; CLNDSDB=MedGen:OMIM; CLNDSDBID=CN221808:616126; CLNDBN=Immunodeficiency_38_with_basal_ganglia_calcification; [...]</div>
+<div class="line"></div>
+<div class="line">1 1014316 rs672601345 C CG  . . RS=672601345;[...];GENEINFO=ISG15:9636;CLNSIG=5; CLNDSDB=MedGen:OMIM; CLNDSDBID=CN221808:616126; CLNDBN=Immunodeficiency_38_with_basal_ganglia_calcification; [...]</div>
+<div class="line"></div>
+<div class="line">1 1053827 rs74685771  G A,C,T . . RS=74685771;[...];GENEINFO=AGRN:375790;[...]; CLNSIG=3; CLNDSDB=MedGen; CLNDSDBID=CN169374; CLNDBN=not_specified; [...]</div>
+<div class="line"></div>
+<div class="line">1 11847114  rs202102042 C T . . RS=202102042;[...]GENEINFO=NPPA:4878|NPPA-AS1:100379251;[...]; CLNSIG=5; CLNDSDB=MedGen:OMIM; CLNDSDBID=C3810401:615745; CLNDBN=Atrial_standstill_2; [...]; CAF=0.9998,0.0001997;COMMON=0</div>
+<div class="line"></div>
+<div class="line">1 11847311  rs755212754 G A . . RS=755212754;[...]GENEINFO=NPPA:4878|NPPA-AS1:100379251;[...]; CLNSIG=3; CLNDSDB=MedGen:OMIM; CLNDSDBID=C2677294:612201; CLNDBN=Atrial_fibrillation\x2c_familial\x2c_6; [...]</div>
+<div class="line"></div>
+<div class="line">13  32316475  rs80359298  CAA C . . RS=80359298;[...];GENEINFO=BRCA2:675;[...]; CLNSIG=1|5; CLNDSDB=MedGen:OMIM:SNOMED_CT|MedGen:OMIM; CLNDSDBID=C0346153:114480:254843006|C2675520:612555; CLNDBN=Familial_cancer_of_breast|Breast-ovarian_cancer\x2c_familial_2;[...]</div>
+</div><!-- fragment --><p>Los campos de interés en cada línea son los siguientes: </p>
+<ul>
+<li>CHROM: Número de cromosoma. </li>
+<li>POS: Posición del SNP dentro del cromosoma (comienza a numerarse en 1). </li>
+<li>ID: Identificador único del SNP ('rsXXXX'). </li>
+<li>REF: Base(s) que aparecen en esa posición en el genoma humano de referencia. En caso de que aparezca una pequeña cadena de varias bases (ejemplo: "ATTGGAG"), el SNP que se indica reemplaza esta secuencia de bases por una sola. </li>
+<li>ALT: la(s) base(s) alternativa(s) que se han observado en la población. Si se han observado distintas mutaciones para la misma posición, estás se indican delimitadas por coma (ejemplo: "A,C,T"). </li>
+<li>INFO: Este campo representa información adicional sobre el SNP en forma de listado de atributos separados por ';'. Entre estos atributos, destacamos por su interés los siguientes:<ul>
+<li>GENEINFO: Nombre e identificador del gen que contiene este SNP. Ejemplo: GENEINFO=ISG15:9636 (Nombre del gen: ISG15, Identificador del gen: 9636). En caso de que se trate de varios genes, se separan con '|' o ','. Ejemplo: GENEINFO=B3GALT6:126792|SDF4:51150</li>
+<li>CAF: Frecuencia con que se observa cada base descrita en este SNP en la población. Ejemplo: CAF=0.9912,0.008786 indica que la base de la referencia se observa con frecuencia 0.9912 y la base alternativa con frecuencia 0.008786. El primer valor de CAF corresponde a frecuencia de la base REF, los siguientes a las bases indicadas en ALT, en el mismo orden.</li>
+<li>COMMON: Indica si es un SNP común en la población (0 - no, 1 - si).</li>
+<li>CLNSIG: relevancia clínica del SNP: 0/1 - Incierta, Desconocida, 2 - Benigno, 3 - Probablemente benigno, 4 - Probablemente patógeno, 5 - Patógeno, 6 - Relevante en respuesta a fármaco, 7 - Histocompatibilidad, 255 - Otro. En caso de que el SNP esté asociado con varias enfermedades se mostrará un código CLNSIG para cada enfermedad (delimitados por '|' o ','), o un solo código CLNSIG, indicando que la relevancia clínica del SNP es la misma para todas las enfermedades.</li>
+<li>CLNDBN: Nombre de la enfermedad asociada al SNP. También se suministran el ID único de la enfermedad (CLNDSDBID) y la base de datos que provee este ID (CLNDSDB). En caso de que un SNP esté asociado a varias enfermedades, éstas se separan con '|' o ','. El siguiente ejemplo hace referencia a tres enfermedades: CLNDSDB=MedGen|MedGen:OMIM|MedGen; CLNDSDBID=CN178850|C3809288:615373|CN169374; CLNDBN=Dilated_cardiomyopathy_1LL|Left_ventricular_noncompaction_8|not_specified;</li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" id="enfermedad"></a>
+TDA enfermedad</h1>
+<p>Para relacionar SNPs con enfermedades proponemos la creación de una clase enfermedad, que deberá tener entre otros los métodos abajo indicados. La especificación de la clase enfermedad se realizará en el fichero <a class="el" href="enfermedad_8h.html">enfermedad.h</a> y la implementación de la clase enfermedad en el fichero <a class="el" href="enfermedad_8hxx.html">enfermedad.hxx</a>.</p>
+<div class="fragment"><div class="line"><span class="keyword">class </span><a class="code" href="classenfermedad.html">enfermedad</a> {</div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">  <span class="keywordtype">string</span>  <a class="code" href="classenfermedad.html#ad7c4204057028a73bde6022678c6813e">name</a>;       <span class="comment">// nombre de la enfermedad. Almacenar completo en minúscula. </span></div>
+<div class="line">  <span class="keywordtype">string</span>  <a class="code" href="classenfermedad.html#a689cdbd469ecc28e045bda2f62a229d2">ID</a>;         <span class="comment">// ID único para la enfermedad</span></div>
+<div class="line">  <span class="keywordtype">string</span>  <a class="code" href="classenfermedad.html#a3684b7ec850d4c9357dd21bdd5e02803">database</a>;   <span class="comment">// Base de datos que provee el ID</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line"> <a class="code" href="classenfermedad.html#a60eb5e620b0bf9a53d4f0980031aeefd">enfermedad</a> (); <span class="comment">//Constructor de enfermedad por defecto</span></div>
+<div class="line"> <a class="code" href="classenfermedad.html#a60eb5e620b0bf9a53d4f0980031aeefd">enfermedad</a> (<span class="keyword">const</span> <span class="keywordtype">string</span> &amp; <a class="code" href="classenfermedad.html#ad7c4204057028a73bde6022678c6813e">name</a>, <span class="keyword">const</span> <span class="keywordtype">string</span> &amp; <a class="code" href="classenfermedad.html#a689cdbd469ecc28e045bda2f62a229d2">ID</a>, <span class="keyword">const</span> <span class="keywordtype">string</span> &amp; <a class="code" href="classenfermedad.html#a3684b7ec850d4c9357dd21bdd5e02803">database</a>); </div>
+<div class="line"></div>
+<div class="line"> <span class="keywordtype">void</span> <a class="code" href="classenfermedad.html#a18f621d13de01c0b06a05757ddd8a087">setName</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp; <a class="code" href="classenfermedad.html#ad7c4204057028a73bde6022678c6813e">name</a>);</div>
+<div class="line"> <span class="keywordtype">void</span> <a class="code" href="classenfermedad.html#a5ad52bdce8de9ac4fe25b460dc699af4">setID</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp; <a class="code" href="classenfermedad.html#a689cdbd469ecc28e045bda2f62a229d2">ID</a>);</div>
+<div class="line"> <span class="keywordtype">void</span> <a class="code" href="classenfermedad.html#ac1f009307d52232420a72264e9c2ce3f">setDatabase</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp; <a class="code" href="classenfermedad.html#a3684b7ec850d4c9357dd21bdd5e02803">database</a>);</div>
+<div class="line"></div>
+<div class="line"> <span class="keywordtype">string</span> <a class="code" href="classenfermedad.html#ab22f6f0140a5fe5a331d72920d95f55b">getName</a>( );</div>
+<div class="line"> <span class="keywordtype">string</span> <a class="code" href="classenfermedad.html#aaf9b9135b1d4efda7dc61856fce1b7b2">getID</a>( );</div>
+<div class="line"> <span class="keywordtype">string</span> <a class="code" href="classenfermedad.html#a79d304a2e39ea391917744fd4d8f168d">getDatabase</a>( );</div>
+<div class="line"> </div>
+<div class="line"> <a class="code" href="classenfermedad.html">enfermedad</a> &amp; <a class="code" href="classenfermedad.html#a795be16b7e3e6a858211ff20a62c9d85">operator=</a>(<span class="keyword">const</span> <a class="code" href="classenfermedad.html">enfermedad</a> &amp; e);</div>
+<div class="line"> <span class="keywordtype">string</span> <a class="code" href="classenfermedad.html#a044425928b4f7fa6a398cf2486260b23">toString</a>() <span class="keyword">const</span>;</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// Operadores relacionales</span></div>
+<div class="line"> <span class="keywordtype">bool</span> <a class="code" href="classenfermedad.html#ac2786ad7be914729516dd15611532fbb">operator==</a>(<span class="keyword">const</span> <a class="code" href="classenfermedad.html">enfermedad</a> &amp; e) <span class="keyword">const</span>; </div>
+<div class="line"> <span class="keywordtype">bool</span> <a class="code" href="classenfermedad.html#a85bf5cbb035fd4712ff9a72188060e5c">operator!=</a>(<span class="keyword">const</span> <a class="code" href="classenfermedad.html">enfermedad</a> &amp; e)<span class="keyword">const</span>;</div>
+<div class="line"> <span class="keywordtype">bool</span> <a class="code" href="classenfermedad.html#a2b3361849fa17dc88be561cd4233d584">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="classenfermedad.html">enfermedad</a> &amp; e) <span class="keyword">const</span>;  <span class="comment">//Orden alfabético por campo name. </span></div>
+<div class="line"></div>
+<div class="line"> <span class="keywordtype">bool</span> <a class="code" href="classenfermedad.html#a31f2b1bed5745d9f00f3e567c04e68af">nameContains</a>(<span class="keyword">const</span> <span class="keywordtype">string</span> &amp; str) <span class="keyword">const</span>;   <span class="comment">//Devuelve True si str está incluido en el nombre de la enfermedad, aunque no se trate del nombre completo. No debe ser sensible a mayúsculas/minúsculas. </span></div>
+<div class="line"></div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"> ostream&amp; <a class="code" href="enfermedad_8h.html#a6cabaa51c1fab8960486e2c2e51071f0">operator&lt;&lt; </a>( ostream&amp; os, <span class="keyword">const</span> <a class="code" href="classenfermedad.html">enfermedad</a> &amp; e); <span class="comment">//imprime enfermedad </span></div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="enfermedad_8hxx.html">enfermedad.hxx</a>&quot;</span> <span class="comment">// Incluimos la implementacion.</span></div>
+</div><!-- fragment --><p>Así, podremos trabajar con enfermedades como indica el siguiente código </p>
+<div class="fragment"><div class="line">...</div>
+<div class="line">enfermedad e1(<span class="stringliteral">&quot;Breast-ovarian_cancer\x2c_familial_2&quot;</span>, <span class="stringliteral">&quot;C2675520:612555&quot;</span>, <span class="stringliteral">&quot;MedGen:OMIM&quot;</span>);</div>
+<div class="line"><a class="code" href="classenfermedad.html">enfermedad</a> e2(<span class="stringliteral">&quot;Prostate_cancer\x2c_susceptibility_to&quot;</span>, <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a class="code" href="classenfermedad.html">enfermedad</a> e3 = e1; </div>
+<div class="line">...</div>
+<div class="line">if (e1.nameContains(<span class="stringliteral">&quot;cancer&quot;</span>)) </div>
+<div class="line">  cout &lt;&lt; e1 &lt;&lt; <span class="stringliteral">&quot; es un tipo de cancer. &quot;</span>; </div>
+<div class="line">...</div>
+</div><!-- fragment --><h1><a class="anchor" id="mutation"></a>
+Mutación</h1>
+<p>A igual que con la clase enfermedad, la especificación del tipo mutación y su implementación se realizará en los ficheros <a class="el" href="mutacion_8h.html">mutacion.h</a> y mutacion.hxx, respectivamente, y debe tener la información de los atributos (con su representacion asociada)</p>
+<ul>
+<li>chr: identificador del cromosoma (string). Los cromosomas válidos son: "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT". </li>
+<li>pos: identificador de la posición dentro del cromosoma (unsigned int). </li>
+<li>ID: identificador del SNP/mutación (string). </li>
+<li>ref_alt: base(s) en el genoma de referencia y alternativa(s) posible(s) (vector de string). La primera posición la ocupará el string con la(s) base(s) del genoma de referencia, y, a continuación, aparecerán la(s) base(s) alternativas en el mismo orden que se indica en el fichero. Ejemplos: <div class="fragment"><div class="line">X 154032548 rs61754422  C A,G,T</div>
+<div class="line">ref_alt: [<span class="stringliteral">&quot;C&quot;</span>, <span class="stringliteral">&quot;A&quot;</span>, <span class="stringliteral">&quot;G&quot;</span>, <span class="stringliteral">&quot;T&quot;</span>]</div>
+<div class="line"></div>
+<div class="line">1 1338032 rs797044840 GTAGGCAGG GC</div>
+<div class="line">ref_alt: [<span class="stringliteral">&quot;GTAGGCAGG&quot;</span>, <span class="stringliteral">&quot;GC&quot;</span>]</div>
+</div><!-- fragment --></li>
+</ul>
+<ul>
+<li>genes: gen(es) asociado(s) al SNP (vector de string). Ejemplo: <div class="fragment"><div class="line">1 11847311  rs755212754 G A . . [...]GENEINFO=NPPA:4878|NPPA-AS1:100379251;[...]</div>
+<div class="line">genes: [<span class="stringliteral">&quot;NPPA:4878&quot;</span>, <span class="stringliteral">&quot;NPPA-AS1:100379251&quot;</span>]</div>
+</div><!-- fragment --> </li>
+<li>common: indica si el SNP es común en la población (bool). </li>
+<li>caf: frecuencia de cada base del SNP en la población (vector de float). En primer lugar debe indicarse la frecuencia de la base 'ref' (posición 0 de ref-alt), seguida por las frecuencias de las bases alternativas indicadas en 'ref-alt', en el mismo orden. Ejemplo: <div class="fragment"><div class="line">1 11847114  rs202102042 C T . . RS=202102042;[...];CAF=0.9998,0.0001997;COMMON=0</div>
+<div class="line">ref_alt: [<span class="stringliteral">&quot;C&quot;</span>, <span class="stringliteral">&quot;T&quot;</span>]</div>
+<div class="line">caf: [0.9998, 0.0001997]</div>
+<div class="line">common: False</div>
+</div><!-- fragment --> </li>
+<li>enfermedades: enfermedades asociadas al SNP (vector de enfermedad). </li>
+<li>clnsig: relevancia clínica del SNP para cada enfermedad utilizando el código numérico del campo CLNSIG (vector de int). En caso de que existan varias enfermedades asociadas a la mutación, cada una de ellas puede presentar diferente código CLNSIG, por lo se deben almacenar en el vector clnsig en el mismo orden que las enfermedades asociadas. En caso de presentarse sólo un código CLNSIG y varias enfermedades, este código se aplica a todas ellas. Ejemplo: <div class="fragment"><div class="line">13  32316475  rs80359298  CAA C . . RS=80359298;[...];CLNSIG=1|5;CLNDSDB=MedGen:OMIM:SNOMED_CT|MedGen:OMIM;CLNDSDBID=C0346153:114480:254843006|C2675520:612555;CLNDBN=Familial_cancer_of_breast|Breast-ovarian_cancer\x2c_familial_2;[...]</div>
+<div class="line"></div>
+<div class="line">enfermedades: [ <a class="code" href="classenfermedad.html">enfermedad</a>(<span class="stringliteral">&quot;Familial_cancer_of_breast&quot;</span>,<span class="stringliteral">&quot;C0346153:114480:254843006&quot;</span>, <span class="stringliteral">&quot;MedGen:OMIM:SNOMED_CT&quot;</span>), </div>
+<div class="line">                <a class="code" href="classenfermedad.html">enfermedad</a>(<span class="stringliteral">&quot;Breast-ovarian_cancer\x2c_familial_2&quot;</span>, <span class="stringliteral">&quot;C2675520:612555&quot;</span>, <span class="stringliteral">&quot;MedGen:OMIM&quot;</span>)]</div>
+<div class="line">clnsig: [1,5] </div>
+</div><!-- fragment --></li>
+</ul>
+<div class="fragment"><div class="line"><span class="comment">// Fichero mutacion.h  </span></div>
+<div class="line"><span class="keyword">class </span><a class="code" href="classmutacion.html">mutacion</a> {</div>
+<div class="line"> ....</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="preprocessor">#include &quot;mutacion.hxx&quot;</span> <span class="comment">// Incluimos la implementacion</span></div>
+</div><!-- fragment --><h1><a class="anchor" id="sec_tar"></a>
+"Se Entrega / Se Pide"</h1>
+<h2><a class="anchor" id="ssEntrega"></a>
+Se entrega</h2>
+<p>En esta práctica se entrega los fuentes necesarios para generar la documentación de este proyecto así como el código necesario para resolver este problema. En concreto los ficheros que se entregan son:</p>
+<ul>
+<li>documentacion.pdf Documentación de la práctica en pdf. </li>
+<li><a class="el" href="documentacion_8dox.html">documentacion.dox</a> Este fichero contiene el fichero de configuración de doxygen necesario para generar la documentación del proyecto (html y pdf). Para ello, basta con ejecutar desde la línea de comando <div class="fragment"><div class="line">doxygen doxPractica.txt</div>
+</div><!-- fragment --> La documentación en html la podemos encontrar en el fichero ./html/index.html. Para generar la documentación en latex es suficiente con hacer los siguientes pasos: <div class="fragment"><div class="line">cd latex</div>
+<div class="line">make</div>
+</div><!-- fragment --> obteniendo como resultado el fichero refman.pdf que incluye toda la documentación generada.</li>
+</ul>
+<ul>
+<li><a class="el" href="mutacion_8h.html">mutacion.h</a> Plantilla para la especificación del TDA mutación </li>
+<li>mutacion.hxx Plantilla para la implementación del TDA mutación </li>
+<li><a class="el" href="enfermedad_8h.html">enfermedad.h</a> Plantilla para la especificación del TDA enfermedad </li>
+<li><a class="el" href="enfermedad_8hxx.html">enfermedad.hxx</a> Plantilla para la implementación del TDA enfermedad</li>
+</ul>
+<ul>
+<li><a class="el" href="principal_8cpp.html">principal.cpp</a> Fichero donde se incluye el main del programa. Este programa toma como entrada el fichero de datos "clinvar_20160831.vcf", carga las mutaciones en un vector, muestra el número total de mutaciones leídas del fichero y el número de mutaciones que están asociadas a una enfermedad que indica el usuario.</li>
+</ul>
+<h2><a class="anchor" id="ssPide"></a>
+Se Pide</h2>
+<ul>
+<li>Diseñar la función de abstracción e invariante de la representación del tipo enfermedad. </li>
+<li>Diseñar la función de abstracción e invariante de la representación del tipo mutación. </li>
+<li>Implementar el código asociado a los ficheros .hxx. </li>
+<li>Implementar el código asociado a <a class="el" href="principal_8cpp.html">principal.cpp</a>.</li>
+</ul>
+<h1><a class="anchor" id="fecha"></a>
+"Fecha Límite de Entrega"</h1>
+<p>La fecha límite de entrega será el 23 de Octubre a las 23:50 hrs. </p>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.6
+</small></address>
+</body>
+</html>
