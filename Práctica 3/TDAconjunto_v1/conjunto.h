@@ -53,8 +53,8 @@ public:
 	
 	
 	/** @brief busca una entrada en el conjunto
-	 @param[in] chr: cromosoma de la mutación a buscar.
-	 @param[in] pos: posición en el cromosoma de la mutación.
+	 @param[in] chr cromosoma de la mutación a buscar.
+	 @param[in] pos posición en el cromosoma de la mutación.
 	 @param[in] ID: identificador de la mutación a buscar
 	 @param[in] e entrada. Utilizar e.getID() o la combinación e.getChr()/e.getPos() para buscar una mutación con igual ID o Chr/Pos, el resto de los valores de entrada pueden ser ignorados.
  	@return Si existe una mutación en el conjunto con ese chr/pos o ID, respectivamente, devuelve un par con una copia de la mutación en el conjunto y con el segundo valor a true. Si no se encuentra, devuelve la mutación con la definicion por defecto y false
@@ -135,6 +135,30 @@ public:
 	 */
 	conjunto & operator=( const conjunto & org);
 	
+	/** @brief begin del conjunto
+	 @return Devuelve un iterador al primer elemento del conjunto. Si no existe devuelve end
+	 @post no modifica el conjunto.
+	 */
+	conjunto::iterator begin ();
+	
+	/** @brief end del conjunto
+	 @return Devuelve un iterador al final del conjunto (posicion siguiente al ultimo.
+	 @post no modifica el conjunto.
+	 */
+	conjunto::iterator end ();
+	
+	/** @brief begin del conjunto
+	 @return Devuelve un iterador constante al primer elemento del conjunto. Si no existe devuelve end
+	 @post no modifica el conjunto.
+	 */
+	conjunto::const_iterator cbegin () const;
+	
+	/** @brief end del conjunto
+	 @return Devuelve un iterador constante al final del conjunto (posicion siguiente al ultimo.
+	 @post no modifica el conjunto.
+	 */
+	conjunto::const_iterator cend () const;
+	
 	
 	/** @brief cuenta cuantas entradas hay en el conjunto por debajo ('antes', '<') de los parámetros dados.
 	 @param[in] chr de la mutación.
@@ -157,12 +181,12 @@ public:
 	conjunto::iterator upper_bound (const string & chr, const unsigned int & pos) const;
 	conjunto::iterator upper_bound (const conjunto::value_type & e) const;
 	
-	conjunto::value_type getVM();
+	conjunto::value_type & getVM();
 	
 	
 	
 private:
-	vector<mutacion> vm; // vector que almacena los elementos del conjunto
+	vector<value_type> vm; // vector que almacena los elementos del conjunto
 	
 	/** \invariant
 	 
