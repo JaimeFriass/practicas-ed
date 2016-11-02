@@ -58,7 +58,7 @@ int main(int argc, char *argv[]){
     cout << "Lectura del fichero finalizada. Mutaciones cargadas: "<<conjuntoMutaciones.size()<<endl;  
 
     //Imprimir cuántas mutaciones están asociadas al cromosoma 1:
-    cout << "Mutaciones asociadas a Chr 1: "<< conjuntoMutaciones.lower_bound("2", 1)<< endl; 
+    cout << "Mutaciones asociadas a Chr 1: " << conjuntoMutaciones.lower_bound("2", 1) - begin() << endl;
 
     /**@todo ¿Existe la mutación con ID "rs147165522"? Imprimir la mutación y las enfermedades asociadas */
 
