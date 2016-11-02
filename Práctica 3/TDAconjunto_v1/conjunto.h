@@ -157,6 +157,8 @@ public:
 	conjunto::iterator upper_bound (const string & chr, const unsigned int & pos) const;
 	conjunto::iterator upper_bound (const conjunto::value_type & e) const;
 	
+	conjunto::value_type getVM();
+	
 	
 	
 private:
