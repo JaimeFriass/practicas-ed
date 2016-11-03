@@ -43,7 +43,7 @@ public:
 	
 	/** @brief constructor primitivo.
 	 */
-	conjunto( );
+	conjunto();
 	
 	
 	/** @brief constructor de copia
@@ -164,7 +164,7 @@ public:
 	 @param[in] chr de la mutación.
 	 @param[in] pos de la mutación.
 	 @param[in] e entrada.
-	 @return Devuelve un iterador al primer elemento que cumple que "elemento<e" es falso, esto es, el primer elemento que  es mayor o igual que e
+	 @return Devuelve un iterador al primer elemento que cumple que "elemento < e" es falso, esto es, el primer elemento que  es mayor o igual que e
 	 @post no modifica el conjunto.
 	 */
 	conjunto::iterator lower_bound (const string & chr, const unsigned int & pos) const;
