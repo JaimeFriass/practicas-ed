@@ -167,8 +167,8 @@ public:
 	 @return Devuelve un iterador al primer elemento que cumple que "elemento < e" es falso, esto es, el primer elemento que  es mayor o igual que e
 	 @post no modifica el conjunto.
 	 */
-	conjunto::iterator lower_bound (const string & chr, const unsigned int & pos) const;
-	conjunto::iterator lower_bound (const conjunto::value_type & e) const;
+	conjunto::iterator lower_bound (const string & chr, const unsigned int & pos);
+	conjunto::iterator lower_bound (const conjunto::value_type & e);
 	
 	
 	
@@ -178,8 +178,8 @@ public:
 	 @param[in] e entrada. Devuelve un iterador al primer elemento que cumple que "elemento>e", esto es, el primer elemento ESTRICTAMENTE mayor que e
 	 @post no modifica el conjunto.
 	 */
-	conjunto::iterator upper_bound (const string & chr, const unsigned int & pos) const;
-	conjunto::iterator upper_bound (const conjunto::value_type & e) const;
+	conjunto::iterator upper_bound (const string & chr, const unsigned int & pos);
+	conjunto::iterator upper_bound (const conjunto::value_type & e);
 	
 	conjunto::value_type & getVM();
 	
