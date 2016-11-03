@@ -181,6 +181,12 @@ public:
 	conjunto::iterator upper_bound (const string & chr, const unsigned int & pos);
 	conjunto::iterator upper_bound (const conjunto::value_type & e);
 	
+	/**
+	 @brief Devuelve vm
+	 @returns vm vector de mutaciones
+	 
+	 Devuelve el vector de todas las mutaciones.
+	 */
 	conjunto::value_type & getVM();
 	
 	

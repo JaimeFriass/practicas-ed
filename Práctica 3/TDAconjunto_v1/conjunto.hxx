@@ -108,11 +108,15 @@ bool conjunto::erase(const string & chr, const unsigned int & pos){
 bool conjunto::erase(const string & ID){
 	bool correcto = false;
 	
-	if (vm.at(vm.begin() + (pos - 1))).getID() == ID) {
-		vm.erase(vm.begin() + (pos - 1));
-		correcto = true;
-		
+	for (int i = 0; i < vm.size(); i++)
+	{
+		if(vm[i].getID() == ID)
+		{
+			vm.erase( vm.begin() + i );
+			correcto = true;
+		}
 	}
+	
 	return correcto;
 }
 
@@ -198,7 +202,35 @@ conjunto::iterator conjunto::upper_bound (const conjunto::value_type & e) const{
 }
 
 bool conjunto::cheq_rep() const{
-string crom[] = {"1", "2", "3", "4", "5", "6",};
+	bool invariante = true;
+	const string crom[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"};
+	const int num_crom = 25;
+	
+	string chr1, chr2;
+	
+	//Comprobación de que los cromosomas son correctos y que la posición es mayor que 1
+	for (int i = 0; i < vm.size() && invariante; i++){
+		chr1 = vm[i].getChr();
+		
+		if((stoi(chr1) < 1 || stoi(chr2)) > 22 && chr1 != "X" && chr1 != "Y" && chr2 != "MT" && vm[i].getPos() > 0){
+			invariante = false;
+		}
+	}
+	
+	for (int i = 0; i < vm.size() - 1 && invariante; i++){
+		chr1 = vm[i].getChr();
+		chr2 = vm[i + 1].getChr();
+		
+		if (chr1 == chr2 && vm[i].getPos() >= vm[i + 1].getPos()){
+			invariante = false;
+		}
+		
+		if(chr1 != chr2){
+			for (int j = 0; j < num_crom; j++){
+				if 
+			}
+		}
+	}
 }
 
 ostream &  operator << ( ostream & sal, const conjunto & C){
