@@ -208,7 +208,56 @@ conjunto::const_iterator conjunto::cend () const{
 
 conjunto::iterator conjunto::lower_bound (const string & chr, const unsigned int & pos) const{
 	
+if(!empty()){
+ bool encontrado=false;
+   while(this->value.type >= e && size_type <=i){
+      i++;
+      encontrado=true;
+   }
+  if(encontrado)
+      conjunto::iterator anterior=vm[i-1];
+  else
+    conjunto::iterator anterior=vm.end();        
+  return anterior;  
 }
-conjunto::iterator upper_bound (const conjunto::value_type & e) const{
 	
+}
+
+conjunto::iterator upper_bound (const conjunto::value_type & e) const{
+if(!empty()){
+ bool encontrado=false;
+    for(int i=0;i<size_type  && encontrado!=true;i++)
+      if(this->value.type > e)
+        encontrado=true;
+    if(encontrado)
+      conjunto::iterator siguiente =vm[i];
+    else
+      conjunto::iterator siguiente =vm.end();
+  return siguiente;
+}
+	
+}
+
+ostream &  operator << ( ostream & sal, const conjunto & C){
+  for(int i=0;i<C.size_type;i++)
+    sal<<vm[i];
+}
+
+bool conjunto::value_type::operator<(const &v_type){
+  if(value_type.getChr() < v_type.getChr() && value_type.getPos() < v_type.getPos())
+      return true;
+  else
+    return false;
+}
+bool conjunto::value_type::operator>(const &v_type){
+  if(value_type.getChr() > v_type.getChr() && value_type.getPos() > v_type.getPos())
+      return true;
+  else
+    return false;
+}
+bool conjunto::value_type::operator >=(const &v_type){
+  if(value_type.getChr() >= v_type.getChr() && value_type.getPos() >= v_type.getPos())
+      return true;
+  else
+    return false;
 }
