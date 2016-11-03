@@ -58,15 +58,18 @@ int main(int argc, char *argv[]){
     cout << "Lectura del fichero finalizada. Mutaciones cargadas: "<<conjuntoMutaciones.size()<<endl;  
 
     //Imprimir cuántas mutaciones están asociadas al cromosoma 1:
-    cout << "Mutaciones asociadas a Chr 1: " << conjuntoMutaciones.lower_bound("2", 1) - begin() << endl;
+    cout << "Mutaciones asociadas a Chr 1: " << conjuntoMutaciones.lower_bound("2", 1) - conjuntoMutaciones.begin() << endl;
 
     /**@todo ¿Existe la mutación con ID "rs147165522"? Imprimir la mutación y las enfermedades asociadas */
-    cout<<"la mutación y las enfermedades asociadas con ID: " << "rs147165522"<<conjuntoMutaciones.find("rs147165522")<<\n;
-    /**@todo ¿Existe la mutación en chr/pos "14"/67769578? Imprimir la mutación y las enfermedades asociadas */
-    cout<<"la mutación y las enfermedades asociadas con char:14y pos: 67769578" << conjuntoMutaciones.find("14",67769578)<<\n;
-    /**@todo ¿Cómo podríamos calcular el número de mutaciones del cromosoma 3? (utiliza lower_bound / upper_bound) */
-    cout<< "Número de mutaciones del cromosoma 3: "<<conjuntoMutaciones.upper_bound ("3",0)<<\n;
-    /**@todo Analiza la eficiencia teórica y empírica de las operaciones find, insert y erase */
+    cout<< "la mutación y las enfermedades asociadas con ID: rs147165522" << conjuntoMutaciones.find("rs147165522").first << " " << conjuntoMutaciones.find("rs147165522").second << endl;
+	
+	/**@todo ¿Existe la mutación en chr/pos "14"/67769578? Imprimir la mutación y las enfermedades asociadas */
+    cout<< "la mutación y las enfermedades asociadas con char:14y pos: 67769578" << conjuntoMutaciones.find("14",67769578).first << conjuntoMutaciones.find("14",67769578).second << endl;
+	
+	/**@todo ¿Cómo podríamos calcular el número de mutaciones del cromosoma 3? (utiliza lower_bound / upper_bound) */
+    cout<< "Número de mutaciones del cromosoma 3: " << conjuntoMutaciones.upper_bound ("3",0) - conjuntoMutaciones.begin() << endl;
+	
+	/**@todo Analiza la eficiencia teórica y empírica de las operaciones find, insert y erase */
 
    return 0;
 }
