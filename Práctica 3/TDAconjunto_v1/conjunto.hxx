@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -59,9 +58,9 @@ pair<conjunto::value_type,bool>  conjunto::find (const conjunto::value_type & e)
 conjunto::size_type conjunto::count (const string & chr, const unsigned int & pos) const{
 	conjunto::size_type tamanio = 0;
 	
-	for (int i = 0; i < vm.size(); i++){
+	for (int i = 0; i < vm.size() && tamanio == 0; i++){
 		if (vm[i].getChr() == chr || vm[i].getPos() == pos){
-			tamanio++;
+			tamanio = 1;
 		}
 	}
 	
@@ -71,9 +70,9 @@ conjunto::size_type conjunto::count (const string & chr, const unsigned int & po
 conjunto::size_type conjunto::count (const string & ID) const{
 	conjunto::size_type tamanio = 0;
 	
-	for(int i=0; i < vm.size(); i++){
+	for(int i=0; i < vm.size() && tamanio == 0; i++){
 		if(vm[i].getID() == ID)
-			tamanio++;
+			tamanio = 1;
 	}
 	
 	return tamanio;
@@ -135,7 +134,7 @@ bool conjunto::empty() const{
 
 conjunto & conjunto::operator=(const conjunto & org){
 	if (this != &org){
-		this -> vm == org.getVM();
+		this -> vm = org.getVM();
 	}
 	
 	return *this;
@@ -149,9 +148,9 @@ conjunto::iterator conjunto::begin(){
 
 
 conjunto::iterator conjunto::end (){
-	conjunto::iterator final = vm.end();
+	conjunto::iterator ultimo = vm.end();
 	
-	return final;
+	return ultimo;
 }
 
 conjunto::const_iterator conjunto::cbegin () const{
@@ -166,7 +165,7 @@ conjunto::const_iterator conjunto::cend () const{
 	return const_final;
 }
 
-conjunto::iterator conjunto::lower_bound (const string & chr, const unsigned int & pos) const{
+conjunto::iterator conjunto::lower_bound (const string & chr, const unsigned int & pos){
 	conjunto::iterator lower = begin();
 	
 	while((*lower).getChr() != chr && (*lower).getPos() != pos && lower != end() ) {
@@ -198,7 +197,11 @@ conjunto::iterator conjunto::upper_bound (const conjunto::value_type & e) const{
 	return upper_bound(e.getChr(), e.getPos());
 }
 
+bool conjunto::cheq_rep() const{
+string crom[] = {"1", "2", "3", "4", "5", "6",};
+}
+
 ostream &  operator << ( ostream & sal, const conjunto & C){
-	for(int i=0;i<C.size_type;i++)
+	for(int i = 0;i < C.size();i++)
 		sal << vm[i] << " ";
 }
