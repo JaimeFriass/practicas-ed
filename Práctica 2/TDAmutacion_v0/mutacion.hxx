@@ -27,165 +27,128 @@ mutacion::mutacion(const mutacion& m){
 
 //para crear objeto mutacion a partir de la cadena que contiene una línea completa del fichero de entrada
 mutacion::mutacion(const string & str){
-	bool extras = false;
-	int j = 0;
-	unsigned long i = 0;
+	string info = "",
+	recolectora = "";
+	vector<string> ref_alt_a_copiar,
+	genes_a_copiar,
+	database_a_copiar,
+	id_enfermedad_a_copiar,
+	name_enfermedad_a_copiar;
+	vector<enfermedad> enfermedades_a_copiar;
+	vector<int> clnsig_a_copiar;
+	vector<float> caf_a_copiar;
+	bool bool_a_copiar = false;					// Le damos el valor por defecto al bool que copiar en el objeto
+	size_t pos_buscado = 0;
 	
-	// OBTENER CHR
-	(*this).chr = str.substr(0,1);
+	// Recolectamos todos los datos que quedan separados por tabuladores:
+	// Chr, Pos, ID, cadena de referencia y alternativa
+	// Los copiamos en el objeto con las funciones set
+	info = strtok((char *) &str[0], "\t");
+	setChr(info);
+	info = strtok(NULL, "\t");
+	setPos( stoi(info) );
+	info = strtok(NULL, "\t");
+	setID(info);
+	info = strtok(NULL, "\t");
+	ref_alt_a_copiar.push_back(info);			// Cadena de referencia
+	info = strtok(NULL, "\t");
 	
-	// OBTENER POS
-	// En el substring que va desde el primer dígito de pos hasta rs, busca el
-	// tabulador que marca el final de pos.
-	string aux = str.substr(2,str.substr(2,str.find("rs")).find('\t'));
-	(*this).pos = atoi(aux.c_str());
-	
-	// OBTENER ID
-	i = str.find("rs");
-	(*this).ID = "";
-	while(str[i] != '\t'){
-		(*this).ID += str[i];
-		i++;
-	}
-	
-	// OBTENER REF_ALT
-	i++;
-	aux = "";
-	while(str[i] != '\t'){
-		aux += str[i];
-		i++;
-	}
-	(*this).ref_alt.push_back(aux);
-	i++;
-	aux = "";
-	while(str[i] != '\t'){
-		aux += str[i];
-		i++;
-	}
-	(*this).ref_alt.push_back(aux);
-	
-	// OBTENER GENES
-	i = str.find("GENEINFO");
-	unsigned long sigPyC = str.substr(i, str.size() - i).find(";");
-	aux = str.substr(i +9, sigPyC -9);
-	
-	for(int k = 0; k < aux.size(); k++){
-		if(aux[k] == '|'){
-			(*this).genes.push_back(aux.substr(j, k-j));
-			extras = true;
-			j = k +1;
+	for (unsigned k = 0; k < info.size(); k++){
+		if (info[k] == ','){
+			ref_alt_a_copiar.push_back(recolectora);	// Añade la cadena alternativa al vector
+			recolectora.clear();
 		}
-	}
-	if(extras)
-		(*this).genes.push_back(aux.substr(j,aux.size() -1));
-	else
-		(*this).genes.push_back(aux);
- 
-	// OBTENER COMMON
-	i = str.find("COMMON");
-	if(str[i +7] == '1')
-		(*this).common = true;
-	else
-		(*this).common = false;
-	
-	// OBTENER CAF
-	j = 0;
-	extras = false;
-	i = str.find("CAF");
-	if(i != -1){
-		sigPyC = str.substr(i, str.size() -i).find(";");
-		aux = str.substr(i +4, sigPyC -4);
-		for(int k = 0; k < aux.size(); k++){
-			if(aux[k] == ','){
-				(*this).caf.push_back(atof(aux.substr(j, k - j).c_str()));
-				j = k +1;
-				extras = true;
-			}
-		}
-		if(extras)
-			(*this).caf.push_back(atof(aux.substr(j, aux.size()-j).c_str()));
 		else
-			(*this).caf.push_back(atof(aux.c_str()));
-	}
-	else{
-		(*this).caf.push_back(0.0);
+			recolectora.push_back(info[k]);		// Añade caracteres a la cadena(s) alternativa(s)
 	}
 	
-	// OBTENER ENFERMEDADES Y CLNSIG
+	ref_alt_a_copiar.push_back(recolectora);	// Añade la última cadena alternativa que se ha leido
+	setRef_alt(ref_alt_a_copiar);
+	strtok(NULL, "\t");								// Saltamos los dos puntos
+	strtok(NULL, "\t");
+	info = strtok(NULL, "\n");						// Cogemos la cadena de información con todas las etiquetas
+	info.push_back('\n');							// Añadimos un '\n' al final como tope para la búsqueda
 	
-	unsigned long posCln = str.find("CLNSIG"); // Códigos CLNSIG
-	unsigned long posName = str.find("CLNDBN"); // Nombres enf
-	unsigned long posID = str.find("CLNDSDBID"); // ID enf
-	unsigned long posDB = str.find("CLNDSDB"); // Database Enf
-	j = 0;
-	extras = false;
- 
-	if(posName != -1){
-		sigPyC = str.substr(posName, str.size() -posName).find(";");
-		string nomEnf = str.substr(posName + 7, sigPyC -7);
+	// Recolectamos los datos restantes ordenados en el vector constante de string
+	// Si existe la etiqueta
+	// 	Dependiendo de la iteración del primer bucle lo guardamos en un vector o en otro
+	for (unsigned i = 0; i < a_buscar.size(); i++){
+		pos_buscado = info.find(a_buscar[i]);
 		
-		sigPyC = str.substr(posID, str.size() -posID).find(";");
-		string iDenf = str.substr(posID +10, sigPyC -10);
-		
-		sigPyC = str.substr(posDB, str.size() -posDB).find(";");
-		string dBenf = str.substr(posDB +8, sigPyC - 8);
-		vector<string> auxNombre, auxID, auxDB;
-		
-		
-		for(int k = 0; k < nomEnf.size(); k++){ // pilla nombres
-			if(nomEnf[k] == '|'){
-				auxNombre.push_back(nomEnf.substr(j, k -j));
-				j = k +1;
-				extras = true;
-			}
+		if ( pos_buscado != string::npos ){		// Comprobamos que la etiqueta estaba presente
+			pos_buscado += a_buscar[i].size() - 1;
+			recolectora.clear();
+			
+			// Recorremos caracter a caracter hasta llegar a un ';' o un '\n'
+			// Si nos encontramos un separador
+			// 	llevamos lo que posee la cadena hasta ahora al vector correspondiente
+			// en caso contrario
+			// 	copiamos el caracter en la cadena recolectora
+			do {
+				pos_buscado++;
+				
+				if (info[pos_buscado] == ',' || info[pos_buscado] == '|' ||
+					info[pos_buscado] == ';' || info[pos_buscado] == '\n'){
+					switch (i){
+						case 0:
+							genes_a_copiar.push_back(recolectora);
+							break;
+						case 1:
+							database_a_copiar.push_back(recolectora);
+							break;
+						case 2:
+							id_enfermedad_a_copiar.push_back(recolectora);
+							break;
+						case 3:
+							name_enfermedad_a_copiar.push_back(recolectora);
+							break;
+						case 4:
+							clnsig_a_copiar.push_back( stoi(recolectora) );
+							break;
+						case 5:
+							if (recolectora == ".")
+								recolectora = "0.0";
+							
+							caf_a_copiar.push_back( stof(recolectora) );
+							break;
+						case 6:
+							if ( stoi(recolectora) == 0 )			// Si está, comprobamos que es (T or F)
+								bool_a_copiar = false;
+							else
+								bool_a_copiar = true;
+							
+							break;
+					}
+					
+					recolectora.clear();
+				}
+				else
+					recolectora.push_back(info[pos_buscado]);
+			}while(info[pos_buscado] != ';' && info[pos_buscado] != '\n');
 		}
-		if(extras)
-			auxNombre.push_back(nomEnf.substr(j, nomEnf.size()-j));
-		else
-			auxNombre.push_back(nomEnf);
-		j = 0;
-		extras = false;
-		
-		for(int k = 0; k < iDenf.size(); k++){	// pilla ID
-			if(iDenf[k] == '|'){
-				auxID.push_back(iDenf.substr(j, k -j));
-				j = k +1;
-				extras = true;
-			}
-		}
-		if(extras)
-			auxID.push_back(iDenf.substr(j, nomEnf.size()-j));
-		else
-			auxID.push_back(iDenf);
-		j = 0;
-		extras = false;
-		
-		for(int k = 0; k < dBenf.size(); k++){	// pilla DB
-			if(dBenf[k] == '|'){
-				auxDB.push_back(dBenf.substr(j, k -j));
-				j = k +1;
-				extras = true;
-			}
-		}
-		if(extras)
-			auxDB.push_back(dBenf.substr(j, nomEnf.size()-j));
-		else
-			auxDB.push_back(dBenf);
-		j = 0;
-		extras = false;
-		
-		for(int k = 0; k < auxNombre.size(); k++){
-			enfermedad auxEnf(auxNombre[k], auxID[k], auxDB[k]);
-			(*this).enfermedades.push_back(auxEnf);
-		}
-		
-		sigPyC = str.substr(posCln, str.size() - posCln).find(";");
-		string strCln = str.substr(posCln +7, sigPyC - 7);
-		if(strCln.size() > 1)
-			for(int k = 0; k < enfermedades.size(); k+=2)
-				(*this).clnsig.push_back((int)strCln[k]-48);
-		
 	}
+	
+	// Hay que asegurarse de que se hayen emparejados de tres en tres
+	// el nombre, id y database de la enfermeda
+	// Si no es así rellenar con una cadena [<UNKNOWN>]
+	for (unsigned k = id_enfermedad_a_copiar.size(); k < name_enfermedad_a_copiar.size(); k++)
+		id_enfermedad_a_copiar.push_back("[<Unknown>]");
+	
+	for (unsigned k = database_a_copiar.size(); k < name_enfermedad_a_copiar.size(); k++)
+		database_a_copiar.push_back("[<Unknown>]");
+	
+	for (unsigned k = 0; k < name_enfermedad_a_copiar.size(); k++){
+		enfermedades_a_copiar.push_back( enfermedad(name_enfermedad_a_copiar[k],
+													id_enfermedad_a_copiar[k],
+													database_a_copiar[k]) );
+	}
+	
+	// Copiamos los contenidos de los vectores a los objetos
+	setGenes(genes_a_copiar);
+	setEnfermedades(enfermedades_a_copiar);
+	setClnsig(clnsig_a_copiar);
+	setCaf(caf_a_copiar);
+	setCommon(bool_a_copiar);
 	
 }
 

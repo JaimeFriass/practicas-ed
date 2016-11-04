@@ -20,6 +20,7 @@ using namespace std;
  
  */
 
+const vector<string> a_buscar = {"GENEINFO=", "CLNDSDB=", "CLNDSDBID=", "CLNDBN=", "CLNSIG=", "CAF=", "COMMON="};
 
 class mutacion {
 private:

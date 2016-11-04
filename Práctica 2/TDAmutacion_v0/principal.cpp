@@ -61,19 +61,21 @@ int cuentaMutacionesEnfermedad(vector<mutacion> &  vm, const string & s) {
 	for (int i = 0; i < vm.size(); i++){    //recorrer vector de mutaciones vm
 		// para cada mutación, obtener sus enfermedades asociadas:
 		
-		for (int k = 0;i < vm[i].getEnfermedades().size(); k++){
-			enfermedad nueva = vm[i].getEnfermedades()[k];
+		for (int k = 0;i < vm.size(); k++){
+			bool encontrada = false;
+			unsigned j = 0;
 			
-			enfermedades.push_back( nueva );
-		}
-		
-		int j = 0;
-		//recorrer el vector de enfermedades para ver si hay alguna cuyo nombre contiene s
-		while (j < enfermedades.size()){
-			//utilizar el método enfermedades[j].nameContains(s)
-			if(enfermedades[j].nameContains(s)){
-				//si alguna enfermedad de enfermedades estaba asociada a s, incrementar contador.
-				cont_mutaciones++;
+			// para cada mutación, obtener sus enfermedades asociadas:
+			enfermedades = vm[i].getEnfermedades();
+			
+			// recorrer el vector de enfermedades para ver si hay alguna cuyo nombre contiene s
+			while(j < enfermedades.size() && !encontrada){
+				if (enfermedades[j].nameContains(s)){
+					cont_mutaciones++;
+					encontrada = true;
+				}
+				
+				j++;
 			}
 		}
 	}
