@@ -144,7 +144,7 @@ Convierte la enfermedad en un string.
 
 /**
 @brief Sobrecarga el operador <<
-@param os
+@param os	Operador de flujo
 @param e	Enfermedad a imprimir
 
 Sobrecarga el operador << para imprimir una enfermedad con todos sus campos.

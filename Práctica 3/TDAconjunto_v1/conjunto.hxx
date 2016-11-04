@@ -3,6 +3,7 @@
 #include <vector>
 #include "conjunto.h"
 #include "mutacion.h"
+#include "enfermedad.h"
 
 using namespace std;
 
@@ -226,11 +227,13 @@ bool conjunto::cheq_rep() const{
 		}
 		
 		if(chr1 != chr2){
-			for (int j = 0; j < num_crom; j++){
-				if 
+			if (vm[i] > vm[i + 1]){
+				invariante  = false;
 			}
 		}
 	}
+	
+	return invariante;
 }
 
 ostream &  operator << ( ostream & sal, const conjunto & C){
