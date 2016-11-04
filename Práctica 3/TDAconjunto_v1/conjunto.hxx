@@ -227,7 +227,7 @@ bool conjunto::cheq_rep() const{
 		}
 		
 		if(chr1 != chr2){
-			if (vm[i] > vm[i + 1]){
+			if (!(vm[i] > vm[i + 1])){
 				invariante  = false;
 			}
 		}
