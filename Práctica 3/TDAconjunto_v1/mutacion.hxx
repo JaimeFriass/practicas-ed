@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "enfermedad.h"
+#include "mutacion.h"
 
 using namespace std;
 
@@ -28,8 +28,9 @@ mutacion::mutacion(const mutacion& m){
 //para crear objeto mutacion a partir de la cadena que contiene una línea completa del fichero de entrada
 mutacion::mutacion(const string & str){
 	bool extras = false;
+	unsigned int k=0;
 	int j = 0;
-	unsigned long i = 0;
+	int i = 0;
 	
 	// OBTENER CHR
 	(*this).chr = str.substr(0,1);
@@ -69,7 +70,7 @@ mutacion::mutacion(const string & str){
 	unsigned long sigPyC = str.substr(i, str.size() - i).find(";");
 	aux = str.substr(i +9, sigPyC -9);
 	
-	for(int k = 0; k < aux.size(); k++){
+	for( k = 0; k < aux.size(); k++){
 		if(aux[k] == '|'){
 			(*this).genes.push_back(aux.substr(j, k-j));
 			extras = true;
@@ -95,7 +96,7 @@ mutacion::mutacion(const string & str){
 	if(i != -1){
 		sigPyC = str.substr(i, str.size() -i).find(";");
 		aux = str.substr(i +4, sigPyC -4);
-		for(int k = 0; k < aux.size(); k++){
+		for( k = 0; k < aux.size(); k++){
 			if(aux[k] == ','){
 				(*this).caf.push_back(atof(aux.substr(j, k - j).c_str()));
 				j = k +1;
@@ -114,9 +115,9 @@ mutacion::mutacion(const string & str){
 	// OBTENER ENFERMEDADES Y CLNSIG
 	
 	unsigned long posCln = str.find("CLNSIG"); // Códigos CLNSIG
-	unsigned long posName = str.find("CLNDBN"); // Nombres enf
 	unsigned long posID = str.find("CLNDSDBID"); // ID enf
 	unsigned long posDB = str.find("CLNDSDB"); // Database Enf
+	long posName = str.find("CLNDBN"); // Nombres enf
 	j = 0;
 	extras = false;
  
@@ -132,7 +133,7 @@ mutacion::mutacion(const string & str){
 		vector<string> auxNombre, auxID, auxDB;
 		
 		
-		for(int k = 0; k < nomEnf.size(); k++){ // pilla nombres
+		for(k = 0; k < nomEnf.size(); k++){ // pilla nombres
 			if(nomEnf[k] == '|'){
 				auxNombre.push_back(nomEnf.substr(j, k -j));
 				j = k +1;
@@ -146,7 +147,7 @@ mutacion::mutacion(const string & str){
 		j = 0;
 		extras = false;
 		
-		for(int k = 0; k < iDenf.size(); k++){	// pilla ID
+		for(k = 0; k < iDenf.size(); k++){	// pilla ID
 			if(iDenf[k] == '|'){
 				auxID.push_back(iDenf.substr(j, k -j));
 				j = k +1;
@@ -160,7 +161,7 @@ mutacion::mutacion(const string & str){
 		j = 0;
 		extras = false;
 		
-		for(int k = 0; k < dBenf.size(); k++){	// pilla DB
+		for(k = 0; k < dBenf.size(); k++){	// pilla DB
 			if(dBenf[k] == '|'){
 				auxDB.push_back(dBenf.substr(j, k -j));
 				j = k +1;
@@ -174,7 +175,7 @@ mutacion::mutacion(const string & str){
 		j = 0;
 		extras = false;
 		
-		for(int k = 0; k < auxNombre.size(); k++){
+		for(k = 0; k < auxNombre.size(); k++){
 			enfermedad auxEnf(auxNombre[k], auxID[k], auxDB[k]);
 			(*this).enfermedades.push_back(auxEnf);
 		}
@@ -182,7 +183,7 @@ mutacion::mutacion(const string & str){
 		sigPyC = str.substr(posCln, str.size() - posCln).find(";");
 		string strCln = str.substr(posCln +7, sigPyC - 7);
 		if(strCln.size() > 1)
-			for(int k = 0; k < enfermedades.size(); k+=2)
+			for( k = 0; k < enfermedades.size(); k+=2)
 				(*this).clnsig.push_back((int)strCln[k]-48);
 		
 	}
@@ -210,7 +211,7 @@ void mutacion::setPos(const unsigned int & pos){
 void mutacion::setRef_alt(const vector<string> & ref_alt){
 	(this -> ref_alt).clear();
 	
-	for (int i = 0; i < ref_alt.size(); i++){
+	for (unsigned int i = 0; i < ref_alt.size(); i++){
 		(this -> ref_alt).push_back(ref_alt[i]);
 	}
 }
@@ -218,7 +219,7 @@ void mutacion::setRef_alt(const vector<string> & ref_alt){
 void mutacion::setGenes (const vector<string> & genes){
 	(this -> genes).clear();
 	
-	for (int i = 0; i < genes.size(); i++){
+	for (unsigned int i = 0; i < genes.size(); i++){
 		(this -> genes).push_back(genes[i]);
 	}
 }
@@ -230,7 +231,7 @@ void mutacion::setCommon (const bool & common){
 void mutacion::setCaf (const vector<float> & caf){
 	(this -> caf).clear();
 	
-	for (int i = 0; i < caf.size(); i++){
+	for (unsigned int i = 0; i < caf.size(); i++){
 		(this -> caf).push_back(caf[i]);
 	}
 }
@@ -238,13 +239,13 @@ void mutacion::setCaf (const vector<float> & caf){
 void mutacion::setEnfermedades (const vector<enfermedad> & enfermedades){
 	(this -> enfermedades).clear();
 	
-	for(int i = 0; i < enfermedades.size(); i++){
+	for(unsigned int i = 0; i < enfermedades.size(); i++){
 		this -> enfermedades = enfermedades;
 	}
 }
 
 void mutacion::setClnsig (const vector<int> & clnsig){
-	for(int i = 0; i < clnsig.size(); i++){
+	for(unsigned int i = 0; i < clnsig.size(); i++){
 		this -> clnsig.push_back(clnsig[i]);
 	}
 }
@@ -343,7 +344,7 @@ bool mutacion::operator < (const mutacion & m) const{
 string mutacion::imprime_Ref() const{
 	string hola;
 	
-	for (int i = 0; i < ref_alt.size(); i++){
+	for (unsigned int i = 0; i < ref_alt.size(); i++){
 		hola = hola + " " + ref_alt[i];
 	}
 	
@@ -353,7 +354,7 @@ string mutacion::imprime_Ref() const{
 string mutacion::imprime_Genes() const{
 	string hola;
 	
-	for (int i = 0; i < genes.size(); i++){
+	for (unsigned int i = 0; i < genes.size(); i++){
 		hola = hola + " " + genes[i];
 	}
 	
@@ -363,7 +364,7 @@ string mutacion::imprime_Genes() const{
 string mutacion::imprime_Caf() const{
 	string hola;
 	
-	for (int i = 0; i < genes.size(); i++){
+	for (unsigned int i = 0; i < genes.size(); i++){
 		hola = hola + " " + to_string(caf[i]);
 	}
 	
@@ -373,7 +374,7 @@ string mutacion::imprime_Caf() const{
 string mutacion::imprime_Enfermedades() const{
 	string hola;
 	
-	for(int i = 0; i < enfermedades.size(); i++){
+	for(unsigned int i = 0; i < enfermedades.size(); i++){
 		hola = hola + " " + enfermedades[i].imprime_Enf();
 	}
 	

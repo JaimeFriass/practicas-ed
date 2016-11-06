@@ -196,5 +196,5 @@ public:
 ostream& operator<< ( ostream& os, const mutacion& m);   //Imprimir TODOS los campos del objeto mutación.
 
 
-#include "mutacion.hxx"
+
 #endif

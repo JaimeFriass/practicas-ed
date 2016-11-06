@@ -151,7 +151,6 @@ Sobrecarga el operador << para imprimir una enfermedad con todos sus campos.
 */
 ostream& operator<< ( ostream& os, const enfermedad & e);
 
-#include "enfermedad.hxx" // Incluimos la implementacion.
 
 
 #endif

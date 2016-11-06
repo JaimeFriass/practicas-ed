@@ -49,7 +49,7 @@ public:
 	/** @brief constructor de copia
 	 @param[in] d conjunto a copiar
 	 */
-	conjunto (const conjunto & d);
+	conjunto (conjunto & d);
 	
 	
 	/** @brief busca una entrada en el conjunto
@@ -133,7 +133,13 @@ public:
 	 @param[in] org conjunto a copiar.
 	 @return Crea y devuelve un conjunto duplicado exacto de org.
 	 */
-	conjunto & operator=( const conjunto & org);
+	conjunto & operator=(conjunto & org);
+	
+	/** @brief operador de asignacion de los vectores vm
+	@param[in] vm del conjunto a copiar
+	@return CRea y devuelve el vector dupliacdo exacto al vector vm del conjunto
+	*/
+	 vector<value_type> operator=(vector<mutacion> aux);
 	
 	/** @brief begin del conjunto
 	 @return Devuelve un iterador al primer elemento del conjunto. Si no existe devuelve end
@@ -187,8 +193,8 @@ public:
 	 
 	 Devuelve el vector de todas las mutaciones.
 	 */
+	conjunto::mutacion & getVM();
 	conjunto::value_type & getVM();
-	
 	
 	
 private:
@@ -222,8 +228,7 @@ private:
  @post No se modifica el conjunto.
  Implementar tambien esta funcion
 	*/
-ostream &  operator << ( ostream & sal, const conjunto & C);
-
+ostream &  operator << ( ostream & sal,conjunto & C);
 
 
 #endif
