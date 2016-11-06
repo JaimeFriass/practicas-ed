@@ -145,14 +145,14 @@ conjunto & conjunto::operator=(conjunto & org){
 }
 
 vector<value_type> conjunto::operator = (vector<value_type> aux){
-	if(this!=&aux){	
+	if(this!=&aux){
 		this->vm.clear();
 		this->vm[aux.size()];
 		for(unsigned int i=0;i<aux.size();i++)
 			vm[i]=aux[i];
 		return vm;
 	}
-			
+	
 }
 
 conjunto::iterator conjunto::begin(){
@@ -214,8 +214,6 @@ conjunto::iterator conjunto::upper_bound (const conjunto::value_type & e) const{
 
 bool conjunto::cheq_rep() const{
 	bool invariante = true;
-	const string crom[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"};
-	
 	
 	string chr1, chr2;
 	int n_chr1_aux,n_chr2_aux;
@@ -224,7 +222,7 @@ bool conjunto::cheq_rep() const{
 	for (unsigned int i = 0; i < vm.size() && invariante; i++){
 		chr1 = vm[i].getChr();
 		chr2 = vm[i + 1].getChr();
-		n_aux=atoi(chr1.c_str()); 
+		n_aux=atoi(chr1.c_str());
 		n_chr2_aux=atoi(chr2.c_str());
 		if(n_chr1_aux < 1 || n_chr2_aux > 22 && chr1 != "X" && chr1 != "Y" && chr2 != "MT" && vm[i].getPos() > 0){
 			invariante = false;
@@ -250,11 +248,9 @@ bool conjunto::cheq_rep() const{
 }
 
 ostream &  operator << ( ostream & sal, conjunto & C){
- vector<mutacion> aux[C.size()]=C.getVM();
+	vector<mutacion> aux[C.size()]=C.getVM();
+	
 	for(unsigned int i = 0;i < C.size();i++)
 		sal << aux[i] << " ";
 	return sal;
 }
-
-
-
