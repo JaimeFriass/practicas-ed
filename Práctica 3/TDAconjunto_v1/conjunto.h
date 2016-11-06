@@ -193,8 +193,7 @@ public:
 	 
 	 Devuelve el vector de todas las mutaciones.
 	 */
-	conjunto::mutacion & getVM();
-	conjunto::value_type & getVM();
+	mutacion & getVM();
 	
 	
 private:
