@@ -204,8 +204,6 @@ conjunto::iterator conjunto::upper_bound (const conjunto::value_type & e) const{
 
 bool conjunto::cheq_rep() const{
 	bool invariante = true;
-	const string crom[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y", "MT"};
-	const int num_crom = 25;
 	
 	string chr1, chr2;
 	
