@@ -21,6 +21,9 @@ enfermedad.o: enfermedad.hxx enfermedad.h
 mutacion.o: mutacion.hxx mutacion.h enfermedad.h
 	$(CPPFLAGS) -c mutacion.hxx -o mutacion.o -Iinclude/
 
+conjunto.o: conjunto.hxx mutacion.h enfermedad.h conjunto.h
+	$(CPPFLAGS) -c conjunto.hxx -o conjunto.o -Iinclude/
+
 #Limpieza de archivos objeto, ejecutables y bibliotecas
 
 clean:
