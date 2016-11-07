@@ -94,12 +94,12 @@ bool conjunto::insert( const conjunto::value_type & e){
 
 bool conjunto::erase(const string & chr, const unsigned int & pos){
 	bool correcto = false;
-	iterator num = (vm.begin() + (pos - 1));
 	
-	if ( ( (*num).getChr() ) == chr){
-		vm.erase(num);
-		
-		correcto = true;
+	for(unsigned int i = 0; i < vm.size(); i++){
+		if(vm[i].getChr() == chr && vm[i].getPos() == pos){
+			vm.erase(vm.begin() + i);
+			correcto = true;
+		}
 	}
 	
 	return correcto;
@@ -108,10 +108,8 @@ bool conjunto::erase(const string & chr, const unsigned int & pos){
 bool conjunto::erase(const string & ID){
 	bool correcto = false;
 	
-	for (unsigned int i = 0; i < vm.size(); i++)
-	{
-		if(vm[i].getID() == ID)
-		{
+	for (unsigned int i = 0; i < vm.size(); i++){
+		if(vm[i].getID() == ID){
 			vm.erase( vm.begin() + i );
 			correcto = true;
 		}
