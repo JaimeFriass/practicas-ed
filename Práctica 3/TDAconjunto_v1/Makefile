@@ -1,9 +1,4 @@
-OBJ = obj
-BIN = bin
-INC = include
-LIB = lib
-SRC = src
-CPPFLAGS = g++ -std=c++11 -g -Wall
+CPPFLAGS = g++ -c
 
 #Creación de ejecutables
 
@@ -13,22 +8,19 @@ principal : principal.o
 #Creación de archivos objeto
 
 principal.o: principal.cpp conjunto.o
-	$(CPPFLAGS) -c principal.cpp -o principal.o -I.
+	$(CPPFLAGS) principal.cpp -o principal.o -I.
 
 enfermedad.o: enfermedad.cpp
-	$(CPPFLAGS) -c enfermedad.cpp -o enfermedad.o -I.
+	$(CPPFLAGS) enfermedad.cpp -o enfermedad.o -I.
 
 mutacion.o: mutacion.cpp enfermedad.o
-	$(CPPFLAGS) -c mutacion.cpp -o mutacion.o -I.
+	$(CPPFLAGS) mutacion.cpp -o mutacion.o -I.
 
 conjunto.o: conjunto.cpp mutacion.o
-	$(CPPFLAGS) -c conjunto.cpp -o conjunto.o -I.
+	$(CPPFLAGS) conjunto.cpp -o conjunto.o -I.
 
 #Limpieza de archivos objeto, ejecutables y bibliotecas
 
 clean:
 	echo "Limpiando..."
 	rm *.o
-
-mrproper: clean
-	rm $(LIB)/*.a

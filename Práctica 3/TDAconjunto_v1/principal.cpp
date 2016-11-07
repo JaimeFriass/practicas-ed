@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <string>
 
 
 using namespace std;
@@ -53,7 +54,7 @@ int main(int argc, char *argv[]){
     load(conjuntoMutaciones, "clinvar_20160831.vcf");
     
     //Imprimir número de elementos almacenados en conjuntoMutaciones
-    cout << "Lectura del fichero finalizada. Mutaciones cargadas: " << conjuntoMutaciones.size() << endl;  
+    cout << "Lectura del fichero finalizada. Mutaciones cargadas: " << conjuntoMutaciones.size() << endl;
 
     //Imprimir cuántas mutaciones están asociadas al cromosoma 1:
     cout << "Mutaciones asociadas a Chr 1: " << conjuntoMutaciones.lower_bound("2", 1) - conjuntoMutaciones.begin() << endl;
