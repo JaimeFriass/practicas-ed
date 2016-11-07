@@ -86,7 +86,19 @@ bool conjunto::insert( const conjunto::value_type & e){
 	bool insertado = par.second;
 	
 	if(!insertado){
-		vm.push_back(e);
+		vector<value_type> aux(vm.size()+1);
+		for(unsigned int i=0;i<vm.size()-1;i++){
+			aux[i]=vm[i];
+			if(value_type > e){
+				if(!insertado){
+					aux[i]=e;
+					insertado=true;
+				}
+				else
+					aux[i]=vm[i+i];
+				
+			}
+		}
 	}
 	
 	return insertado;
