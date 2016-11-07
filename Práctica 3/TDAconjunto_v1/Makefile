@@ -13,22 +13,22 @@ principal : principal.o
 #Creación de archivos objeto
 
 principal.o: principal.cpp conjunto.o
-	$(CPPFLAGS) -c principal.cpp -o principal.o -Iinclude/
+	$(CPPFLAGS) -c principal.cpp -o principal.o -I.
 
-enfermedad.o: enfermedad.hxx enfermedad.h
-	$(CPPFLAGS) -c enfermedad.hxx -o enfermedad.o -Iinclude/
+enfermedad.o: enfermedad.cpp
+	$(CPPFLAGS) -c enfermedad.cpp -o enfermedad.o -I.
 
-mutacion.o: mutacion.hxx mutacion.h enfermedad.o
-	$(CPPFLAGS) -c mutacion.hxx -o mutacion.o -Iinclude/
+mutacion.o: mutacion.cpp enfermedad.o
+	$(CPPFLAGS) -c mutacion.cpp -o mutacion.o -I.
 
-conjunto.o: conjunto.h conjunto.hxx mutacion.o
-	$(CPPFLAGS) -c conjunto.hxx -o conjunto.o -Iinclude/
+conjunto.o: conjunto.cpp mutacion.o
+	$(CPPFLAGS) -c conjunto.cpp -o conjunto.o -I.
 
 #Limpieza de archivos objeto, ejecutables y bibliotecas
 
 clean:
 	echo "Limpiando..."
-	rm $(OBJ)/*.o
+	rm *.o
 
 mrproper: clean
 	rm $(LIB)/*.a

@@ -40,7 +40,6 @@ public:
 	typedef vector<mutacion>::iterator iterator;
 	typedef vector<mutacion>::const_iterator const_iterator;
 	
-	
 	/** @brief constructor primitivo.
 	 */
 	conjunto();
@@ -139,7 +138,7 @@ public:
 	@param[in] vm del conjunto a copiar
 	@return CRea y devuelve el vector dupliacdo exacto al vector vm del conjunto
 	*/
-	 vector<value_type> operator=(vector<mutacion> aux);
+	 vector<value_type> & operator=(vector<mutacion> aux);
 	
 	/** @brief begin del conjunto
 	 @return Devuelve un iterador al primer elemento del conjunto. Si no existe devuelve end
@@ -193,7 +192,7 @@ public:
 	 
 	 Devuelve el vector de todas las mutaciones.
 	 */
-	mutacion & getVM();
+	const vector<mutacion>  & getVM();
 	
 	
 private:

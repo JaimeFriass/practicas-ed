@@ -13,15 +13,15 @@ conjunto::conjunto(conjunto & d){
 	this -> vm = (d.getVM());
 }
 
-mutacion conjunto::getVM(){
+const vector<mutacion>  & conjunto::getVM(){
 	return vm;
 }
 
 pair<conjunto::value_type,bool>  conjunto::find (const string & chr, const unsigned int & pos) const{
 	bool encontrado = false;
-	conjunto aux;
+	conjunto::value_type aux;
 	
-	pair par(aux, encontrado);
+	pair<conjunto::value_type, bool> par(aux, encontrado);
 	
 	for(unsigned int i = 0; i < vm.size() && !encontrado; i++){
 		if(vm[i].getChr() == chr || vm[i].getPos() == pos) {
@@ -35,12 +35,12 @@ pair<conjunto::value_type,bool>  conjunto::find (const string & chr, const unsig
 
 pair<conjunto::value_type,bool>  conjunto::find (const string & ID) const{
 	bool encontrado=false;
-	conjunto aux;
+	conjunto::value_type aux;
 	
-	pair par(aux, encontrado);
+	pair<conjunto::value_type, bool> par(aux, encontrado);
 	
 	for(unsigned int i=0; i < vm.size() && !encontrado ; i++){
-		if(vm[i].getID == ID) {
+		if(vm[i].getID() == ID) {
 			par.first = vm[i];
 			par.second = true;
 		}
@@ -82,7 +82,7 @@ conjunto::size_type conjunto::count (const conjunto::value_type & e) const{
 }
 
 bool conjunto::insert( const conjunto::value_type & e){
-	pair par = find(e);
+	pair<conjunto::value_type, bool> par(find(e));
 	bool insertado = par.second;
 	
 	if(!insertado){
@@ -94,9 +94,9 @@ bool conjunto::insert( const conjunto::value_type & e){
 
 bool conjunto::erase(const string & chr, const unsigned int & pos){
 	bool correcto = false;
-	iterator num=(vm.begin() + (pos - 1));
+	iterator num = (vm.begin() + (pos - 1));
 	
-	if ( ( (vm.at(num)).getChr() ) == chr){
+	if ( ( (*num).getChr() ) == chr){
 		vm.erase(num);
 		
 		correcto = true;
@@ -144,15 +144,15 @@ conjunto & conjunto::operator=(conjunto & org){
 	return *this;
 }
 
-vector<value_type> conjunto::operator = (vector<value_type> aux){
-	if(this!=&aux){
-		this->vm.clear();
-		this->vm[aux.size()];
+vector<conjunto::value_type> & conjunto::operator = (vector<conjunto::value_type> aux){
+	if((this -> vm) != aux){
+		this -> vm.clear();
+		
 		for(unsigned int i=0;i<aux.size();i++)
-			vm[i]=aux[i];
-		return vm;
+			vm.push_back(aux[i]);
 	}
 	
+	return this -> vm;
 }
 
 conjunto::iterator conjunto::begin(){
@@ -199,7 +199,7 @@ conjunto::iterator conjunto::lower_bound (const conjunto::value_type & e){
 conjunto::iterator conjunto::upper_bound (const string & chr, const unsigned int & pos){
 	conjunto::iterator upper = begin();
 	
-	while ( (*upper).getChr() != chr && (*upper.getPos() != pos && upper != end() ))
+	while ( (*upper).getChr() != chr && ((*upper).getPos() != pos && upper != end() ))
 		upper++;
 	
 	
@@ -208,7 +208,7 @@ conjunto::iterator conjunto::upper_bound (const string & chr, const unsigned int
 
 
 
-conjunto::iterator conjunto::upper_bound (const conjunto::value_type & e) const{
+conjunto::iterator conjunto::upper_bound (const conjunto::value_type & e){
 	return upper_bound(e.getChr(), e.getPos());
 }
 
@@ -222,9 +222,10 @@ bool conjunto::cheq_rep() const{
 	for (unsigned int i = 0; i < vm.size() && invariante; i++){
 		chr1 = vm[i].getChr();
 		chr2 = vm[i + 1].getChr();
-		n_aux=atoi(chr1.c_str());
+		n_chr1_aux = atoi(chr1.c_str());
 		n_chr2_aux=atoi(chr2.c_str());
-		if(n_chr1_aux < 1 || n_chr2_aux > 22 && chr1 != "X" && chr1 != "Y" && chr2 != "MT" && vm[i].getPos() > 0){
+		
+		if((n_chr1_aux < 1 || n_chr2_aux > 22) && chr1 != "X" && chr1 != "Y" && chr2 != "MT" && vm[i].getPos() > 0){
 			invariante = false;
 		}
 	}
@@ -248,9 +249,10 @@ bool conjunto::cheq_rep() const{
 }
 
 ostream &  operator << ( ostream & sal, conjunto & C){
-	vector<mutacion> aux[C.size()]=C.getVM();
+	vector<mutacion> aux = C.getVM();
 	
-	for(unsigned int i = 0;i < C.size();i++)
+	for(unsigned int i = 0; i < C.size();i++)
 		sal << aux[i] << " ";
+	
 	return sal;
 }
