@@ -144,9 +144,9 @@ conjunto & conjunto::operator=(conjunto & org){
 
 vector<conjunto::value_type> & conjunto::operator = (vector<conjunto::value_type> aux){
 	if((this -> vm) != aux){
-		this -> vm.clear();
+		vm.clear();
 		
-		for(unsigned int i=0;i<aux.size();i++)
+		for(unsigned int i = 0;i < aux.size(); i++)
 			vm.push_back(aux[i]);
 	}
 	
