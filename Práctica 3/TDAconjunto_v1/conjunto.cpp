@@ -34,12 +34,12 @@ pair<conjunto::value_type,bool>  conjunto::find (const string & chr, const unsig
 }
 
 pair<conjunto::value_type,bool>  conjunto::find (const string & ID) const{
-	bool encontrado=false;
+	bool encontrado = false;
 	conjunto::value_type aux;
 	
 	pair<conjunto::value_type, bool> par(aux, encontrado);
 	
-	for(unsigned int i=0; i < vm.size() && !encontrado ; i++){
+	for(unsigned int i = 0; i < vm.size() && !encontrado ; i++){
 		if(vm[i].getID() == ID) {
 			par.first = vm[i];
 			par.second = true;
@@ -69,7 +69,7 @@ conjunto::size_type conjunto::count (const string & chr, const unsigned int & po
 conjunto::size_type conjunto::count (const string & ID) const{
 	conjunto::size_type tamanio = 0;
 	
-	for(unsigned int i=0; i < vm.size() && tamanio == 0; i++){
+	for(unsigned int i = 0; i < vm.size() && tamanio == 0; i++){
 		if(vm[i].getID() == ID)
 			tamanio = 1;
 	}
@@ -136,7 +136,9 @@ bool conjunto::empty() const{
 
 conjunto & conjunto::operator=(conjunto & org){
 	if (this != &org){
-		this -> vm = org.getVM();
+		vm.clear();
+		
+		vm = org.getVM();
 	}
 	
 	return *this;

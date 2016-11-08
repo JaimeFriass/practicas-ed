@@ -1,4 +1,4 @@
-CPPFLAGS = g++ -c
+CPPFLAGS = g++ -std=c++11 -c
 
 #Creación de ejecutables
 
@@ -24,3 +24,5 @@ conjunto.o: conjunto.cpp
 clean:
 	echo "Limpiando..."
 	rm *.o
+mrproper: clean
+	rm principal
