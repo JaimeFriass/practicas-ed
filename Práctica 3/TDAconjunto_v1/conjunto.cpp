@@ -86,20 +86,7 @@ bool conjunto::insert( const conjunto::value_type & e){
 	bool insertado = par.second;
 	
 	if(!insertado){
-		vector<value_type> aux(vm.size()+1);
-		
-		for(unsigned int i=0;i<vm.size()-1;i++){
-			aux[i]=vm[i];
-			if(value_type > e){
-				if(!insertado){		/*no está insertado,mete la mutación*/
-					aux[i]=e;
-					insertado=true;
-				}
-				else
-					aux[i]=vm[i+i];		/*mete todas las mutaciones más grandes a e.*/
-			}	
-		}
-		vm=aux;			/*modificamos aux para que esté e dentro.*/
+		vm.push_back(e);
 	}
 	
 	return insertado;
