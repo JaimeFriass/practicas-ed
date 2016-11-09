@@ -1,0 +1,198 @@
+﻿/*! \mainpage  PRACTICA TEMPLATE
+ *
+\version v2
+\author  Juan F. Huete y Carlos Cano.
+
+\tableofcontents
+
+ * \section intro_sec Introducción
+ *
+ * En la práctica anterior se os pidió la implementación del tipo conjunto de mutaciones. En esta práctica  el objetivo es seguir  avanzando  en el uso de las estructuras de datos, particularmente mediante el uso de plantillas (templates) para la definición de tipos de datos genéricos.
+
+Nuestro objetivo es dotar al TDA conjunto de la capacidad de almacenar elementos de cualquier tipo. Teniendo en cuenta que los elementos se almacenan de forma ordenada, es necesario que el tipo de dato con el que se instancia el conjunto tenga definido una relación de preorden total, R, esto es:
+
+\li Para todo x,y: xRy || yRx
+\li Para todo x,y,z: Si xRy && yRz entonces xRz
+
+Por tanto  R es una relación binaria que toma como entrada dos elementos del mismo tipo y como salida nos devuelve un booleano. Ejemplos de este tipo de relaciones son el operator< (o el operator>), ya definidos sobre la clase mutación y enfermedad
+
+Tanto el tipo de dato con el que particularizar el conjunto como el criterio de ordenación serán proporcionados a la hora de definir un conjunto. 
+
+\code
+template <typename T, typename CMP> class conjunto;
+\endcode
+
+en la plantilla T hace referencia al tipo de dato, y CMP hace referencia al criterio de comparación interno (functor). 
+
+
+En la clase se declarará un objeto tipo CMP, que llamaremos comp. Así, la expresion comp(a,b) devuelve true si se considera que a precede  b en la relación de preorden. Esta relación será utilizada por el "conjunto" 
+ para:
+\li decidir cuando un elemento precede a otro en el contenedor,
+\li pero también a la hora de determinar cuando dos elementos son equivalentes: para determinar cuando dos elementos serán considerados iguales con respecto a la relacion tendremos en cuenta que
+\code
+Si (!comp(a,b) && !comp(b,a))  entonces necesariamente a==b.
+\endcode
+
+\section platillas Uso de templates
+ Hasta ahora, en un conjunto de mutaciones los elementos se encuentran almacenadas en orden siguiendo el criterio de comparación dado por el operador< (primero se compara cromosoma y en caso de empate se compara la posición). Sin embargo nos podríamos plantear otros conjuntos de elementos.    Así, podríamos tener
+
+\code
+#include "conjunto.h"
+...
+// declaracion de tipos básicos:
+
+conjunto<mutacion,less<mutacion > > Xl;  // elementos ordenados en orden creciende  (operator< sobre mutacion)
+conjunto<mutacion,greater<mutacion > > Xg;  // elementos ordenados en orden creciende  (operator> sobre mutacion)
+
+conjunto<enfermedad,greater<enfermedad> > Yg; // elementos ordenados en orden decreciente (operator> sobre enfermedad)
+
+// declaración de tipos más complejos:
+
+conjunto<mutacion,less<mutacion> >::iterator itl;
+conjunto<enfermedad,greater<enfermedad> >::iterator itg;
+
+
+... 
+
+\endcode
+
+Hay que notar que en este ejemplo Xl y Xg representan a tipos distintos, esto es un conjunto ordenado en orden creciente NO SERÁ del mismo tipo que un conjunto ordenado en orden decreciente. De igual forma,  itl e itg tampoco serán variables del mismo tipo, por lo que no podríamos hacer entre otras cosas asignaciones como 
+
+\code
+Xl=Yg; // ERROR  un conjunto ordenado en orden descendente no puede ser asignado a un conjunto ordenado en orden descendente
+...
+itg=itl; // igual que en el caso anterior, apuntan a elementos distintos
+\endcode
+
+En este caso, para realizar  la práctica, el alumno deberá modificar tanto el fichero de especificación, conjunto.h,  de forma que la propia especificación indique que trabaja con parámetros plantilla, como los ficheros de implementación (.hxx) de la clase conjunto. 
+
+
+De igual forma se debe modificar el fichero principal.cpp de manera que se demuestre el correcto comportamiento del conjunto cuando se instancia bajo distintos tipos de datos y distintos criterios de ordenación, en concreto debemos asegurarnos que utilizamos los siguientes criterios de ordenación:
+
+\li conjunto de mutacion creciente por cromosoma/posicion
+\li conjunto de mutacion decreciente por cromosoma/posicion
+\li conjunto de mutacion creciente por id
+\li conjunto de mutacion decreciente por id
+\li conjunto de enfermedad por orden creciente 
+\li conjunto de enfermedad por orden decreciente
+
+Para los dos primeros casos, y teniendo en cuenta que tenemos sobrecargado los operadores relacionales para mutación, es suficiente con utilizar las clases genéricas less<T> y greater<T> definidas en functional ( #include <functional> ). Sin embargo, para el resto de casos del conjunto de mutaciones debemos implementar los functores que nos permitan realizar la correcta comparación entre mutaciones.
+
+\section functor functor
+ Para realizar dichas comparaciones utilizaremos una herramienta potente de C++: un functor (objeto función). Un functor es una clase en C++ que actua como una función. Un functor puede ser llamado con una sintaxis familiar a la de las funciones en C++, pudiendo devolver valores y aceptar parámetros como una función normal.
+
+Por ejemplo, si queremos crear un functor que compare dos mutaciones teniendo en cuenta el orden de ID, podríamos hacer
+
+\code
+mutacion x,y;
+...
+ComparacionPorID miFunctor;
+cout << miFunctor(x,y) << endl;
+
+\endcode
+Aunque miFunctor es un objeto, en la llamada miFunctor(x,y) la tratamos como si estuviésemos invocando a una función tomando x e y como parámetros.
+
+Para crear dicho functor, creamos un objeto que sobrecarga el operador() como sigue
+
+\code
+class ComparacionPorID {
+ public:
+   bool operator()(const mutacion &a, const mutacion &b) {
+     return (a.getID() < b.getID()); // devuelve verdadero si el ID de a precede al ID de b
+ }
+};
+      
+\endcode
+
+\section generalizar Generalizando el conjunto.
+
+Para poder extender nuestro conjunto hemos de dotarlo de la capacidad de poder definir el criterio de ordenación. Para ello vamos a considerar un caso simplificado (que no se corresponde exactamente con lo que se pide en la práctica) donde ilustraremos su uso
+
+\code
+template <typename T, typename CMP>
+class conjunto {
+  public:
+    ....
+    pair<typename conjunto<T,CMP>::iterator,bool> insert( const T & c);
+
+  private:
+    vector<T> vdatos; //donde se almacenan los datos
+    CMP comp;
+};
+\endcode
+Como hemos dicho, el nombre del tipo ahora es conjunto<T,CMP> y no conjunto. Distintas particularizaciones dan lugar a tipos también distintos. Ahora, en el fichero conjunto.hxx debemos de implementar cada uno de los métodos, recordemos que cada uno de ellos pertenece a la clase conjunto<T,CMP> y por tanto se implementa considerando
+\code
+tipoRetorno conjunto<T,CMP>::nombreMetodo( parametros ...)
+\endcode
+
+Pasamos a ver la implementación de los métodos:
+
+\subsection insert Insert
+El método insert asume como prerequisito que el conjunto está ordenado según el criterio dado por CMP, y por tanto debe asegurar que tras insertar una nueva entrada dicho conjunto siga ordenado. Por ejemplo, podríamos hacer algo del tipo: 
+\code
+pair<typename conjunto<T,CMP>::iterator,bool> 
+                              conjunto<T,CMP>::insert( const T & c){
+
+      pair<typename conjunto<T,CMP>::iterator,bool> salida;
+
+      bool fin = false;
+      for (auto it = vdatos.begin(); it!=vdatos.end() && !fin; ){
+        if (comp(*it,c) ) it++;
+        else if (!comp(*it,c) && !comp(c,*it)){ // equivalentes segun CMP
+            salida.first = vdatos.end();
+            salida.second = false;
+            fin = true;
+        }else {
+            salida.first = vdatos.insert(it,c);
+            salida.second = fin = true;
+        }
+      } // del for
+      if (!fin){
+        salida.first = vdatos.insert(vdatos.end(),c);
+        salida.second = true; 
+      }
+      return salida;
+}
+\endcode
+
+En este caso comp(*it,c) hace referencia a una comparación genérica entre elementos de tipo T definida por la relación de orden con la que se haya particularizado el conjunto. Así si hemos definido
+
+\code
+conjunto<mutacion,ComparacionPorID> cID;
+\endcode
+
+en este caso comp es un objeto de la clase ComparacionPorID, y mediante la llamada comp(.,.) lo que estamos haciendo es llamar a la "función" que me compara dos mutaciones teniendo en cuenta su ID. 
+
+Finalmente, debemos tener cuidado a  la hora de realizar comparaciones y la semántica de las mismas, como se muestra en el caso en que comparamos cuando dos elementos son "iguales". Así, si en lugar de realizar la comparación 
+\code
+if (!comp(*it,c) && !comp(c,*it)){ // equivalentes segun CMP
+}
+\endcode 
+hubiésemos utilizado 
+\code
+If (*it==c) { //igualdad
+\endcode
+estaríamos haciendo la llamada a la comparación de igualdad entre mutaciones (definida mediante la comparación de cromosoma/posicion) por lo que podría funcionar correctamente el método cuando particularizamos con
+\code
+Conjunto<mutacion,less<mutacion> > X;
+\endcode
+Sin embargo, si el conjunto está definido como conjunto<mutacion,ComparacionPorID>, utilizar el mismo código para realizar la búsqueda no funcionaría correctamente: los elementos están ordenados en orden creciente de ID y la comparación de igualdad se hace por cromosoma/mutacion. 
+
+
+
+\subsection SP2 SE PIDE
+
+Por tanto, se pide la implementación de los métodos de la clase conjunto genérico y su prueba de funcionamiento correcto en los supuestos planteados anteriormente
+
+
+
+\li conjunto de mutacion creciente por cromosoma/posicion
+\li conjunto de mutacion decreciente por cromosoma/posicion
+\li conjunto de mutacion creciente por id
+\li conjunto de mutacion decreciente por id
+\li conjunto de enfermedad por orden creciente 
+\li conjunto de enfermedad por orden decreciente 
+
+Dicha entrega se debe realizar antes del 18 de Noviembre a las 23:59 horas.
+
+*/
