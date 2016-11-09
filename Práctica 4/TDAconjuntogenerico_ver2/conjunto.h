@@ -41,18 +41,18 @@ public:
 	typedef vector<value_type>::iterator iterator;
 	typedef vector<value_type>::const_iterator const_iterator;
 	
-	
+	//1
 	/** @brief constructor primitivo.
 	 */
 	conjunto( );
 	
-	
+	//2
 	/** @brief constructor de copia
 	 @param[in] d conjunto a copiar
 	 */
 	conjunto (const conjunto<T,CMP> & d);
 	
-	
+	//3
 	/** @brief busca una entrada en el conjunto
 	 @param[in] s: entrada  a buscar.
 	 @return Si existe una entrada en el conjunto con ese valor devuelve el iterador a su posicion, en caso contrario devuelve iterador al final de conjunto
@@ -63,7 +63,7 @@ public:
 	const_iterator  find (const value_type & s) const;
 	
 	
-	
+	//1
 	/** @brief cuenta cuantas entradas coinciden con los parámetros dados.
 	 @param[in] e entrada.
 	 @return Como el conjunto no puede tener entradas repetidas, devuelve 1 (si se encuentra la entrada) o 0 (si no se encuentra).
@@ -73,7 +73,7 @@ public:
 	size_type count (const value_type & e) const;
 	
 	
-	
+	//2
 	/** @brief Inserta una entrada en el conjunto
 	 @param val entrada a insertar
 	 @return un par donde el segundo campo vale true si la entrada se ha podido insertar con éxito, esto es, no existe una mutación con igual valor en el conjunto. False en caso contrario.
@@ -83,7 +83,7 @@ public:
 	pair<iterator,bool> insert (const value_type& val);
 	pair<iterator,bool> insert (value_type& val);
 	
-	
+	//3
 	/** @brief Borra una entrada en el conjunto .
 	 Busca la entrada y si la encuentra la borra.
 	 
@@ -95,56 +95,61 @@ public:
 	iterator  erase (const iterator position);
 	size_type erase (const value_type& val);
 	
-	
+	//1
 	/** @brief Borra todas las entradas del conjunto, dejandolo vacio.
 	 @post El conjunto se modifica, quedando vacio.
 	 */
 	void clear();
 	
+	//2
 	/** @brief numero de entradas en el conjunto
 	 @post  No se modifica el conjunto.
 	 @return numero de entradas en el conjunto
 	 */
 	size_type size() const ;
 	
-	
+	//3
 	/** @brief Chequea si el conjunto esta vacio (size()==0)
 	 @post  No se modifica el conjunto.
 	 */
 	bool empty() const;
 	
-	
+	//1
 	/** @brief operador de asignación
 	 @param[in] org conjunto a copiar.
 	 @return Crea y devuelve un conjunto duplicado exacto de org.
 	 */
 	conjunto & operator=( const conjunto & org);
 	
+	//2
 	/** @brief begin del conjunto
 	 @return Devuelve un iterador al primer elemento del conjunto. Si no existe devuelve end
 	 @post no modifica el conjunto.
 	 */
 	conjunto::iterator begin ();
 	
+	//3
 	/** @brief end del conjunto
 	 @return Devuelve un iterador al final del conjunto (posicion siguiente al ultimo).
 	 @post no modifica el conjunto.
 	 */
 	conjunto::iterator end ();
 	
+	//1
 	/** @brief begin del conjunto
 	 @return Devuelve un iterador constante al primer elemento del conjunto. Si no existe devuelve cend
 	 @post no modifica el conjunto.
 	 */
 	conjunto::const_iterator cbegin () const;
 	
+	//2
 	/** @brief end del conjunto
 	 @return Devuelve un iterador constante al final del conjunto (posicion siguiente al ultimo.
 	 @post no modifica el conjunto.
 	 */
 	conjunto::const_iterator cend () const;
 	
-	
+	//3
 	/** @brief busca primer elemento que no está por debajo ('antes', '<') de los parámetros dados.
 	 @param[in] val entrada.
 	 @return Devuelve un iterador al primer elemento que cumple que "elemento<e" es falso, esto es, el primer elemento que  es mayor o igual que val
@@ -167,6 +172,8 @@ public:
 	
 private:
 	vector<value_type> vm; // vector que almacena los elementos del conjunto
+	
+	//1
 	CMP comp; // criterio para guiar la ordenacion
 	
 	
@@ -188,6 +195,7 @@ private:
 	*/
 template <typename T, typename CMP>
 
+//2
 ostream &  operator << ( ostream & sal, const conjunto<T,CMP> & C);
 
 
