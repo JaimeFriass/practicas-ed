@@ -187,6 +187,7 @@ private:
  Implementar tambien esta funcion
 	*/
 template <typename T, typename CMP>
+
 ostream &  operator << ( ostream & sal, const conjunto<T,CMP> & C);
 
 
