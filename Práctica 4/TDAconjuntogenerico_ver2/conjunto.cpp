@@ -4,6 +4,9 @@
 #include "conjunto.h"
 
 using namespace std;
+conjunto::conjunto( ){
+	vm.clear();	
+}
 
 conjunto::conjunto<T,CMP>(){
 	vm.clear();
@@ -36,6 +39,22 @@ const_iterator  find (const value_type & s) const{
 
 	return it;
 }
+
+size_type count (const value_type & e) const{
+	bool encontrado=false;
+	
+	if( size() > 0 ){ //si hay elementos;
+		for(unsigned int i = 0 ; i < size() && !encontrado ; i++){
+			if( e == vm[i] )
+				encontrado=true;
+		}
+	}
+	if(encontrado)
+		return 1;
+	else
+		return 0;
+}
+
 conjunto::size_type conjunto::count (const string & chr, const unsigned int & pos) const{
 	conjunto::size_type tamanio = 0;
 
