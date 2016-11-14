@@ -108,10 +108,10 @@ size_type conjunto::erase (const value_type& val){
 	*/
 	return 1;
 }
-
 void conjunto::clear(){
 	vm.clear();
 }
+
 
 conjunto::size_type conjunto::size() const {
 	return vm.size();
@@ -208,8 +208,12 @@ conjunto::iterator conjunto::upper_bound (const string & chr, const unsigned int
 
 
 
-conjunto::iterator conjunto::upper_bound (const conjunto::value_type & e){
-	return upper_bound(e.getChr(), e.getPos());
+conjunto::iterator upper_bound (const value_type& val){
+	return upper_bound( val.getChr(), val.getPos() );
+}
+
+const_iterator upper_bound (const value_type& val) const{
+	return uppe_bound( val.getChr(), val.getPos() );
 }
 
 bool conjunto::cheq_rep() const{
