@@ -275,3 +275,18 @@ class comp{
 
 };
 
+/*functor :conjunto de mutacion creciente por cromosoma/posicion*/
+class comp{
+	
+  public:
+	
+    bool operator( conjunto::value_type &a , conjunto::value_type &b ){
+	/* también podría ser : return !(a < b)*/
+ 	if( ( a.getChr() < b.getChr() ) && ( a.getPos() < b.getPos() ) ) 
+		return false;
+	else
+		return true;
+	    
+    }
+
+};
