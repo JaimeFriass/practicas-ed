@@ -259,18 +259,17 @@ ostream &  operator << ( ostream & sal, const conjunto<T,CMP> & C){
 
 	return sal;
 }
-/*functor :conjunto de mutacion creciente por cromosoma/posicion*/
+/*functor :conjunto de mutacion decreciente por cromosoma/posicion*/
 class comp{
 	
   public:
 	
     bool operator( conjunto::value_type &a , conjunto::value_type &b ){
-	    /*a es mayor que ve si la comparas con su posicion y char.Creo que si pones a < b debería hacer lo mismo
-	    (estaba implementado como opeardor < en mutacion.cpp */
+	/* también podría ser : return !(a < b)*/
  	if( ( a.getChr() < b.getChr() ) && ( a.getPos() < b.getPos() ) ) 
-		return false;
-	else
 		return true;
+	else
+		return false;
 	    
     }
 
