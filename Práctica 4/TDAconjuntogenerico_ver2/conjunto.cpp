@@ -39,7 +39,7 @@ conjunto::const_iterator  conjunto::find (const value_type & s) const{
 
 conjunto::size_type conjunto::count (const conjunto::value_type & e) const{
 	bool encontrado=false;
-	
+
 	if( size() > 0 ){ //si hay elementos;
 		for(unsigned int i = 0 ; i < size() && !encontrado ; i++){
 			if( e == vm[i] )
@@ -173,7 +173,7 @@ conjunto::const_iterator conjunto::cend () const{
 }
 
 conjunto::iterator conjunto::lower_bound (const conjunto::value_type& val){
-	conjunto::iterator lower = begin();
+	conjunto::iterator lower = vm.begin();
 	bool encontrado = false;
 
 	for(int i = 0; i < vm.size() && !encontrado; i++){
@@ -181,7 +181,9 @@ conjunto::iterator conjunto::lower_bound (const conjunto::value_type& val){
 			lower++;
 		}
 		else{
-			encontrado = true;
+			if(vm[i] >= val){
+				encontrado = true;
+			}
 		}
 	}
 
@@ -201,42 +203,34 @@ conjunto::const_iterator conjunto::lower_bound (const conjunto::value_type& val)
 	return it;
 }
 
-conjunto::iterator conjunto::upper_bound (const string & chr, const unsigned int & pos){
-	conjunto::iterator upper = begin();
+conjunto::iterator conjunto::upper_bound (const value_type& val){
+	conjunto::iterator upper = vm.begin();
+	bool encontrado = false;
 
-	while ( (*upper).getChr() != chr && ((*upper).getPos() != pos && upper != end() ))
-		upper++;
+	for(int i = 0; i < vm.size() && !encontrado; i++){
+		if(vm[i] < val){
+			upper++;
+		}
+		else{
+			encontrado = true;
+		}
+	}
 
+	if(encontrado){
+		upper--;
+	}
+	else{
+		upper = end();
+	}
 
 	return upper;
 }
 
-
-
-conjunto::iterator conjunto::upper_bound (const value_type& val){
-	return upper_bound( val.getChr(), val.getPos() );
-}
-
 conjunto::const_iterator conjunto::upper_bound (const value_type& val) const{
-	return uppe_bound( val.getChr(), val.getPos() );
+	conjunto::const_iterator it = upper_bound(val);
+
+	return it;
 }
-
-/*functor :conjunto de mutacion creciente por cromosoma/posicion*/
-class comp{
-	
-  public:
-	
-    bool operator()( conjunto::value_type &a , conjunto::value_type &b ){
-	    /*a es mayor que ve si la comparas con su posicion y char.Creo que si pones a < b debería hacer lo mismo
-	    (estaba implementado como opeardor < en mutacion.cpp */
- 	if( ( a.getChr() < b.getChr() ) && ( a.getPos() < b.getPos() ) ) 
-		return false;
-	else
-		return true;
-	    
-    }
-
-};
 
 bool conjunto::cheq_rep() const{
 	bool invariante = true;
@@ -281,34 +275,49 @@ ostream &  operator << ( ostream & sal, const conjunto<T,CMP> & C){
 
 	return sal;
 }
-/*functor :conjunto de mutacion decreciente por cromosoma/posicion*/
-class comp{
-	
-  public:
-	
-    bool operator()( conjunto::value_type &a , conjunto::value_type &b ){
-	/* también podría ser : return !(a < b)*/
- 	if( ( a.getChr() < b.getChr() ) && ( a.getPos() < b.getPos() ) ) 
-		return true;
-	else
-		return false;
-	    
-    }
 
+/*functor :conjunto de mutacion decreciente por cromosoma/posicion*/
+class DecrecienteChrPos{
+public:
+    bool operator()( const mutacion &a, const mutacion &b){
+	/* también podría ser : return !(a < b)*/
+ 		return ( ( a.getChr() < b.getChr() ) && ( a.getPos() < b.getPos() ) );
+	}
 };
 
 /*functor :conjunto de mutacion creciente por cromosoma/posicion*/
-class comp{
-	
-  public:
-	
-    bool operator()( conjunto::value_type &a , conjunto::value_type &b ){
+class CrecienteChrPos{
+public:
+    bool operator()(const mutacion &a, const mutacion &b){
 	/* también podría ser : return !(a < b)*/
- 	if( ( a.getChr() < b.getChr() ) && ( a.getPos() < b.getPos() ) ) 
-		return false;
-	else
-		return true;
-	    
-    }
+ 		return !( ( a.getChr() < b.getChr() ) && ( a.getPos() < b.getPos() ) );
+	}
+};
 
+class CrecienteID{
+public:
+	bool operator()(const mutacion &a, const mutacion &b){
+		return (a.getID() < b.getID()); // devuelve verdadero si el ID de a precede al ID de b
+	}
+};
+
+class DecrecienteID{
+public:
+	bool operator()(const mutacion &a, const mutacion &b){
+		return !(a.getID() < b.getID()); // devuelve verdadero si el ID de a precede al ID de b
+	}
+};
+
+class CrecienteEnf{
+public:
+	bool operator()(const enfermedad &a, const enfermedad &b){
+		return (a < b);
+	}
+};
+
+class DecrecienteEnf{
+public:
+	bool operator()(const enfermedad &a, const enfermedad &b){
+		return !(a < b);
+	}
 };
