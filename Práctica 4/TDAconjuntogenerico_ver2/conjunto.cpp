@@ -286,7 +286,7 @@ class comp{
 	
   public:
 	
-    bool operator( conjunto::value_type &a , conjunto::value_type &b ){
+    bool operator()( conjunto::value_type &a , conjunto::value_type &b ){
 	/* también podría ser : return !(a < b)*/
  	if( ( a.getChr() < b.getChr() ) && ( a.getPos() < b.getPos() ) ) 
 		return true;
@@ -302,7 +302,7 @@ class comp{
 	
   public:
 	
-    bool operator( conjunto::value_type &a , conjunto::value_type &b ){
+    bool operator()( conjunto::value_type &a , conjunto::value_type &b ){
 	/* también podría ser : return !(a < b)*/
  	if( ( a.getChr() < b.getChr() ) && ( a.getPos() < b.getPos() ) ) 
 		return false;
