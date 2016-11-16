@@ -5,6 +5,7 @@
 #include <string>
 #include <chrono>
 #include <algorithm>
+#include "mutacion.h"
 
 
 using namespace std;
@@ -114,9 +115,12 @@ int main(int argc, char *argv[]){
 	string query_str;
 	high_resolution_clock::time_point start,end;
 	duration<double> tiempo_transcurrido;
+    mutacion prueba;
 
 	//Cargar las mutaciones en vectorSNPs
 	load(conjuntoMutaciones, "clinvar_20160831.vcf");
+
+    prueba = conjuntoMutaciones.getVM().at(50000);  //Se guarda esta mutación para usarla más tarde en el método find y el método erase
 
 	//Imprimir número de elementos almacenados en conjuntoMutaciones
 	cout << "Lectura del fichero finalizada. Mutaciones cargadas: " << conjuntoMutaciones.size() << endl;
@@ -124,7 +128,7 @@ int main(int argc, char *argv[]){
 
 
 	//Imprimir cuántas mutaciones están asociadas al cromosoma 1:
-	cout << "Mutaciones asociadas a Chr 1: " << conjuntoMutaciones.lower_bound("2", 1) - conjuntoMutaciones.begin() << endl;
+	cout << "Mutaciones asociadas a Chr 1: " << conjuntoMutaciones.lower_bound(conjuntoMutaciones.getVM().at(1)) - conjuntoMutaciones.begin() << endl;
 
 
 	/**@todo ¿Existe la mutación con ID "rs147165522"? Imprimir la mutación y las enfermedades asociadas */
@@ -138,7 +142,7 @@ int main(int argc, char *argv[]){
 	/**@todo ¿Existe la mutación en chr/pos "14"/67769578? Imprimir la mutación y las enfermedades asociadas */
 	start =  high_resolution_clock::now();;
 
-	cout<< "la mutación y las enfermedades asociadas con char:14y pos: 67769578" << conjuntoMutaciones.find("14",67769578).first << conjuntoMutaciones.find("14",67769578).second << endl;
+	cout<< "la mutación y las enfermedades asociadas con char:14y pos: 67769578" << conjuntoMutaciones.find(prueba) - conjuntoMutaciones.begin() << endl;
 
 	end =  high_resolution_clock::now();;
 
@@ -154,7 +158,7 @@ int main(int argc, char *argv[]){
 
 	start =  high_resolution_clock::now();;
 
-	conjuntoMutaciones.erase("rs147165522");
+	conjuntoMutaciones.erase(prueba);
 
 	end =  high_resolution_clock::now();;
 
