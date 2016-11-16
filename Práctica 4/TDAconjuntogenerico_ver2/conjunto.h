@@ -39,8 +39,8 @@ class conjunto{
 public:
 	typedef T value_type;
 	typedef unsigned int size_type;
-	typedef vector<value_type>::iterator iterator;
-	typedef vector<value_type>::const_iterator const_iterator;
+	typedef typename vector<value_type>::iterator iterator;
+	typedef typename vector<value_type>::const_iterator const_iterator;
 
 	//Nazaret
 	/** @brief constructor primitivo.
@@ -120,6 +120,7 @@ public:
 	 @return Crea y devuelve un conjunto duplicado exacto de org.
 	 */
 	conjunto & operator=( const conjunto & org);
+	vector<value_type> & operator = (vector<value_type> org);
 
 	//Jaime
 	/** @brief begin del conjunto
@@ -168,6 +169,14 @@ public:
 	 */
 	iterator upper_bound (const value_type& val);
 	const_iterator upper_bound (const value_type& val) const;
+	
+	/**
+	 @brief Devuelve vm
+	 @returns vm vector de mutaciones
+	 
+	 Devuelve el vector de todas las mutaciones.
+	 */
+	const vector<mutacion>  & getVM();
 
 
 
