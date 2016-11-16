@@ -4,45 +4,54 @@
 #include "conjunto.h"
 
 using namespace std;
-conjunto::conjunto( ){
-	vm.clear();	
-}
 
-conjunto::conjunto<T,CMP>(){
+template <typename T, typename CMP>
+
+conjunto<T,CMP>::conjunto(){
 	vm.clear();
 }
 
-conjunto::conjunto(conjunto & d){
+template <typename T, typename CMP>
+
+conjunto<T,CMP>::conjunto(const conjunto<T,CMP> & d){
 	this -> vm = (d.getVM());
 }
 
-const vector<mutacion>  & conjunto::getVM(){
+template <typename T, typename CMP>
+
+const vector<mutacion>  & conjunto<T,CMP>::getVM(){
 	return vm;
 }
 
-conjunto::iterator  conjunto::find (const conjunto::value_type & s){
+template <typename T, typename CMP>
+
+typename conjunto<T,CMP>::iterator  conjunto<T,CMP>::find (const conjunto<T,CMP>::value_type & s){
 	bool encontrado = false;
-	conjunto::iterator it;
+	conjunto<T,CMP>::iterator it;
 
 	for(int i = 0; i < vm.size() && !encontrado; i++){
 		if(s == vm[i]){
 			encontrado = true;
-			iterator = vm.begin() + i;
+			it = vm.begin() + i;
 		}
 	}
 
 	return it;
 }
 
-const_iterator  find (const value_type & s) const{
-	conjunto::const_iterator it = find(s);
+template <typename T, typename CMP>
+
+typename conjunto<T,CMP>::const_iterator  conjunto<T,CMP>::find (const value_type & s) const{
+	conjunto<T,CMP>::const_iterator it = find(s);
 
 	return it;
 }
 
-size_type count (const value_type & e) const{
+template <typename T, typename CMP>
+
+typename conjunto<T,CMP>::size_type conjunto<T,CMP>::count (const conjunto<T,CMP>::value_type & e) const{
 	bool encontrado=false;
-	
+
 	if( size() > 0 ){ //si hay elementos;
 		for(unsigned int i = 0 ; i < size() && !encontrado ; i++){
 			if( e == vm[i] )
@@ -55,51 +64,40 @@ size_type count (const value_type & e) const{
 		return 0;
 }
 
-conjunto::size_type conjunto::count (const string & chr, const unsigned int & pos) const{
-	conjunto::size_type tamanio = 0;
+template <typename T, typename CMP>
 
-	for (unsigned int i = 0; i < vm.size() && tamanio == 0; i++){
-		if (vm[i].getChr() == chr || vm[i].getPos() == pos){
-			tamanio = 1;
-		}
+pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (const conjunto<T,CMP>::value_type& val) {
+	pair<conjunto<T,CMP>::iterator, bool> par;
+	par.first = find(val);
+
+	if(par.first != vm.end()){
+		par.second = false;
+	}
+	else{
+		par.second = true;
+		vm.push_back(val);
 	}
 
-	return tamanio;
+	return par;
 }
 
-conjunto::size_type conjunto::count (const string & ID) const{
-	conjunto::size_type tamanio = 0;
+template <typename T, typename CMP>
 
-	for(unsigned int i = 0; i < vm.size() && tamanio == 0; i++){
-		if(vm[i].getID() == ID)
-			tamanio = 1;
-	}
-
-	return tamanio;
+pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (conjunto<T,CMP>::value_type& val) {
+	return insert(val);
 }
 
-conjunto::size_type conjunto::count (const conjunto::value_type & e) const{
-	return count(e.getChr(), e.getPos());
-}
+template <typename T, typename CMP>
 
-bool conjunto::insert( const conjunto::value_type & e){
-	pair<conjunto::value_type, bool> par(find(e));
-	bool insertado = par.second;
-
-	if(!insertado){
-		vm.push_back(e);
-	}
-
-	return insertado;
-}
-
-iterator  conjunto::erase (const conjunto::iterator position){
+typename conjunto<T,CMP>::iterator conjunto<T,CMP>::erase (const conjunto<T,CMP>::iterator position){
 	vm.erase(position);
 
 	return position;
 }
 
-size_type conjunto::erase (const value_type& val){
+template <typename T, typename CMP>
+
+typename conjunto<T,CMP>::size_type conjunto<T,CMP>::erase (const value_type& val){
 	vm.erase(vm.begin() + val);
 
 	/*
@@ -108,20 +106,28 @@ size_type conjunto::erase (const value_type& val){
 	*/
 	return 1;
 }
-void conjunto::clear(){
+
+template <typename T, typename CMP>
+
+void conjunto<T,CMP>::clear(){
 	vm.clear();
 }
 
+template <typename T, typename CMP>
 
-conjunto::size_type conjunto::size() const {
+typename conjunto<T,CMP>::size_type conjunto<T,CMP>::size() const {
 	return vm.size();
 }
 
-bool conjunto::empty() const{
+template <typename T, typename CMP>
+
+bool conjunto<T,CMP>::empty() const{
 	return vm.empty();
 }
 
-conjunto & conjunto::operator=(conjunto & org){
+template <typename T, typename CMP>
+
+conjunto<T, CMP> & conjunto<T, CMP>::operator=( const conjunto<T, CMP> & org){
 	if (this != &org){
 		vm.clear();
 
@@ -131,44 +137,56 @@ conjunto & conjunto::operator=(conjunto & org){
 	return *this;
 }
 
-vector<conjunto::value_type> & conjunto::operator = (vector<conjunto::value_type> aux){
-	if((this -> vm) != aux){
+template <typename T, typename CMP>
+
+vector<typename conjunto<T,CMP>::value_type> & conjunto<T,CMP>::operator = (vector<conjunto<T,CMP>::value_type> org){
+	if((this -> vm) != org){
 		vm.clear();
 
-		for(unsigned int i = 0;i < aux.size(); i++)
-			vm.push_back(aux[i]);
+		for(unsigned int i = 0;i < org.size(); i++)
+			vm.push_back(org[i]);
 	}
 
 	return this -> vm;
 }
 
-conjunto::iterator conjunto::begin(){
-	conjunto::iterator inicio = vm.begin();
+template <typename T, typename CMP>
+
+typename conjunto<T,CMP>::iterator conjunto<T,CMP>::begin(){
+	conjunto<T,CMP>::iterator inicio = vm.begin();
 
 	return inicio;
 }
 
+template <typename T, typename CMP>
 
-conjunto::iterator conjunto::end (){
-	conjunto::iterator ultimo = vm.end();
+
+typename conjunto<T,CMP>::iterator conjunto<T,CMP>::end (){
+	conjunto<T,CMP>::iterator ultimo = vm.end();
 
 	return ultimo;
 }
 
-conjunto::const_iterator conjunto::cbegin () const{
-	conjunto::const_iterator const_inicio = vm.cbegin();
+template <typename T, typename CMP>
+
+typename conjunto<T,CMP>::const_iterator conjunto<T,CMP>::cbegin () const{
+	conjunto<T,CMP>::const_iterator const_inicio = vm.cbegin();
 
 	return const_inicio;
 }
 
-conjunto::const_iterator conjunto::cend () const{
-	conjunto::const_iterator const_final = vm.cend();
+template <typename T, typename CMP>
+
+typename conjunto<T,CMP>::const_iterator conjunto<T,CMP>::cend () const{
+	conjunto<T,CMP>::const_iterator const_final = vm.cend();
 
 	return const_final;
 }
 
-conjunto::iterator conjunto::lower_bound (const conjunto::value_type& val){
-	conjunto::iterator lower = begin();
+template <typename T, typename CMP>
+
+typename conjunto<T,CMP>::iterator conjunto<T,CMP>::lower_bound (const conjunto<T,CMP>::value_type& val){
+	conjunto<T,CMP>::iterator lower = vm.begin();
 	bool encontrado = false;
 
 	for(int i = 0; i < vm.size() && !encontrado; i++){
@@ -176,7 +194,9 @@ conjunto::iterator conjunto::lower_bound (const conjunto::value_type& val){
 			lower++;
 		}
 		else{
-			encontrado = true;
+			if(vm[i] >= val){
+				encontrado = true;
+			}
 		}
 	}
 
@@ -190,33 +210,50 @@ conjunto::iterator conjunto::lower_bound (const conjunto::value_type& val){
 	return lower;
 }
 
-conjunto::const_iterator conjunto::lower_bound (const conjunto::value_type& val) const{
-	conjunto::const_iterator it = lower_bound(val);
+template <typename T, typename CMP>
+
+typename conjunto<T,CMP>::const_iterator conjunto<T,CMP>::lower_bound (const conjunto<T,CMP>::value_type& val) const{
+	conjunto<T,CMP>::const_iterator it = lower_bound(val);
 
 	return it;
 }
 
-conjunto::iterator conjunto::upper_bound (const string & chr, const unsigned int & pos){
-	conjunto::iterator upper = begin();
+template <typename T, typename CMP>
 
-	while ( (*upper).getChr() != chr && ((*upper).getPos() != pos && upper != end() ))
-		upper++;
+typename conjunto<T,CMP>::iterator conjunto<T,CMP>::upper_bound (const value_type& val){
+	conjunto<T,CMP>::iterator upper = vm.begin();
+	bool encontrado = false;
 
+	for(int i = 0; i < vm.size() && !encontrado; i++){
+		if(vm[i] < val){
+			upper++;
+		}
+		else{
+			encontrado = true;
+		}
+	}
+
+	if(encontrado){
+		upper--;
+	}
+	else{
+		upper = end();
+	}
 
 	return upper;
 }
 
+template <typename T, typename CMP>
 
+typename conjunto<T,CMP>::const_iterator conjunto<T,CMP>::upper_bound (const value_type& val) const{
+	conjunto<T,CMP>::const_iterator it = upper_bound(val);
 
-conjunto::iterator upper_bound (const value_type& val){
-	return upper_bound( val.getChr(), val.getPos() );
+	return it;
 }
 
-const_iterator upper_bound (const value_type& val) const{
-	return uppe_bound( val.getChr(), val.getPos() );
-}
+template <typename T, typename CMP>
 
-bool conjunto::cheq_rep() const{
+bool conjunto<T,CMP>::cheq_rep() const{
 	bool invariante = true;
 
 	string chr1, chr2;
@@ -251,6 +288,8 @@ bool conjunto::cheq_rep() const{
 
 	return invariante;
 }
+
+template <typename T, typename CMP>
 
 ostream &  operator << ( ostream & sal, const conjunto<T,CMP> & C){
 	for(int i = 0; i < C.size(); i++){
