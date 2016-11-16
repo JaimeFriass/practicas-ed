@@ -281,3 +281,34 @@ ostream &  operator << ( ostream & sal, const conjunto<T,CMP> & C){
 
 	return sal;
 }
+/*functor :conjunto de mutacion decreciente por cromosoma/posicion*/
+class comp{
+	
+  public:
+	
+    bool operator( conjunto::value_type &a , conjunto::value_type &b ){
+	/* también podría ser : return !(a < b)*/
+ 	if( ( a.getChr() < b.getChr() ) && ( a.getPos() < b.getPos() ) ) 
+		return true;
+	else
+		return false;
+	    
+    }
+
+};
+
+/*functor :conjunto de mutacion creciente por cromosoma/posicion*/
+class comp{
+	
+  public:
+	
+    bool operator( conjunto::value_type &a , conjunto::value_type &b ){
+	/* también podría ser : return !(a < b)*/
+ 	if( ( a.getChr() < b.getChr() ) && ( a.getPos() < b.getPos() ) ) 
+		return false;
+	else
+		return true;
+	    
+    }
+
+};
