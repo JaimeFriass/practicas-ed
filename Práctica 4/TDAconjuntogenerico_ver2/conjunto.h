@@ -179,8 +179,6 @@ public:
 	 */
 	const vector<mutacion>  & getVM();
 
-
-
 private:
 	vector<value_type> vm; // vector que almacena los elementos del conjunto
 

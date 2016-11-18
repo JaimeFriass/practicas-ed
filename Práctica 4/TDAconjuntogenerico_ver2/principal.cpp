@@ -115,12 +115,16 @@ int main(int argc, char *argv[]){
 	string query_str;
 	high_resolution_clock::time_point start,end;
 	duration<double> tiempo_transcurrido;
-    mutacion prueba;
 
 	//Cargar las mutaciones en vectorSNPs
 	load(conjuntoMutaciones, "clinvar_20160831.vcf");
-
-    prueba = conjuntoMutaciones.getVM().at(50000);  //Se guarda esta mutación para usarla más tarde en el método find y el método erase
+	
+	vector<mutacion> prueba(conjuntoMutaciones.size());
+    prueba = conjuntoMutaciones.getVM();  //Se guarda para usarlo en el método fin y erase
+	
+	mutacion find_erase;
+	
+	find_erase = prueba[2];
 
 	//Imprimir número de elementos almacenados en conjuntoMutaciones
 	cout << "Lectura del fichero finalizada. Mutaciones cargadas: " << conjuntoMutaciones.size() << endl;
@@ -142,7 +146,7 @@ int main(int argc, char *argv[]){
 	/**@todo ¿Existe la mutación en chr/pos "14"/67769578? Imprimir la mutación y las enfermedades asociadas */
 	start =  high_resolution_clock::now();;
 
-	cout<< "la mutación y las enfermedades asociadas con char:14y pos: 67769578" << conjuntoMutaciones.find(prueba) - conjuntoMutaciones.begin() << endl;
+	cout<< "la mutación y las enfermedades asociadas con char:14y pos: 67769578" << conjuntoMutaciones.find(find_erase) - conjuntoMutaciones.begin() << endl;
 
 	end =  high_resolution_clock::now();;
 
@@ -158,7 +162,7 @@ int main(int argc, char *argv[]){
 
 	start =  high_resolution_clock::now();;
 
-	conjuntoMutaciones.erase(prueba);
+	conjuntoMutaciones.erase(find_erase);
 
 	end =  high_resolution_clock::now();;
 
