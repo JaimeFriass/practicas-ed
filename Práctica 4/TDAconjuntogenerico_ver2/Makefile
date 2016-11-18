@@ -2,12 +2,12 @@ CPPFLAGS = g++ -std=c++11 -c
 
 #Creación de ejecutables
 
-principal : principal.o conjunto.o enfermedad.o mutacion.o 
+principal : principal.o enfermedad.o mutacion.o 
 	g++ -o principal principal.o conjunto.o enfermedad.o mutacion.o  
 
 #Creación de archivos objeto
 
-principal.o: principal.cpp 
+principal.o: principal.cpp conjunto.h
 	$(CPPFLAGS) principal.cpp -o principal.o -I.
 
 enfermedad.o: enfermedad.cpp
@@ -15,9 +15,6 @@ enfermedad.o: enfermedad.cpp
 
 mutacion.o: mutacion.cpp
 	$(CPPFLAGS) mutacion.cpp -o mutacion.o -I.
-
-conjunto.o: conjunto.cpp
-	$(CPPFLAGS) conjunto.cpp -o conjunto.o -I.
 
 #Limpieza de archivos objeto, ejecutables y bibliotecas
 

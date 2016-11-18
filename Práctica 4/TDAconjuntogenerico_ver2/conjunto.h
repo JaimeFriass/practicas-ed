@@ -13,6 +13,7 @@
 #include "mutacion.h"
 #include "enfermedad.h"
 
+
 using namespace std;
 
 
@@ -158,7 +159,7 @@ public:
 	 Si no existe devuelve end
 	 @post no modifica el conjunto.
 	 */
-	iterator lower_bound (const value_type& val);
+	iterator lower_bound (value_type& val);
 	const_iterator lower_bound (const value_type& val) const;
 
 	//Nazaret
@@ -207,6 +208,6 @@ template <typename T, typename CMP>
 */
 ostream &  operator << ( ostream & sal, const conjunto<T,CMP> & C);
 
-
+#include "conjunto.hxx"
 
 #endif
