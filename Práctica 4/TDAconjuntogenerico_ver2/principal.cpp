@@ -85,14 +85,15 @@ bool load(conjunto<T, CMP> &  cm, const string & s) {
 
 		//leo la tabla de mutaciones, una línea cada vez
 		while ( !fe.eof() ){
-		 //cout << "leo:: "<< cadena << endl;
-		 // Invoco el constructor de mutación que recibe una cadena completa, la parsea y crea la mutación.
+		 	cout << "Leo:: "<< cadena << endl;
+		 	// Invoco el constructor de mutación que recibe una cadena completa, la parsea y crea la mutación.
 			mutacion mut = mutacion(cadena);
-		 // Insertar mutación en el conjunto
+			// Insertar mutación en el conjunto
 
 			start =  high_resolution_clock::now();;
-
+			cerr << "Inserto la mutacion en el conjunto...";
 			cm.insert(mut);
+			cerr << " Done."<<endl;
 
 			end =  high_resolution_clock::now();;
 
@@ -121,9 +122,9 @@ int main(int argc, char *argv[]){
 	
 	vector<mutacion> prueba(conjuntoMutaciones.size());
     prueba = conjuntoMutaciones.getVM();  //Se guarda para usarlo en el método fin y erase
-	
+
 	mutacion find_erase;
-	
+
 	find_erase = prueba[2];
 
 	//Imprimir número de elementos almacenados en conjuntoMutaciones

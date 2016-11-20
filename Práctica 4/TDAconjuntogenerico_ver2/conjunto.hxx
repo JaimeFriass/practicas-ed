@@ -26,13 +26,14 @@ template <typename T, typename CMP>
 
 typename conjunto<T,CMP>::iterator  conjunto<T,CMP>::find (const conjunto<T,CMP>::value_type & s){
 	bool encontrado = false;
-	conjunto<T,CMP>::iterator it;
+	conjunto<T,CMP>::iterator it=begin();
 
 	for(int i = 0; i < vm.size() && !encontrado; i++){
-		if(s == vm[i]){
+		if(s == vm[i])
 			encontrado = true;
-			it = vm.begin() + i;
-		}
+		else
+			it ++;
+
 	}
 
 	return it;
@@ -63,28 +64,60 @@ typename conjunto<T,CMP>::size_type conjunto<T,CMP>::count (const conjunto<T,CMP
 		return 0;
 }
 
-template <typename T, typename CMP>
-
-pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (const conjunto<T,CMP>::value_type& val) {
-	pair<conjunto<T,CMP>::iterator, bool> par;
-	par.first = find(val);
-
-	if(par.first != vm.end()){
-		par.second = false;
-	}
-	else{
-		par.second = true;
-		vm.push_back(val);
-	}
-
-	return par;
-}
 
 template <typename T, typename CMP>
-
 pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (conjunto<T,CMP>::value_type& val) {
+	pair<conjunto<T,CMP>::iterator, bool> par;
+	bool fin=false;
+	conjunto<T,CMP>::iterator it;
+
+	cerr << endl<< "Dentro de conjunto::insert"<<endl; 
+	cerr << "\tItero sobre el conjunto para encontrar su posición"<<endl; 
+
+//CC: ojo con el bucle usando iteradores. Conoceis la implementación del operator< en iteradores?
+//No utilicéis < para iteradores, sino == y != para controlar bucle, como en los ejemplos del guión y las transparencias. 	
+
+	for(it =vm.begin() ;it != vm.end() && !fin; ){
+//	for(it =vm.begin() ;it < vm.end() -1 && !fin; ){
+		cerr << "\tElemento : "<<(*it).getID()<<endl; 
+		if(comp(*it,val)){
+			it++;
+			cerr << "\tEs menor, avanzo it"<<endl; 
+		}
+		else
+			if(!comp(*it,val) && !comp(val,*it)){	//son iguales
+				par.first=vm.end();
+				par.second=false;
+				fin=true;
+				cerr << "\tEs igual. Termino sin insertar."<<endl;
+			}
+			else{
+				*it=val;
+				par.second=true;
+				fin=true;
+				cerr << "\tEs mayor. LO REEMPLAZO POR val"<<endl; 
+
+			}
+	}
+
+	if(!fin) {//si no se insertó
+		cerr<< "\tHemos terminado de recorrer los elementos y ninguno era mayor. Lo inserto al final"<<endl;
+		//CC: OJO, así no se inserta, no me deja compilar: 
+		//vm[vm.end()]=val;
+		//Así si: 
+		vm.push_back(val);
+		//o con insert , mirad manual. http://www.cplusplus.com/reference/vector/vector/insert/
+		par.first=vm.end();
+		par.second=true;
+	}
+	return par;
+
+}
+template <typename T, typename CMP>
+pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (const conjunto<T,CMP>::value_type& val) {
 	return insert(val);
 }
+
 
 template <typename T, typename CMP>
 
@@ -98,7 +131,7 @@ template <typename T, typename CMP>
 
 typename conjunto<T,CMP>::size_type conjunto<T,CMP>::erase (const value_type& val){
 	conjunto<T, CMP>::iterator it = find(val);
-	
+
 	if(it != vm.end()){
 		vm.erase(it);
 	}
