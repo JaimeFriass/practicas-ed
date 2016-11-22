@@ -28,11 +28,11 @@ mutacion::mutacion(const mutacion& m){
 //para crear objeto mutacion a partir de la cadena que contiene una línea completa del fichero de entrada
 mutacion::mutacion(const string & str){
 	bool extras = false;
-	unsigned int k=0;
+	unsigned int k = 0;
 	int j = 0;
 	int i = 0;
 
-	cerr << "Invocado constructor mutacion::mutacion(str)"<<endl;
+	cerr << "Invocado constructor mutacion::mutacion(str)" << endl;
 	// OBTENER CHR
 	(*this).chr = str.substr(0,1);
 	cerr<< "\tchr: "<<(*this).chr<<endl; 
@@ -47,6 +47,7 @@ mutacion::mutacion(const string & str){
 	// OBTENER ID
 	i = str.find("rs");
 	(*this).ID = "";
+	
 	while(str[i] != '\t'){
 		(*this).ID += str[i];
 		i++;
@@ -56,13 +57,16 @@ mutacion::mutacion(const string & str){
 	// OBTENER REF_ALT
 	i++;
 	aux = "";
+	
 	while(str[i] != '\t'){
 		aux += str[i];
 		i++;
 	}
+	
 	(*this).ref_alt.push_back(aux);
 	i++;
 	aux = "";
+	
 	while(str[i] != '\t'){
 		aux += str[i];
 		i++;
@@ -70,11 +74,10 @@ mutacion::mutacion(const string & str){
 	(*this).ref_alt.push_back(aux);
 	
 	cerr << "\tREF_ALT: "; 
-	for (int i=0; i<ref_alt.size(); i++)
+	for (int i = 0; i < ref_alt.size(); i++)
 		cerr << ref_alt.at(i) << " ";
 	cerr << endl; 
 	
-
 	// OBTENER GENES
 	i = str.find("GENEINFO");
 	unsigned long sigPyC = str.substr(i, str.size() - i).find(";");
@@ -88,7 +91,7 @@ mutacion::mutacion(const string & str){
 		}
 	}
 	if(extras)
-		(*this).genes.push_back(aux.substr(j,aux.size() -1));
+		(*this).genes.push_back(aux.substr(j,aux.size() - 1));
 	else
 		(*this).genes.push_back(aux);
 
@@ -100,27 +103,30 @@ mutacion::mutacion(const string & str){
 
 	// OBTENER COMMON
 	i = str.find("COMMON");
-	if(str[i +7] == '1')
+	if(str[i + 7] == '1')
 		(*this).common = true;
 	else
 		(*this).common = false;
 
-	cerr << "\tCOMMON: "<<common<<endl; 
+	cerr << "\tCOMMON: " << common << endl;
 	
 	// OBTENER CAF
 	j = 0;
 	extras = false;
 	i = str.find("CAF");
+	
 	if(i != -1){
 		sigPyC = str.substr(i, str.size() -i).find(";");
 		aux = str.substr(i +4, sigPyC -4);
+	
 		for( k = 0; k < aux.size(); k++){
 			if(aux[k] == ','){
 				(*this).caf.push_back(atof(aux.substr(j, k - j).c_str()));
-				j = k +1;
+				j = k + 1;
 				extras = true;
 			}
 		}
+		
 		if(extras)
 			(*this).caf.push_back(atof(aux.substr(j, aux.size()-j).c_str()));
 		else
@@ -130,6 +136,7 @@ mutacion::mutacion(const string & str){
 		(*this).caf.push_back(0.0);
 	}
 	cerr << "\tCAF: "; 
+	
 	for (int i=0; i<caf.size(); i++)
 		cerr << caf.at(i) << " ";
 	cerr << endl; 
@@ -147,13 +154,13 @@ mutacion::mutacion(const string & str){
 	extras = false;
 
 	if(posName != -1){
-		sigPyC = str.substr(posName, str.size() -posName).find(";");
+		sigPyC = str.substr(posName, str.size() - posName).find(";");
 		string nomEnf = str.substr(posName + 7, sigPyC -7);
 
-		sigPyC = str.substr(posID, str.size() -posID).find(";");
+		sigPyC = str.substr(posID, str.size() - posID).find(";");
 		string iDenf = str.substr(posID +10, sigPyC -10);
 
-		sigPyC = str.substr(posDB, str.size() -posDB).find(";");
+		sigPyC = str.substr(posDB, str.size() - posDB).find(";");
 		string dBenf = str.substr(posDB +8, sigPyC - 8);
 		vector<string> auxNombre, auxID, auxDB;
 
@@ -161,7 +168,7 @@ mutacion::mutacion(const string & str){
 		for(k = 0; k < nomEnf.size(); k++){ // pilla nombres
 			if(nomEnf[k] == '|'){
 				auxNombre.push_back(nomEnf.substr(j, k -j));
-				j = k +1;
+				j = k + 1;
 				extras = true;
 			}
 		}
@@ -169,12 +176,13 @@ mutacion::mutacion(const string & str){
 			auxNombre.push_back(nomEnf.substr(j, nomEnf.size()-j));
 		else
 			auxNombre.push_back(nomEnf);
+		
 		j = 0;
 		extras = false;
 
 		for(k = 0; k < iDenf.size(); k++){	// pilla ID
 			if(iDenf[k] == '|'){
-				auxID.push_back(iDenf.substr(j, k -j));
+				auxID.push_back(iDenf.substr(j, k - j));
 				j = k +1;
 				extras = true;
 			}
@@ -183,20 +191,23 @@ mutacion::mutacion(const string & str){
 			auxID.push_back(iDenf.substr(j, nomEnf.size()-j));
 		else
 			auxID.push_back(iDenf);
+		
 		j = 0;
 		extras = false;
 
 		for(k = 0; k < dBenf.size(); k++){	// pilla DB
 			if(dBenf[k] == '|'){
-				auxDB.push_back(dBenf.substr(j, k -j));
-				j = k +1;
+				auxDB.push_back(dBenf.substr(j, k - j));
+				j = k + 1;
 				extras = true;
 			}
 		}
+		
 		if(extras)
-			auxDB.push_back(dBenf.substr(j, nomEnf.size()-j));
+			auxDB.push_back(dBenf.substr(j, nomEnf.size() - j));
 		else
 			auxDB.push_back(dBenf);
+		
 		j = 0;
 		extras = false;
 
@@ -204,24 +215,38 @@ mutacion::mutacion(const string & str){
 			enfermedad auxEnf(auxNombre[k], auxID[k], auxDB[k]);
 			(*this).enfermedades.push_back(auxEnf);
 		}
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		sigPyC = str.substr(posCln, str.size() - posCln).find(";");
 		string strCln = str.substr(posCln +7, sigPyC - 7);
-		cerr << "\tIdentificando CLNSIG: cadena: "<<strCln<<endl;
-		if(strCln.size() > 1)
-			for( k = 0; k < enfermedades.size(); k+=2){
-				(*this).clnsig.push_back((int)strCln[k]-48);
-				cerr << "\t\tSe ha hecho push_back sobre clnsig de la cadena : "<< strCln[k]-48<<endl; 
+		
+		cerr << "\tIdentificando CLNSIG: cadena: " << strCln << endl;
+		
+		if(strCln.size() >= 1){
+			int k = 0;
+			int m = strCln.size();
+			
+			while(k != m){
+				if(strCln[k] != '|' && strCln[k] != ','){
+					(*this).clnsig.push_back((int)strCln[k] - '0');
+					
+					cerr << "\t\tSe ha hecho push_back sobre clnsig de la cadena : " << strCln[k] - '0' << endl;		//strCln[k] - '0' para convertir el string en entero
+					
+					k++;
+				}
+				else{
+					k++;
+				}
 			}
-
+		}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
-	cerr << "\tEnfermedades ("<<enfermedades.size()<<"): "; 
-	for (int i=0; i<enfermedades.size(); i++)
+	cerr << "\tEnfermedades (" << enfermedades.size() << "): "; 
+	for (int i = 0; i < enfermedades.size(); i++)
 		cerr << enfermedades.at(i) << " ";
 	cerr << endl; 
 
-	cerr << "\tCLNSIG ("<<clnsig.size()<<"): "; 
-	for (int i=0; i<clnsig.size(); i++)
+	cerr << "\tCLNSIG (" << clnsig.size() << "): ";
+	for (int i = 0; i < clnsig.size(); i++)
 		cerr << clnsig.at(i) << " ";
 	cerr << endl; 
 

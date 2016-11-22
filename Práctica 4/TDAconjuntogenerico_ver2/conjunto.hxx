@@ -71,37 +71,37 @@ pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (conjunt
 	bool fin=false;
 	conjunto<T,CMP>::iterator it;
 
-	cerr << endl<< "Dentro de conjunto::insert"<<endl; 
-	cerr << "\tItero sobre el conjunto para encontrar su posición"<<endl; 
+	cerr << endl << "Dentro de conjunto::insert" << endl;
+	cerr << "\tItero sobre el conjunto para encontrar su posición" << endl; 
 
 //CC: ojo con el bucle usando iteradores. Conoceis la implementación del operator< en iteradores?
 //No utilicéis < para iteradores, sino == y != para controlar bucle, como en los ejemplos del guión y las transparencias. 	
 
 	for(it =vm.begin() ;it != vm.end() && !fin; ){
 //	for(it =vm.begin() ;it < vm.end() -1 && !fin; ){
-		cerr << "\tElemento : "<<(*it).getID()<<endl; 
+		//cerr << "\tElemento : "<<(*it).getID()<<endl;
 		if(comp(*it,val)){
 			it++;
-			cerr << "\tEs menor, avanzo it"<<endl; 
+			//cerr << "\tEs menor, avanzo it"<<endl;
 		}
 		else
 			if(!comp(*it,val) && !comp(val,*it)){	//son iguales
 				par.first=vm.end();
 				par.second=false;
 				fin=true;
-				cerr << "\tEs igual. Termino sin insertar."<<endl;
+				//cerr << "\tEs igual. Termino sin insertar."<<endl;
 			}
 			else{
 				*it=val;
 				par.second=true;
 				fin=true;
-				cerr << "\tEs mayor. LO REEMPLAZO POR val"<<endl; 
+				//cerr << "\tEs mayor. LO REEMPLAZO POR val"<<endl;
 
 			}
 	}
 
 	if(!fin) {//si no se insertó
-		cerr<< "\tHemos terminado de recorrer los elementos y ninguno era mayor. Lo inserto al final"<<endl;
+		//cerr<< "\tHemos terminado de recorrer los elementos y ninguno era mayor. Lo inserto al final"<<endl;
 		//CC: OJO, así no se inserta, no me deja compilar: 
 		//vm[vm.end()]=val;
 		//Así si: 
