@@ -116,7 +116,7 @@ mutacion::mutacion(const string & str){
 	i = str.find("CAF");
 	
 	if(i != -1){
-		sigPyC = str.substr(i, str.size() -i).find(";");
+		sigPyC = str.substr(i, str.size() - i).find(";");
 		aux = str.substr(i +4, sigPyC -4);
 	
 		for( k = 0; k < aux.size(); k++){
@@ -156,26 +156,31 @@ mutacion::mutacion(const string & str){
 	if(posName != -1){
 		sigPyC = str.substr(posName, str.size() - posName).find(";");
 		string nomEnf = str.substr(posName + 7, sigPyC -7);
+		cerr << "Si 1" << endl;
 
 		sigPyC = str.substr(posID, str.size() - posID).find(";");
 		string iDenf = str.substr(posID +10, sigPyC -10);
+		cerr << "Si 2" << endl;
 
 		sigPyC = str.substr(posDB, str.size() - posDB).find(";");
 		string dBenf = str.substr(posDB +8, sigPyC - 8);
 		vector<string> auxNombre, auxID, auxDB;
+		cerr << "Si 3" << endl;
 
 
 		for(k = 0; k < nomEnf.size(); k++){ // pilla nombres
 			if(nomEnf[k] == '|'){
-				auxNombre.push_back(nomEnf.substr(j, k -j));
+				auxNombre.push_back(nomEnf.substr(j, k - j));
 				j = k + 1;
 				extras = true;
 			}
 		}
+		cerr << "Si 4" << endl;
 		if(extras)
 			auxNombre.push_back(nomEnf.substr(j, nomEnf.size()-j));
 		else
 			auxNombre.push_back(nomEnf);
+		cerr << "Si 5" << endl;
 		
 		j = 0;
 		extras = false;
@@ -187,10 +192,12 @@ mutacion::mutacion(const string & str){
 				extras = true;
 			}
 		}
+		cerr << "Si 6" << endl;
 		if(extras)
-			auxID.push_back(iDenf.substr(j, nomEnf.size()-j));
+			auxID.push_back(iDenf.substr(j, nomEnf.size() - j));
 		else
 			auxID.push_back(iDenf);
+		cerr << "Si 7" << endl;
 		
 		j = 0;
 		extras = false;
@@ -202,11 +209,13 @@ mutacion::mutacion(const string & str){
 				extras = true;
 			}
 		}
+		cerr << "Si 8" << endl;
 		
 		if(extras)
 			auxDB.push_back(dBenf.substr(j, nomEnf.size() - j));
 		else
 			auxDB.push_back(dBenf);
+		cerr << "Si 9" << endl;
 		
 		j = 0;
 		extras = false;
@@ -215,9 +224,11 @@ mutacion::mutacion(const string & str){
 			enfermedad auxEnf(auxNombre[k], auxID[k], auxDB[k]);
 			(*this).enfermedades.push_back(auxEnf);
 		}
+		cerr << "Si 10" << endl;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		sigPyC = str.substr(posCln, str.size() - posCln).find(";");
 		string strCln = str.substr(posCln +7, sigPyC - 7);
+		cerr << "Si 11" << endl;
 		
 		cerr << "\tIdentificando CLNSIG: cadena: " << strCln << endl;
 		
