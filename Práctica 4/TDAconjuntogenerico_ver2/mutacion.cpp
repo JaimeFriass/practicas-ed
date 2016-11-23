@@ -219,9 +219,22 @@ mutacion::mutacion(const string & str){
 		
 		j = 0;
 		extras = false;
+		
+		for(int w = 0; w < auxNombre.size(); w++){
+			cerr << "AuxNombre " << w << " vale: " << auxNombre[w] << endl;
+			
+			cerr << "AuxDB " << w << " vale: " << auxDB[w] << endl;
+		}
+		for(int w = 0; w < auxID.size(); w++){
+			cerr << "AuxID " << w << " vale: " << auxID[w] << endl;
+		}
+		for(int w = 0; w < auxDB.size(); w++){
+			cerr << "AuxDB " << w << " vale: " << auxDB[w] << endl;
+		}
 
 		for(k = 0; k < auxNombre.size(); k++){
 			enfermedad auxEnf(auxNombre[k], auxID[k], auxDB[k]);
+			cerr << "Enfermedad " << k << ": " << auxEnf << endl;
 			(*this).enfermedades.push_back(auxEnf);
 		}
 		cerr << "Si 10" << endl;
