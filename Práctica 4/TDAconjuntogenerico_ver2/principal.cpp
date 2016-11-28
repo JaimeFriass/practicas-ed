@@ -119,13 +119,18 @@ int main(int argc, char *argv[]){
 
 	//Cargar las mutaciones en vectorSNPs
 	load(conjuntoMutaciones, "clinvar_20160831.vcf");
+	cerr << "\nload:\t hecho" << endl;
 	
 	vector<mutacion> prueba(conjuntoMutaciones.size());
     prueba = conjuntoMutaciones.getVM();  //Se guarda para usarlo en el método fin y erase
+	cerr << "guardar una mutacion" << endl;
 
 	mutacion find_erase;
+	cerr << "crear una mutacion" << endl;
 
 	find_erase = prueba[2];
+	
+	cerr << "mutacion auxiliar:\t hecho" << endl;
 
 	//Imprimir número de elementos almacenados en conjuntoMutaciones
 	cout << "Lectura del fichero finalizada. Mutaciones cargadas: " << conjuntoMutaciones.size() << endl;
@@ -133,7 +138,7 @@ int main(int argc, char *argv[]){
 
 
 	//Imprimir cuántas mutaciones están asociadas al cromosoma 1:
-	cout << "Mutaciones asociadas a Chr 1: " << conjuntoMutaciones.lower_bound(conjuntoMutaciones.getVM().at(1)) - conjuntoMutaciones.begin() << endl;
+	cout << "Mutaciones asociadas a Chr 1: " << conjuntoMutaciones.lower_bound(prueba[2]) - conjuntoMutaciones.begin() << endl;
 
 
 	/**@todo ¿Existe la mutación con ID "rs147165522"? Imprimir la mutación y las enfermedades asociadas */

@@ -155,66 +155,96 @@ mutacion::mutacion(const string & str){
 
 	if(posName != -1){
 		sigPyC = str.substr(posName, str.size() - posName).find(";");
-		string nomEnf = str.substr(posName + 7, sigPyC -7);
+		string nomEnf = str.substr(posName + 7, sigPyC - 7);
 		cerr << "Si 1" << endl;
 
 		sigPyC = str.substr(posID, str.size() - posID).find(";");
-		string iDenf = str.substr(posID +10, sigPyC -10);
+		string iDenf = str.substr(posID + 10, sigPyC - 10);
 		cerr << "Si 2" << endl;
 
 		sigPyC = str.substr(posDB, str.size() - posDB).find(";");
-		string dBenf = str.substr(posDB +8, sigPyC - 8);
+		string dBenf = str.substr(posDB + 8, sigPyC - 8);
 		vector<string> auxNombre, auxID, auxDB;
 		cerr << "Si 3" << endl;
 
-
+		int numero_enf = 0;
+		
 		for(k = 0; k < nomEnf.size(); k++){ // pilla nombres
 			if(nomEnf[k] == '|'){
 				auxNombre.push_back(nomEnf.substr(j, k - j));
 				j = k + 1;
 				extras = true;
+				
+				numero_enf++;
 			}
 		}
+		
 		cerr << "Si 4" << endl;
-		if(extras)
+		
+		if(extras){
 			auxNombre.push_back(nomEnf.substr(j, nomEnf.size()-j));
-		else
+			numero_enf++;
+		}
+		else{
 			auxNombre.push_back(nomEnf);
+		}
+		
 		cerr << "Si 5" << endl;
 		
 		j = 0;
 		extras = false;
+		
+		int numero_ID = 0;
 
 		for(k = 0; k < iDenf.size(); k++){	// pilla ID
 			if(iDenf[k] == '|'){
 				auxID.push_back(iDenf.substr(j, k - j));
-				j = k +1;
+				j = k + 1;
 				extras = true;
+				
+				numero_ID++;
 			}
 		}
+		
 		cerr << "Si 6" << endl;
-		if(extras)
+		
+		if(extras){
 			auxID.push_back(iDenf.substr(j, nomEnf.size() - j));
-		else
+			numero_ID++;
+		}
+		else{
 			auxID.push_back(iDenf);
+			numero_ID = 1;
+		}
+		
 		cerr << "Si 7" << endl;
 		
 		j = 0;
 		extras = false;
+		
+		int numero_CLNDSDB = 0;
 
 		for(k = 0; k < dBenf.size(); k++){	// pilla DB
 			if(dBenf[k] == '|'){
 				auxDB.push_back(dBenf.substr(j, k - j));
 				j = k + 1;
 				extras = true;
+				
+				numero_CLNDSDB++;
 			}
 		}
+		
 		cerr << "Si 8" << endl;
 		
-		if(extras)
+		if(extras){
 			auxDB.push_back(dBenf.substr(j, nomEnf.size() - j));
-		else
+			numero_CLNDSDB++;
+		}
+		else{
 			auxDB.push_back(dBenf);
+			numero_CLNDSDB = 1;
+		}
+		
 		cerr << "Si 9" << endl;
 		
 		j = 0;
@@ -222,8 +252,6 @@ mutacion::mutacion(const string & str){
 		
 		for(int w = 0; w < auxNombre.size(); w++){
 			cerr << "AuxNombre " << w << " vale: " << auxNombre[w] << endl;
-			
-			cerr << "AuxDB " << w << " vale: " << auxDB[w] << endl;
 		}
 		for(int w = 0; w < auxID.size(); w++){
 			cerr << "AuxID " << w << " vale: " << auxID[w] << endl;
@@ -231,16 +259,50 @@ mutacion::mutacion(const string & str){
 		for(int w = 0; w < auxDB.size(); w++){
 			cerr << "AuxDB " << w << " vale: " << auxDB[w] << endl;
 		}
+		
+		int iteraciones = 0;
 
 		for(k = 0; k < auxNombre.size(); k++){
-			enfermedad auxEnf(auxNombre[k], auxID[k], auxDB[k]);
+			enfermedad auxEnf;
+			
+			if(numero_CLNDSDB == 1 && numero_ID == 1){
+				auxEnf = enfermedad(auxNombre[k], auxID[0], auxDB[0]);
+			}
+			else{
+				if(numero_CLNDSDB == 1 && numero_ID != 1){
+					auxEnf = enfermedad(auxNombre[k], auxID[k], auxDB[0]);
+				}
+				else{
+					if(numero_CLNDSDB != 1 && numero_ID == 1){
+						auxEnf = enfermedad(auxNombre[k], auxID[0], auxDB[k]);
+					}
+					else{
+						if(numero_CLNDSDB != 1 && numero_ID != 1 && numero_enf == 2){
+							auxEnf = enfermedad(auxNombre[k], auxID[k], auxDB[k]);
+						}
+						else{
+							if(numero_CLNDSDB == 3 && numero_ID == 3 && numero_enf == 5){
+								if(iteraciones < 3){
+									auxEnf = enfermedad(auxNombre[k], auxID[k], auxDB[k]);
+								}
+								else{
+									auxEnf = enfermedad(auxNombre[k], auxID[2], auxDB[2]);
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			iteraciones++;
+			
 			cerr << "Enfermedad " << k << ": " << auxEnf << endl;
 			(*this).enfermedades.push_back(auxEnf);
 		}
 		cerr << "Si 10" << endl;
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		sigPyC = str.substr(posCln, str.size() - posCln).find(";");
-		string strCln = str.substr(posCln +7, sigPyC - 7);
+		string strCln = str.substr(posCln + 7, sigPyC - 7);
 		cerr << "Si 11" << endl;
 		
 		cerr << "\tIdentificando CLNSIG: cadena: " << strCln << endl;
@@ -262,9 +324,9 @@ mutacion::mutacion(const string & str){
 				}
 			}
 		}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
-	cerr << "\tEnfermedades (" << enfermedades.size() << "): "; 
+
+	cerr << "\tEnfermedades (" << enfermedades.size() << "): ";
 	for (int i = 0; i < enfermedades.size(); i++)
 		cerr << enfermedades.at(i) << " ";
 	cerr << endl; 
