@@ -80,25 +80,35 @@ mutacion::mutacion(const string & str){
 	
 	// OBTENER GENES
 	i = str.find("GENEINFO");
-	unsigned long sigPyC = str.substr(i, str.size() - i).find(";");
-	aux = str.substr(i +9, sigPyC -9);
 
-	for( k = 0; k < aux.size(); k++){
-		if(aux[k] == '|'){
-			(*this).genes.push_back(aux.substr(j, k-j));
-			extras = true;
-			j = k +1;
+	unsigned long sigPyC;
+
+	if(i != -1){
+		sigPyC = str.substr(i, str.size() - i).find(";");
+		aux = str.substr(i +9, sigPyC -9);
+
+		for( k = 0; k < aux.size(); k++){
+			if(aux[k] == '|'){
+				(*this).genes.push_back(aux.substr(j, k-j));
+				extras = true;
+				j = k +1;
+			}
 		}
-	}
-	if(extras)
-		(*this).genes.push_back(aux.substr(j,aux.size() - 1));
-	else
-		(*this).genes.push_back(aux);
+		if(extras)
+			(*this).genes.push_back(aux.substr(j,aux.size() - 1));
+		else
+			(*this).genes.push_back(aux);
 
-	cerr << "\tGENES: "; 
-	for (int i=0; i<genes.size(); i++)
-		cerr << genes.at(i) << " ";
-	cerr << endl; 
+		cerr << "\tGENES: "; 
+		for (int i=0; i<genes.size(); i++)
+			cerr << genes.at(i) << " ";
+		cerr << endl;
+	}
+	else{
+		(*this).genes.push_back("");
+	}
+
+	 
 
 
 	// OBTENER COMMON
