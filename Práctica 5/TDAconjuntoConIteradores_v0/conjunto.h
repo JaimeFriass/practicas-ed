@@ -183,59 +183,136 @@ public:
 
 
 	class iterator{
-		public:
-			iterator();
-			iterator(const iterator &  x);
-			iterator(const secure_iterator &  x); // Transforma secure_iterator en iterator;
+	public:
+		iterator(){
+			it = NULL;
+			elvector = NULL;
+		}
+		
+		iterator(const iterator &  x){
+			it = x.it;
+			elvector = x.elvector;
+		}
+		
+		iterator(const secure_iterator &  x){	// Transforma secure_iterator en iterator;
+			it = x.getIterador();
+			elvector = x.getVector();
+		}
+		
+		const T & operator*(){
+			return *it;
+		}
+		
+		iterator & operator++(){
+			typename vector<T>::iterator aux = it;
 			
-			const T & operator*();
-			iterator & operator++();
-			iterator operator++(int i);
-			iterator & operator--();
-			iterator operator--(int i);
-			bool operator==(const iterator & x) const ;		  
-			bool operator!=(const iterator & x) const ;
-			iterator & operator=(const iterator & x);
-		public:
-			friend class conjunto<T,CMP>;
-			typename vector<T>::iterator it;
-			vector<T> *elvector;
-		};
-
+			if(aux != elvector.end()){
+				aux++;
+			}
+			
+			return aux;
+		}
+		
+		iterator operator++(int i){
+			typename vector<T>::iterator aux = it;
+			
+			for(int j = 0;  j < i; j++){
+				if((aux + 1) != elvector.end()){
+					aux++;
+				}
+			}
+			
+			return aux;
+		}
+		
+		iterator & operator--(){
+			typename vector<T>::iterator aux = it;
+			
+			if(aux != elvector.begin()){
+				aux--;
+			}
+			
+			return aux;
+		}
+		
+		iterator operator--(int i){
+			typename vector<T>::iterator aux = it;
+			
+			for(int j = 0;  j < i; j++){
+				if((aux - 1) != elvector.begin()){
+					aux--;
+				}
+			}
+			
+			return aux;
+		}
+		
+		bool operator==(const iterator & x) const{
+			bool same = false;
+			
+			if(it == x.it){
+				same = true;
+			}
+			
+			return same;
+		}
+		
+		bool operator!=(const iterator & x) const{
+			bool different = false;
+			
+			if(it != x.it){
+				different = true;
+			}
+			
+			return different;
+		}
+		
+		iterator & operator=(const iterator & x){
+			it = x.it;
+			
+			return it;
+		}
+		
+	public:
+		friend class conjunto<T,CMP>;
+		typename vector<T>::iterator it;
+		vector<T> *elvector;
+	};
+	
 	class secure_iterator{
-		public:
-			secure_iterator();
-			secure_iterator(const secure_iterator &  x);
-			const T & operator*();
-			secure_iterator & operator++();
-			secure_iterator operator++(int i);
-			secure_iterator & operator--();
-			secure_iterator operator--(int i);
-			bool operator==(const secure_iterator & x) const ;
-			bool operator!=(const secure_iterator & x) const ;
-			secure_iterator & operator=(const secure_iterator & x);
-		public:
-			friend class conjunto<T,CMP>;
-			typename vector<T>::iterator it;
-			vector<T> *elvector;
-		};
-
-
+	public:
+		secure_iterator();
+		secure_iterator(const secure_iterator &  x);
+		const T & operator*();
+		secure_iterator & operator++();
+		secure_iterator operator++(int i);
+		secure_iterator & operator--();
+		secure_iterator operator--(int i);
+		bool operator==(const secure_iterator & x) const ;
+		bool operator!=(const secure_iterator & x) const ;
+		secure_iterator & operator=(const secure_iterator & x);
+	public:
+		friend class conjunto<T,CMP>;
+		typename vector<T>::iterator it;
+		vector<T> *elvector;
+	};
+	
+	
 	class impar_iterator{
-		public:
-			impar_iterator();
-			impar_iterator(const impar_iterator &  x);
-			const T & operator*();
-			impar_iterator & operator++();
-			impar_iterator operator++(int i);
-			bool operator==(const impar_iterator & x) const;
-			bool operator!=(const impar_iterator & x) const;
-			impar_iterator & operator=(const impar_iterator & x);
-		public:
-			friend class conjunto<T,CMP>;
-			typename vector<T>::iterator it;
-			vector<T> *elvector;
-		};
+	public:
+		impar_iterator();
+		impar_iterator(const impar_iterator &  x);
+		const T & operator*();
+		impar_iterator & operator++();
+		impar_iterator operator++(int i);
+		bool operator==(const impar_iterator & x) const;
+		bool operator!=(const impar_iterator & x) const;
+		impar_iterator & operator=(const impar_iterator & x);
+	public:
+		friend class conjunto<T,CMP>;
+		typename vector<T>::iterator it;
+		vector<T> *elvector;
+	};
 	
 private:
 	friend class impar_iterator;
