@@ -72,10 +72,10 @@ pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (conjunt
 	conjunto<T,CMP>::iterator it;
 
 	cerr << endl << "Dentro de conjunto::insert" << endl;
-	cerr << "\tItero sobre el conjunto para encontrar su posición" << endl; 
+	cerr << "\tItero sobre el conjunto para encontrar su posición" << endl;
 
 //CC: ojo con el bucle usando iteradores. Conoceis la implementación del operator< en iteradores?
-//No utilicéis < para iteradores, sino == y != para controlar bucle, como en los ejemplos del guión y las transparencias. 	
+//No utilicéis < para iteradores, sino == y != para controlar bucle, como en los ejemplos del guión y las transparencias.
 
 	for(it =vm.begin() ;it != vm.end() && !fin; ){
 //	for(it =vm.begin() ;it < vm.end() -1 && !fin; ){
@@ -102,9 +102,9 @@ pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (conjunt
 
 	if(!fin) {//si no se insertó
 		//cerr<< "\tHemos terminado de recorrer los elementos y ninguno era mayor. Lo inserto al final"<<endl;
-		//CC: OJO, así no se inserta, no me deja compilar: 
+		//CC: OJO, así no se inserta, no me deja compilar:
 		//vm[vm.end()]=val;
-		//Así si: 
+		//Así si:
 		vm.push_back(val);
 		//o con insert , mirad manual. http://www.cplusplus.com/reference/vector/vector/insert/
 		par.first=vm.end();
@@ -334,52 +334,111 @@ ostream &  operator << ( ostream & sal, const conjunto<T,CMP> & C){
 
 	return sal;
 }
-class  impar_iterator; //conjunto::impar_iterator ???
+//si no queremos poner en el .h
+//template <typename T, typename CMP>
+//conjunto<T,CMP>::impar_iterator
 /*Metodos de iterator impar */
 
-impar_iterator::impar_iterator(){
+conjunto<T,CMP>::impar_iterator::impar_iterator(){
   it=NULL;
   elvector=NULL;
 }
 
-impar_iterator::impar_iterator(const impar_iterator &  x){
+conjunto<T,CMP>::impar_iterator::impar_iterator(const impar_iterator &  x){
   it=x.it;
   elvector=x.elvector;
 
 }
-const T & impar_iterator::operator*(){
+const T & conjunto<T,CMP>::impar_iterator::operator*(){
   return (*it);
 }
-impar_iterator & impar_iterator::operator++(){
+impar_iterator & conjunto<T,CMP>::impar_iterator::operator++(){
     vector<T>::iterator aux;
     boolean encontrado=false;
     for(aux=it; aux < (&elvector).size() && !encontrado;aux++){
-      if( (elvector.getVM().getPos() )%2 !=0){ //posicion impar
+      if( ((*elvector).getPos() )%2 !=0){ //posicion impar
           encontrado=true;
           it=aux;
       }
     }
     return it;
 }
-			impar_iterator operator++(int i){
+impar_iterator conjunto<T,CMP>::impar_iterator::operator++(int i){
+	if( *(elvector).size() > *(it).size()+ i  && (*(it.size() +i)).pos %2 != 0) //tenga posicion impar y no se salga
+		it=it.size()+i;
 
+}
+bool conjunto<T,CMP>::impar_iterator::operator==(const impar_iterator & x) const{
 
-      }
-			bool operator==(const impar_iterator & x) const{
-
-        if(it.getVM() == x.getVM())
-          return true;
-        else
-          return false;
-      }
-			bool operator!=(const impar_iterator & x) const{
-
-        return !(this.it == x);
-      }
-impar_iterator & operator=(const impar_iterator & x){
+	if(*it == *(x.it) && *elvector == *(x.elvector) )
+		return true;
+  else
+  	return false;
+}
+bool conjunto<T,CMP>::impar_iterator::operator!=(const impar_iterator & x) const{
+	return !(this == x);
+}
+impar_iterator & conjunto<T,CMP>::impar_iterator::operator=(const impar_iterator & x){
   if(this != &x){
     it=x.it;
     elvector=x.elvector;
   }
-  return *this;  
+  return *this;
+}
+/* Clase impar iterator consatante :
+Lo que no puede cambiar es el objeto apuntado,el iterador puede*/
+
+class const_impar_iterator;
+
+	conjunto<T,CMP>::const_impar_iterator::impar_iterator (){
+		it=NULL;
+		elvector=NULL;
+	}
+	conjunto<T,CMP>::const_impar_iterator::impar_iterator (const const_impar_iterator &x){
+		it=x.it;
+		elvector=x.elvector;
+	}
+	const T & conjunto<T,CMP>::const_impar_iterator::operator ∗ (){
+		return (*it);
+	}
+	const_impar_iterator & conjunto<T,CMP>::const_impar_iterator::operator++ (){
+		bool encontrado = false;
+		while(it < (*elvetor).size() && !encontrado){
+			it++;
+			if( (it.elvector->pos %2 )!= 0 )
+				encontrado=true;
+		}
+
+	}
+//este es el iterador post fijo es decir incrementa y devuelve el anterior (creo)
+	impar_iterator conjunto<T,CMP>::const_impar_iterator::operator++ (int i){
+		impar_iterator aux=this;
+		bool encontrado=false;
+		while(aux < (*elvetor).size() && !encontrado){
+			aux++;
+			if( (aux.elvector->pos %2 )!= 0 )
+				encontrado=true;
+		}
+		return this;
+	}
+	bool conjunto<T,CMP>::const_impar_iterator::operator== (const const_impar_iterator &x) const{
+		boolean iguales=true;
+		if(*it != *(x.it) && *elvector != *(x.elvector) )
+			iguales=false;
+
+		return iguales;
+	}
+
+	bool conjunto<T,CMP>::const_impar_iterator::operator!= (const const_impar_iterator &x) const{
+		return !(this == x);
+	}
+	impar_iterator & conjunto<T,CMP>::const_impar_iterator::operator= (const const_impar_iterator &x){
+			if(this != &x){
+				it=x.it;
+				elvector=x.elvector;
+			}
+			return *this;
+	}
+
+
 }
