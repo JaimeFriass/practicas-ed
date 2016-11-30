@@ -82,6 +82,8 @@ bool load(conjunto<T, CMP> &  cm, const string & s) {
 		do{
 			getline(fe,cadena,'\n');
 		}while (cadena.find("#")==0 && !fe.eof());
+		
+		int i = 0;
 
 		//leo la tabla de mutaciones, una línea cada vez
 		while ( !fe.eof() ){
@@ -89,11 +91,18 @@ bool load(conjunto<T, CMP> &  cm, const string & s) {
 		 	// Invoco el constructor de mutación que recibe una cadena completa, la parsea y crea la mutación.
 			mutacion mut = mutacion(cadena);
 			// Insertar mutación en el conjunto
+			cerr << "Mutacion:" << endl;
+			cerr << mut << endl;
 
 			start =  high_resolution_clock::now();;
 			cerr << "Inserto la mutacion en el conjunto...";
 			cm.insert(mut);
+
+			cerr << "Mutaciones insertadas: " << cm.size() << endl;
+
 			cerr << " Done."<<endl;
+			i++;
+			cerr << "Se han cargado " << i << " mutaciones" << endl;
 
 			end =  high_resolution_clock::now();;
 
@@ -123,14 +132,14 @@ int main(int argc, char *argv[]){
 	
 	vector<mutacion> prueba(conjuntoMutaciones.size());
     prueba = conjuntoMutaciones.getVM();  //Se guarda para usarlo en el método fin y erase
-	cerr << "guardar una mutacion" << endl;
+	//cerr << "guardar una mutacion" << endl;
 
 	mutacion find_erase;
-	cerr << "crear una mutacion" << endl;
+	//cerr << "crear una mutacion" << endl;
 
 	find_erase = prueba[2];
 	
-	cerr << "mutacion auxiliar:\t hecho" << endl;
+	//cerr << "mutacion auxiliar:\t hecho" << endl;
 
 	//Imprimir número de elementos almacenados en conjuntoMutaciones
 	cout << "Lectura del fichero finalizada. Mutaciones cargadas: " << conjuntoMutaciones.size() << endl;
