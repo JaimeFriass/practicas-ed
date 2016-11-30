@@ -338,8 +338,8 @@ class  impar_iterator; //conjunto::impar_iterator ???
 /*Metodos de iterator impar */
 
 impar_iterator::impar_iterator(){
-  it=null;
-  elvector=null;
+  it=NULL;
+  elvector=NULL;
 }
 
 impar_iterator::impar_iterator(const impar_iterator &  x){
