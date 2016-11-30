@@ -91,6 +91,8 @@ bool load(conjunto<T, CMP> &  cm, const string & s) {
 		 	// Invoco el constructor de mutación que recibe una cadena completa, la parsea y crea la mutación.
 			mutacion mut = mutacion(cadena);
 			// Insertar mutación en el conjunto
+			cerr << "Mutacion:" << endl;
+			cerr << mut << endl;
 
 			start =  high_resolution_clock::now();;
 			cerr << "Inserto la mutacion en el conjunto...";
