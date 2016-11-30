@@ -334,3 +334,52 @@ ostream &  operator << ( ostream & sal, const conjunto<T,CMP> & C){
 
 	return sal;
 }
+class  impar_iterator; //conjunto::impar_iterator ???
+/*Metodos de iterator impar */
+
+impar_iterator::impar_iterator(){
+  it=NULL;
+  elvector=NULL;
+}
+
+impar_iterator::impar_iterator(const impar_iterator &  x){
+  it=x.it;
+  elvector=x.elvector;
+
+}
+const T & impar_iterator::operator*(){
+  return (*it);
+}
+impar_iterator & impar_iterator::operator++(){
+    vector<T>::iterator aux;
+    boolean encontrado=false;
+    for(aux=it; aux < (&elvector).size() && !encontrado;aux++){
+      if( (elvector.getVM().getPos() )%2 !=0){ //posicion impar
+          encontrado=true;
+          it=aux;
+      }
+    }
+    return it;
+}
+			impar_iterator operator++(int i){
+
+
+      }
+			bool operator==(const impar_iterator & x) const{
+
+        if(it.getVM() == x.getVM())
+          return true;
+        else
+          return false;
+      }
+			bool operator!=(const impar_iterator & x) const{
+
+        return !(this.it == x);
+      }
+impar_iterator & operator=(const impar_iterator & x){
+  if(this != &x){
+    it=x.it;
+    elvector=x.elvector;
+  }
+  return *this;  
+}
