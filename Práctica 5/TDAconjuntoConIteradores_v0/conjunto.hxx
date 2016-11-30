@@ -431,6 +431,22 @@ secure_iterator secure_iterator::operator--(int i) {
 	++(*this);
 	return aux;
 }
-bool secure_iterator::operator==(const secure_iterator & x) const ;
-bool secure_iterator::operator!=(const secure_iterator & x) const ;
-secure_iterator & secure_iterator::operator=(const secure_iterator & x);
+bool secure_iterator::operator==(const secure_iterator & x) const {
+	if(it.mivector == x.mivector
+    	return true;
+    else
+    	return false;
+}
+bool secure_iterator::operator!=(const secure_iterator & x) const {
+	if(it.mivector != x.mivector
+    	return true;
+    else
+    	return false;
+}
+secure_iterator & secure_iterator::operator=(const secure_iterator & x) {
+	if(this != &x){
+    	it=x.it;
+    	elvector=x.elvector;
+  	}
+  	return *this;
+}
