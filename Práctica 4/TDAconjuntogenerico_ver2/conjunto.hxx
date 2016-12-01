@@ -77,24 +77,24 @@ pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (conjunt
 	//CC: ojo con el bucle usando iteradores. Conoceis la implementación del operator< en iteradores?
 	//No utilicéis < para iteradores, sino == y != para controlar bucle, como en los ejemplos del guión y las transparencias.
 	
-	for(it =vm.begin() ;it != vm.end() && !fin; ){
-		//	for(it =vm.begin() ;it < vm.end() -1 && !fin; ){
+	for(it = vm.begin() ;it != vm.end() && !fin; ){
+		//	for(it = vm.begin() ;it < vm.end() -1 && !fin; ){
 		//cerr << "\tElemento : "<<(*it).getID()<<endl;
-		if(comp(*it,val)){
+		if(comp(*it, val)){
 			it++;
 			//cerr << "\tEs menor, avanzo it"<<endl;
 		}
 		else
-			if(!comp(*it,val) && !comp(val,*it)){	//son iguales
-				par.first=vm.end();
-				par.second=false;
-				fin=true;
+			if(!comp(*it, val) && !comp(val, *it)){	//son iguales
+				par.first = vm.end();
+				par.second = false;
+				fin = true;
 				//cerr << "\tEs igual. Termino sin insertar."<<endl;
 			}
 			else{
-				*it=val;
-				par.second=true;
-				fin=true;
+				vm.push_back(val);
+				par.second = true;
+				fin = true;
 				//cerr << "\tEs mayor. LO REEMPLAZO POR val"<<endl;
 				
 			}
@@ -107,8 +107,8 @@ pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (conjunt
 		//Así si:
 		vm.push_back(val);
 		//o con insert , mirad manual. http://www.cplusplus.com/reference/vector/vector/insert/
-		par.first=vm.end();
-		par.second=true;
+		par.first = vm.end();
+		par.second = true;
 	}
 	return par;
 	
