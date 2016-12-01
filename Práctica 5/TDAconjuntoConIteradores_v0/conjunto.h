@@ -281,16 +281,59 @@ public:
 	
 	class secure_iterator{
 	public:
-		secure_iterator();
-		secure_iterator(const secure_iterator &  x);
-		const T & operator*();
-		secure_iterator & operator++();
-		secure_iterator operator++(int i);
-		secure_iterator & operator--();
-		secure_iterator operator--(int i);
-		bool operator==(const secure_iterator & x) const ;
-		bool operator!=(const secure_iterator & x) const ;
-		secure_iterator & operator=(const secure_iterator & x);
+		secure_iterator() {
+				it = NULL;
+				elvector = NULL;
+            	}
+		
+		secure_iterator(const secure_iterator &  x) {
+			it = x.it;
+			elvector = x.elvector;
+		}
+		
+		const T & operator*() {
+			return *it;
+		}
+		
+		secure_iterator & operator++() {
+			i++;
+			assert(it >= mivector.begin() && it <= mivector.end());
+			return *this;
+		}
+		
+		secure_iterator operator++(int i) {
+			secure_iterator aux(*this);
+			++(*this);
+			return aux;
+		}
+		
+		secure_iterator & operator--() {
+			i--;
+			assert(it >= mivector.begin() && it < mivector.end());
+			return *this;
+		}
+			
+		secure_iterator operator--(int i) {
+			secure_iterator(*this);
+			--(*this);
+			return aux;
+		}
+		
+		bool operator==(const secure_iterator & x) const {
+			return it.mivector == x.mivector;
+		}
+			
+		bool operator!=(const secure_iterator & x) const {
+			return !(it.mivector == x.mivector);
+		}
+
+		secure_iterator & operator=(const secure_iterator & x) {
+			if (this != &x) {
+				it = x.it;
+				elvector = x.elvector;
+			}
+			return *this;
+		}
 	public:
 		friend class conjunto<T,CMP>;
 		typename vector<T>::iterator it;
