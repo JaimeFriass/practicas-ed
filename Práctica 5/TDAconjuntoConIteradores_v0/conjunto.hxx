@@ -27,15 +27,15 @@ template <typename T, typename CMP>
 typename conjunto<T,CMP>::iterator  conjunto<T,CMP>::find (const conjunto<T,CMP>::value_type & s){
 	bool encontrado = false;
 	conjunto<T,CMP>::iterator it=begin();
-
+	
 	for(int i = 0; i < vm.size() && !encontrado; i++){
 		if(s == vm[i])
 			encontrado = true;
 		else
 			it ++;
-
+		
 	}
-
+	
 	return it;
 }
 
@@ -43,7 +43,7 @@ template <typename T, typename CMP>
 
 typename conjunto<T,CMP>::const_iterator  conjunto<T,CMP>::find (const value_type & s) const{
 	conjunto<T,CMP>::const_iterator it = find(s);
-
+	
 	return it;
 }
 
@@ -51,7 +51,7 @@ template <typename T, typename CMP>
 
 typename conjunto<T,CMP>::size_type conjunto<T,CMP>::count (const conjunto<T,CMP>::value_type & e) const{
 	bool encontrado=false;
-
+	
 	if( size() > 0 ){ //si hay elementos;
 		for(unsigned int i = 0 ; i < size() && !encontrado ; i++){
 			if( e == vm[i] )
@@ -123,7 +123,7 @@ template <typename T, typename CMP>
 
 typename conjunto<T,CMP>::iterator conjunto<T,CMP>::erase (const conjunto<T,CMP>::iterator position){
 	vm.erase(position);
-
+	
 	return position;
 }
 
@@ -131,15 +131,15 @@ template <typename T, typename CMP>
 
 typename conjunto<T,CMP>::size_type conjunto<T,CMP>::erase (const value_type& val){
 	conjunto<T, CMP>::iterator it = find(val);
-
+	
 	if(it != vm.end()){
 		vm.erase(it);
 	}
-
+	
 	/*
-	Se devuelve 1 ya que este método devuelve el número de elementos
-	borrados y este sólo puede ser 1
-	*/
+	 Se devuelve 1 ya que este método devuelve el número de elementos
+	 borrados y este sólo puede ser 1
+	 */
 	return 1;
 }
 
@@ -166,10 +166,10 @@ template <typename T, typename CMP>
 conjunto<T, CMP> & conjunto<T, CMP>::operator=( const conjunto<T, CMP> & org){
 	if (this != &org){
 		vm.clear();
-
+		
 		vm = org.getVM();
 	}
-
+	
 	return *this;
 }
 
@@ -178,11 +178,11 @@ template <typename T, typename CMP>
 vector<typename conjunto<T,CMP>::value_type> & conjunto<T,CMP>::operator = (vector<conjunto<T,CMP>::value_type> org){
 	if((this -> vm) != org){
 		vm.clear();
-
+		
 		for(unsigned int i = 0;i < org.size(); i++)
 			vm.push_back(org[i]);
 	}
-
+	
 	return this -> vm;
 }
 
@@ -190,7 +190,7 @@ template <typename T, typename CMP>
 
 typename conjunto<T,CMP>::iterator conjunto<T,CMP>::begin(){
 	conjunto<T,CMP>::iterator inicio = vm.begin();
-
+	
 	return inicio;
 }
 
@@ -199,7 +199,7 @@ template <typename T, typename CMP>
 
 typename conjunto<T,CMP>::iterator conjunto<T,CMP>::end (){
 	conjunto<T,CMP>::iterator ultimo = vm.end();
-
+	
 	return ultimo;
 }
 
@@ -207,7 +207,7 @@ template <typename T, typename CMP>
 
 typename conjunto<T,CMP>::const_iterator conjunto<T,CMP>::cbegin () const{
 	conjunto<T,CMP>::const_iterator const_inicio = vm.cbegin();
-
+	
 	return const_inicio;
 }
 
@@ -215,7 +215,7 @@ template <typename T, typename CMP>
 
 typename conjunto<T,CMP>::const_iterator conjunto<T,CMP>::cend () const{
 	conjunto<T,CMP>::const_iterator const_final = vm.cend();
-
+	
 	return const_final;
 }
 
@@ -224,7 +224,7 @@ template <typename T, typename CMP>
 typename conjunto<T,CMP>::iterator conjunto<T,CMP>::lower_bound (conjunto<T,CMP>::value_type& val){
 	conjunto<T,CMP>::iterator lower = vm.begin();
 	bool encontrado = false;
-
+	
 	for(int i = 0; i < vm.size() && !encontrado; i++){
 		if(vm[i] < val){
 			lower++;
@@ -235,14 +235,14 @@ typename conjunto<T,CMP>::iterator conjunto<T,CMP>::lower_bound (conjunto<T,CMP>
 			}
 		}
 	}
-
+	
 	if(encontrado){
 		lower--;
 	}
 	else{
 		lower = end();
 	}
-
+	
 	return lower;
 }
 
@@ -250,7 +250,7 @@ template <typename T, typename CMP>
 
 typename conjunto<T,CMP>::const_iterator conjunto<T,CMP>::lower_bound (const conjunto<T,CMP>::value_type& val) const{
 	conjunto<T,CMP>::const_iterator it = lower_bound(val);
-
+	
 	return it;
 }
 
@@ -259,7 +259,7 @@ template <typename T, typename CMP>
 typename conjunto<T,CMP>::iterator conjunto<T,CMP>::upper_bound (const value_type& val){
 	conjunto<T,CMP>::iterator upper = vm.begin();
 	bool encontrado = false;
-
+	
 	for(int i = 0; i < vm.size() && !encontrado; i++){
 		if(vm[i] < val){
 			upper++;
@@ -268,14 +268,14 @@ typename conjunto<T,CMP>::iterator conjunto<T,CMP>::upper_bound (const value_typ
 			encontrado = true;
 		}
 	}
-
+	
 	if(encontrado){
 		upper--;
 	}
 	else{
 		upper = end();
 	}
-
+	
 	return upper;
 }
 
@@ -283,7 +283,7 @@ template <typename T, typename CMP>
 
 typename conjunto<T,CMP>::const_iterator conjunto<T,CMP>::upper_bound (const value_type& val) const{
 	conjunto<T,CMP>::const_iterator it = upper_bound(val);
-
+	
 	return it;
 }
 
@@ -291,37 +291,37 @@ template <typename T, typename CMP>
 
 bool conjunto<T,CMP>::cheq_rep() const{
 	bool invariante = true;
-
+	
 	string chr1, chr2;
 	int n_chr1_aux,n_chr2_aux;
-
+	
 	//Comprobación de que los cromosomas son correctos y que la posición es mayor que 1
 	for (unsigned int i = 0; i < vm.size() && invariante; i++){
 		chr1 = vm[i].getChr();
 		chr2 = vm[i + 1].getChr();
 		n_chr1_aux = atoi(chr1.c_str());
 		n_chr2_aux=atoi(chr2.c_str());
-
+		
 		if((n_chr1_aux < 1 || n_chr2_aux > 22) && chr1 != "X" && chr1 != "Y" && chr2 != "MT" && vm[i].getPos() > 0){
 			invariante = false;
 		}
 	}
-
+	
 	for (unsigned int i = 0; i < vm.size() - 1 && invariante; i++){
 		chr1 = vm[i].getChr();
 		chr2 = vm[i + 1].getChr();
-
+		
 		if (chr1 == chr2 && vm[i].getPos() >= vm[i + 1].getPos()){
 			invariante = false;
 		}
-
+		
 		if(chr1 != chr2){
 			if (!(vm[i+1] < vm[i])){
 				invariante  = false;
 			}
 		}
 	}
-
+	
 	return invariante;
 }
 
@@ -331,114 +331,7 @@ ostream &  operator << ( ostream & sal, const conjunto<T,CMP> & C){
 	for(int i = 0; i < C.size(); i++){
 		sal << C.vm[i] << " ";
 	}
-
+	
 	return sal;
 }
-//si no queremos poner en el .h
-//template <typename T, typename CMP>
-//conjunto<T,CMP>::impar_iterator
-/*Metodos de iterator impar */
-
-conjunto<T,CMP>::impar_iterator::impar_iterator(){
-  it=NULL;
-  elvector=NULL;
-}
-
-conjunto<T,CMP>::impar_iterator::impar_iterator(const impar_iterator &  x){
-  it=x.it;
-  elvector=x.elvector;
-
-}
-const T & conjunto<T,CMP>::impar_iterator::operator*(){
-  return (*it);
-}
-impar_iterator & conjunto<T,CMP>::impar_iterator::operator++(){
-    vector<T>::iterator aux;
-    boolean encontrado=false;
-    for(aux=it; aux < (&elvector).size() && !encontrado;aux++){
-      if( ((*elvector).getPos() )%2 !=0){ //posicion impar
-          encontrado=true;
-          it=aux;
-      }
-    }
-    return it;
-}
-impar_iterator conjunto<T,CMP>::impar_iterator::operator++(int i){
-	if( *(elvector).size() > *(it).size()+ i  && (*(it.size() +i)).pos %2 != 0) //tenga posicion impar y no se salga
-		it=it.size()+i;
-
-}
-bool conjunto<T,CMP>::impar_iterator::operator==(const impar_iterator & x) const{
-
-	if(*it == *(x.it) && *elvector == *(x.elvector) )
-		return true;
-  else
-  	return false;
-}
-bool conjunto<T,CMP>::impar_iterator::operator!=(const impar_iterator & x) const{
-	return !(this == x);
-}
-impar_iterator & conjunto<T,CMP>::impar_iterator::operator=(const impar_iterator & x){
-  if(this != &x){
-    it=x.it;
-    elvector=x.elvector;
-  }
-  return *this;
-}
-/* Clase impar iterator consatante :
-Lo que no puede cambiar es el objeto apuntado,el iterador puede*/
-
-class const_impar_iterator;
-
-	conjunto<T,CMP>::const_impar_iterator::impar_iterator (){
-		it=NULL;
-		elvector=NULL;
-	}
-	conjunto<T,CMP>::const_impar_iterator::impar_iterator (const const_impar_iterator &x){
-		it=x.it;
-		elvector=x.elvector;
-	}
-	const T & conjunto<T,CMP>::const_impar_iterator::operator ∗ (){
-		return (*it);
-	}
-	const_impar_iterator & conjunto<T,CMP>::const_impar_iterator::operator++ (){
-		bool encontrado = false;
-		while(it < (*elvetor).size() && !encontrado){
-			it++;
-			if( (it.elvector->pos %2 )!= 0 )
-				encontrado=true;
-		}
-
-	}
-//este es el iterador post fijo es decir incrementa y devuelve el anterior (creo)
-	impar_iterator conjunto<T,CMP>::const_impar_iterator::operator++ (int i){
-		impar_iterator aux=this;
-		bool encontrado=false;
-		while(aux < (*elvetor).size() && !encontrado){
-			aux++;
-			if( (aux.elvector->pos %2 )!= 0 )
-				encontrado=true;
-		}
-		return this;
-	}
-	bool conjunto<T,CMP>::const_impar_iterator::operator== (const const_impar_iterator &x) const{
-		boolean iguales=true;
-		if(*it != *(x.it) && *elvector != *(x.elvector) )
-			iguales=false;
-
-		return iguales;
-	}
-
-	bool conjunto<T,CMP>::const_impar_iterator::operator!= (const const_impar_iterator &x) const{
-		return !(this == x);
-	}
-	impar_iterator & conjunto<T,CMP>::const_impar_iterator::operator= (const const_impar_iterator &x){
-			if(this != &x){
-				it=x.it;
-				elvector=x.elvector;
-			}
-			return *this;
-	}
-
-
 }
