@@ -196,7 +196,7 @@ public:
 		
 		iterator(const secure_iterator &  x){	// Transforma secure_iterator en iterator;
 			it = x.getIterador();
-			elvector = x.getVector();
+			(*elvector) = x.getVector();
 		}
 		
 		const T & operator*(){
@@ -210,7 +210,9 @@ public:
 				aux++;
 			}
 			
-			return aux;
+			it = aux;
+			
+			return it;
 		}
 		
 		iterator operator++(int i){
@@ -225,7 +227,9 @@ public:
 				aux--;
 			}
 			
-			return aux;
+			it = aux;
+			
+			return it;
 		}
 		
 		iterator operator--(int i){
@@ -237,7 +241,9 @@ public:
 				}
 			}
 			
-			return aux;
+			it = aux;
+			
+			return it;
 		}
 		
 		bool operator==(const iterator & x) const{
@@ -261,7 +267,106 @@ public:
 		}
 		
 		iterator & operator=(const iterator & x){
+			if(this != &x){
+				it = x.it;
+				(*elvector) = x.elvector;
+			}
+			
+			return it;
+		}
+		
+	public:
+		friend class conjunto<T,CMP>;
+		typename vector<T>::iterator it;
+		vector<T> *elvector;
+	};
+	
+	//	Const iterator
+	
+	class const_iterator{
+	public:
+		const_iterator(){
+			it = NULL;
+			elvector = NULL;
+		}
+		
+		const_iterator(const const_iterator &  x){
 			it = x.it;
+			elvector = x.elvector;
+		}
+		
+		const_iterator(const secure_iterator &  x){	// Transforma secure_iterator en iterator;
+			it = x.getIterador();
+			(*elvector) = x.getVector();
+		}
+		
+		const T & operator*(){
+			return (*it);
+		}
+		
+		const_iterator & operator++(){
+			typename vector<T>::iterator aux = it;
+			
+			if(aux != (*elvector).end()){
+				aux++;
+			}
+			
+			return aux;
+		}
+		
+		const_iterator operator++(int i){
+			if( (*elvector).size() > *(it).size() + i)
+				it = it.size() + i;
+		}
+		
+		const_iterator & operator--(){
+			typename vector<T>::iterator aux = it;
+			
+			if(aux != (*elvector).begin()){
+				aux--;
+			}
+			
+			return aux;
+		}
+		
+		const_iterator operator--(int i){
+			typename vector<T>::iterator aux = it;
+			
+			for(int j = 0;  j < i; j++){
+				if((aux - 1) != (*elvector).begin()){
+					aux--;
+				}
+			}
+			
+			it = aux;
+			
+			return it;
+		}
+		
+		bool operator==(const const_iterator & x) const{
+			bool same = false;
+			
+			if(it == x.it){
+				same = true;
+			}
+			
+			return same;
+		}
+		
+		bool operator!=(const const_iterator & x) const{
+			bool different = false;
+			
+			if(it != x.it){
+				different = true;
+			}
+			
+			return different;
+		}
+		
+		const_iterator & operator=(const const_iterator & x){
+			if(this != &x){
+				it = x.it;
+			}
 			
 			return it;
 		}
@@ -337,7 +442,11 @@ public:
 		}
 		
 		typename vector<T>::iterator getIterator(){
-			
+			return it;
+		}
+		
+		vector<T> getVector(){
+			return *elvector;
 		}
 	public:
 		friend class conjunto<T,CMP>;
