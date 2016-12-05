@@ -185,20 +185,24 @@ public:
 	 
 	 Devuelve el vector de todas las mutaciones.
 	 */
-	const vector<mutacion>  & getVM();
+	const vector<mutacion>  & getVM() const;
  
 	//Iterator normal
 	
 	class iterator{
 	public:
 		iterator(){
-			it = NULL;
-			elvector = NULL;
+			
 		}
 		
 		iterator(const iterator &  x){
 			it = x.it;
 			elvector = x.elvector;
+		}
+		
+		iterator(typename vector<T>::iterator x, vector<T> vm){
+			it = x;
+			elvector = &vm;
 		}
 		
 		iterator(const secure_iterator &  x){	// Transforma secure_iterator en iterator;
@@ -219,12 +223,12 @@ public:
 			
 			it = aux;
 			
-			return it;
+			return *this;
 		}
 		
 		iterator operator++(int i){
-			if( (*elvector).size() > *(it).size() + i)
-				it = it.size() + i;
+			if((it + i) < (*elvector).end())
+				it = it + i;
 		}
 		
 		iterator & operator--(){
@@ -250,7 +254,7 @@ public:
 			
 			it = aux;
 			
-			return it;
+			return *this;
 		}
 		
 		bool operator==(const iterator & x) const{
@@ -276,10 +280,10 @@ public:
 		iterator & operator=(const iterator & x){
 			if(this != &x){
 				it = x.it;
-				(*elvector) = x.elvector;
+				elvector = x.elvector;
 			}
 			
-			return it;
+			return *this;
 		}
 		
 	public:
@@ -293,8 +297,7 @@ public:
 	class const_iterator{
 	public:
 		const_iterator(){
-			it = NULL;
-			elvector = NULL;
+
 		}
 		
 		const_iterator(const const_iterator &  x){
@@ -329,9 +332,8 @@ public:
 		const_iterator & operator--(){
 			typename vector<T>::iterator aux = it;
 			
-			if(aux != (*elvector).begin()){
+			if(aux != (*elvector).begin())
 				aux--;
-			}
 			
 			return aux;
 		}
@@ -389,8 +391,7 @@ public:
 	class secure_iterator{
 	public:
 		secure_iterator() {
-			it = NULL;
-			elvector = NULL;
+			
 		}
 		
 		secure_iterator(const secure_iterator &  x) {
@@ -466,8 +467,7 @@ public:
 	class const_secure_iterator{
 	public:
 		const_secure_iterator() {
-			it = NULL;
-			elvector = NULL;
+
 		}
 		
 		const_secure_iterator(const const_secure_iterator &  x) {
@@ -544,8 +544,7 @@ public:
 	class impar_iterator{
 	public:
 		impar_iterator(){
-			it = NULL;
-			elvector = NULL;
+
 		}
 		
 		impar_iterator(const impar_iterator &  x){
@@ -581,7 +580,7 @@ public:
 		}
 		
 		bool operator!=(const impar_iterator & x) const{
-			return !(this == x);
+			return !(*this == x);
 		}
 		
 		impar_iterator & operator=(const impar_iterator & x){
@@ -606,8 +605,7 @@ public:
 	class const_impar_iterator{
 	public:
 		const_impar_iterator(){
-			it = NULL;
-			elvector = NULL;
+
 		}
 		
 		const_impar_iterator(const const_impar_iterator &  x){
