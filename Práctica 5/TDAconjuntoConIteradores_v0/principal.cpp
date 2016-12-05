@@ -73,7 +73,7 @@ int main(int argc, char *argv[]){
 	y.setPos(0);
 	y.setChr("4");
 	
-	cout << "En rango "<< cm.lower_bound(y)-cm.lower_bound(x)<< "pos inicio "<< cm.lower_bound(x)-cm.begin() << " pos fin "<<cm.lower_bound(y)-cm.begin()<< endl;
+	cout << "En rango " << cm.lower_bound(y) - cm.lower_bound(x) << "pos inicio " << cm.lower_bound(x)-cm.begin() << " pos fin " << cm.lower_bound(y) - cm.begin() << endl;
 	
 	cm.erase(cm.end() - 7); // borro
 	

@@ -28,8 +28,7 @@ using namespace std;
 
 
 template <typename T, class CMP>
-class conjunto
-{
+class conjunto{
 public:
 	typedef T value_type;
 	typedef unsigned int size_type;
@@ -179,6 +178,14 @@ public:
 	 */
 	iterator upper_bound (const value_type& val);
 	const_iterator upper_bound (const value_type& val) const;
+	
+	/**
+	 @brief Devuelve vm
+	 @returns vm vector de mutaciones
+	 
+	 Devuelve el vector de todas las mutaciones.
+	 */
+	const vector<mutacion>  & getVM();
  
 	//Iterator normal
 	
