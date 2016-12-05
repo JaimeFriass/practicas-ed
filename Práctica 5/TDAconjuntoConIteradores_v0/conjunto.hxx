@@ -66,7 +66,7 @@ typename conjunto<T,CMP>::size_type conjunto<T,CMP>::count (const conjunto<T,CMP
 
 
 template <typename T, typename CMP>
-pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (conjunto<T,CMP>::value_type& val) {
+pair <typename conjunto<typename conjunto<T,CMP>::iterator,bool>::iterator, bool> conjunto<T,CMP>::insert (conjunto<T,CMP>::value_type& val) {
 	pair<conjunto<T,CMP>::iterator, bool> par;
 	bool fin=false;
 	conjunto<T,CMP>::iterator it;
