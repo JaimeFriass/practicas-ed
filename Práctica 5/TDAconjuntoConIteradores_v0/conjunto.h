@@ -683,14 +683,6 @@ private:
 	friend class iterator;
 	vector<value_type> vm; // vector que almacena los elementos del conjunto
 	CMP comp; // criterio para guiar la ordenacion
-private:
-	friend class impar_iterator;
-	friend class secure_iterator;
-	friend class iterator;
-	vector<value_type> vm; // vector que almacena los elementos del conjunto
-	CMP comp; // criterio para guiar la ordenacion
-	
-	
 	
 	/** @brief Chequea el Invariante de la representacion
 	 @return true si el invariante es correcto, falso en caso contrario
