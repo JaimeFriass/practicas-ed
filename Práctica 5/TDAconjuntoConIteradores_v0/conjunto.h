@@ -578,7 +578,7 @@ public:
 
 			while(aux < (*elvector).size() && !encontrado){
 				++(*this);
-				if( (this.elvector -> pos % 2 ) != 0 )
+				if( ((*this).pos % 2 ) != 0 )
 					encontrado = true;
 			}
 
@@ -646,7 +646,7 @@ public:
 
 			while(aux < (*elvector).size() && !encontrado){
 				++(*this);
-				if( (this.elvector -> pos % 2 ) != 0 )
+				if( ((*this).pos % 2 ) != 0 )
 					encontrado = true;
 			}
 
