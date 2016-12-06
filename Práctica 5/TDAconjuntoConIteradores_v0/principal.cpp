@@ -6,6 +6,51 @@
 
 using namespace std;
 
+/*functor :conjunto de mutacion decreciente por cromosoma/posicion*/
+class DecrecienteChrPos{
+public:
+	bool operator()( const mutacion &a, const mutacion &b){
+		/* también podría ser : return !(a < b)*/
+		return ( ( a.getChr() < b.getChr() ) && ( a.getPos() < b.getPos() ) );
+	}
+};
+
+/*functor :conjunto de mutacion creciente por cromosoma/posicion*/
+class CrecienteChrPos{
+public:
+	bool operator()(const mutacion &a, const mutacion &b){
+		/* también podría ser : return !(a < b)*/
+		return !( ( a.getChr() < b.getChr() ) && ( a.getPos() < b.getPos() ) );
+	}
+};
+
+class CrecienteID{
+public:
+	bool operator()(const mutacion &a, const mutacion &b){
+		return (a.getID() < b.getID()); // devuelve verdadero si el ID de a precede al ID de b
+	}
+};
+
+class DecrecienteID{
+public:
+	bool operator()(const mutacion &a, const mutacion &b){
+		return !(a.getID() < b.getID()); // devuelve verdadero si el ID de a precede al ID de b
+	}
+};
+
+class CrecienteEnf{
+public:
+	bool operator()(const enfermedad &a, const enfermedad &b){
+		return (a < b);
+	}
+};
+
+class DecrecienteEnf{
+public:
+	bool operator()(const enfermedad &a, const enfermedad &b){
+		return !(a < b);
+	}
+};
 
 /** @brief lee un fichero de mutaciones, linea a linea
  @param[in] s nombre del fichero
@@ -36,7 +81,7 @@ bool load(conjunto<mutacion,CMP>  &  cm, const string & s) {
 			mutacion mut = mutacion(cadena);
 			//cout << mut<< endl;
 			// Insertar mutación en el conjunto
-			cm.insert( mut);
+			cm.insert(mut);
 			getline(fe,cadena,'\n');
 		}
 		
@@ -48,11 +93,23 @@ bool load(conjunto<mutacion,CMP>  &  cm, const string & s) {
 	fe.close();
 	return false;
 }
+template <typename T>
+
+int tamanio(T orig1,T orig2){
+	T aux= orig2;
+	int distancia = 0;
+	while (aux != orig1){
+		distancia++;
+		aux++;
+	}
+	return distancia;
+	
+}
 
 
 int main(int argc, char *argv[]){
 	
-	conjunto<mutacion,less<mutacion> > cm;
+	conjunto<mutacion,DecrecienteChrPos > cm;
 	load(cm,"clinvar_20160831.vcf");
 	
 	//Imprimir número de elementos almacenados en conjuntoMutaciones
@@ -63,7 +120,7 @@ int main(int argc, char *argv[]){
 	if (it == cm.end())
 		cout << "No está."<<endl;
 	else
-		cout << it->getID() << " "  << it->getPos() << endl;
+		cout << (*it).getID() << " "  << (*it).getPos() << endl;
 	
 	mutacion x,y;
 	
@@ -72,10 +129,12 @@ int main(int argc, char *argv[]){
 	
 	y.setPos(0);
 	y.setChr("4");
+
 	
-	cout << "En rango " << cm.lower_bound(y) - cm.lower_bound(x) << "pos inicio " << cm.lower_bound(x)-cm.begin() << " pos fin " << cm.lower_bound(y) - cm.begin() << endl;
 	
-	cm.erase(cm.end() - 7); // borro
+	cout << "En rango " << tamanio(cm.lower_bound(y),cm.lower_bound(x) )<< "pos inicio " << tamanio(cm.lower_bound(x),cm.begin() )<< " pos fin " << tamanio( cm.lower_bound(y), cm.begin() )<< endl;
+	
+	cm.erase(it); // borro
 	
 	cout << cm.size()<< endl;
 	cout << cm.erase(x) << endl;
@@ -107,8 +166,9 @@ int main(int argc, char *argv[]){
 	--sit;
 	
 	// Borro 10 elementos;
+	
 	for (int i = 0; i < 10; i++)
-		cmg.erase(cmg.end() - 1);
+		cmg.erase(--cmg.end());
 	
 	
 	cout << *sit << endl; // Iterador no valido, debe abortar

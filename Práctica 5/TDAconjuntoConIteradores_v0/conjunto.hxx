@@ -73,6 +73,7 @@ pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (const c
 	conjunto<T,CMP>::iterator it;
 	conjunto<T,CMP>::iterator principio(vm.begin(), vm);
 	conjunto<T,CMP>::iterator ultimo(vm.end(), vm);
+	conjunto<T,CMP>::iterator aux(find(val));
 	
 	//cerr << endl << "Dentro de conjunto::insert" << endl;
 	//cerr << "\tItero sobre el conjunto para encontrar su posición" << endl;
@@ -83,24 +84,25 @@ pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (const c
 	for(it = principio; it != ultimo && !fin; ){
 		//        for(it = vm.begin() ;it < vm.end() -1 && !fin; ){
 		//cerr << "\tElemento : "<<(*it).getID()<<endl;
-		if(comp(*it, val)){
+		if(comp(*it, aux)){
 			it++;
 			//cerr << "\tEs menor, avanzo it"<<endl;
 		}
-		else
-			if(!comp(*it, val) && !comp(val, *it)){        //son iguales
+		else{
+			if(!comp(*it, aux) && !comp(aux, *it)){        //son iguales
 				par.first = ultimo;
 				par.second = false;
 				fin = true;
 				//cerr << "\tEs igual. Termino sin insertar."<<endl;
 			}
 			else{
-				vm.push_back(val);
+				vm.push_back(aux);
 				par.second = true;
 				fin = true;
 				//cerr << "\tEs mayor. LO REEMPLAZO POR val"<<endl;
 				
 			}
+		}
 	}
 	
 	if(!fin) {//si no se insertó
@@ -108,7 +110,7 @@ pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (const c
 		//CC: OJO, así no se inserta, no me deja compilar:
 		//vm[vm.end()]=val;
 		//Así si:
-		vm.push_back(val);
+		vm.push_back(aux);
 		//o con insert , mirad manual. http://www.cplusplus.com/reference/vector/vector/insert/
 		par.first = ultimo;
 		par.second = true;
@@ -257,11 +259,14 @@ typename conjunto<T,CMP>::impar_iterator conjunto<T,CMP>::ibegin(){
 	aux.elvector = &vm;
 	
 	while(!encontrado && aux.it != vm.end() ){
-		aux++;
-		
-		if((*aux).pos % 2 == 0)
-			encontrado=true;
+		if((*aux).getPos() % 2 == 0){
+			encontrado = true;
+		}
+		else{
+			aux++;
+		}
 	}
+	
 	return aux;
 }
 
@@ -275,46 +280,57 @@ typename conjunto<T,CMP>::const_impar_iterator conjunto<T,CMP>::cibegin( ) const
 	aux.elvector = &vm;
 	
 	while(!encontrado && aux.it != vm.end() ){
-		aux++;
-		
-		if((*aux).pos % 2 == 0)
-			encontrado=true;
+		if((*aux).getPos() % 2 == 0){
+			encontrado = true;
+		}
+		else{
+			aux++;
+		}
 	}
+	
 	return aux;
 }
 
 template <typename T, typename CMP>
 
 typename conjunto<T,CMP>::impar_iterator conjunto<T,CMP>::iend(){
-	bool encontrado=false;
+	bool encontrado = false;
+	impar_iterator aux;
+	
+	aux.it = vm.end();
+	aux.elvector = &vm;
+	
+	while(!encontrado && aux.it != vm.begin() ){
+		if((*aux).getPos() % 2 == 0){
+			encontrado = true;
+		}
+		else{
+			aux.it--;
+		}
+	}
+	
+	return aux;
+}
+
+template <typename T, typename CMP>
+
+typename conjunto<T,CMP>::const_impar_iterator conjunto<T,CMP>::ciend( ) const{
+	bool encontrado = false;
 	const_impar_iterator aux;
 	
 	aux.it = vm.end();
 	aux.elvector = &vm;
 	
 	while(!encontrado && aux.it != vm.begin() ){
-		aux--;
-		if((*aux).pos %2 == 0)
-			encontrado=true;
+		if((*aux).getPos() % 2 == 0){
+			encontrado = true;
+		}
+		else{
+			aux.it--;
+		}
 	}
+	
 	return aux;
-	
-	
-}
-
-template <typename T, typename CMP>
-
-typename conjunto<T,CMP>::const_impar_iterator conjunto<T,CMP>::ciend( ) const{
-	bool encontrado=false;
-	const_impar_iterator aux;
-	
-	while(!encontrado && aux != vm.begin() ){
-		aux--;
-		if((*aux).pos %2 == 0)
-			encontrado=true;
-	}
-	return aux;
-	
 }
 
 template <typename T, typename CMP>
@@ -437,5 +453,5 @@ typename conjunto<T,CMP>::const_secure_iterator conjunto<T,CMP>::csend() const{
 	iter.elvector = &vm;
 	iter.it = vm.cend();
 	
-	return ite;
+	return iter;
 }
