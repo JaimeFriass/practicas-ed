@@ -17,7 +17,7 @@ using namespace std;
 /*! mutacion::mutacion,  .....
  *
  @todo Implementa esta clase, junto con su documentación asociada
- 
+
  */
 
 
@@ -32,9 +32,9 @@ private:
 	vector<float> caf;
 	vector<enfermedad> enfermedades;
 	vector<int> clnsig;
-	
+
 public:
-	
+
 	/**
 	 @brief Inicia una mutacion vacía.
 	 */
@@ -42,14 +42,14 @@ public:
 	/**
 	 @brief Crea una mutación a partir de otra.
 	 @param m 	mutación a copiar
-	 
+
 	 Copia los valores de la mutación pasada como argumento y crea una nueva a partir de ellos.
 	 */
 	mutacion(const mutacion& m);
 	/**
 	 @brief Crea una mutación a partir de un string.
 	 @param str 	cadena string con los datos miembro de la clase
-	 
+
 	 Se le pasa un string como argumento y se recorre este guardando los correspondientes datos miembro.
 	 */
 	mutacion(const string & str);   //para crear objeto mutacion a partir de la cadena que contiene una línea completa del fichero de entrada
@@ -98,7 +98,7 @@ public:
 	 @param clnsig	nuevo vector de enteros
 	 */
 	void setClnsig (const vector<int> & clnsig);
-	
+
 	/**
 	 @brief Devuelve el ID de la mutación
 	 @returns ID	valor del id de la mutación
@@ -144,7 +144,7 @@ public:
 	 @returns clnsig	vector de enteros con la relevancia clínica.
 	 */
 	const vector<int> & getClnsig () const;
-	
+
 	/**
 	 @brief Devuelve la relevancia clínica convertida en el string hola
 	 @returns hola	string con la relevancia clínica.
@@ -165,7 +165,7 @@ public:
 	 @returns hola	string con las enfermedades
 	 */
 	string imprime_Enfermedades()const;	//Lo mismo
-	
+
 	/**
 	 @brief Sobrecarga el operador = para ajustarlo a una mutación
 	 @param m	mutación a la que se iguala
@@ -184,7 +184,7 @@ public:
 	 @returns menor
 	 */
 	bool operator<(const mutacion & m) const;      //El orden viene determinado por Chr y pos. El primer criterio es el número de cromosoma. El orden para el número de cromosoma se rige por "1"<"2"<"3"<...<"22"<"X"<"Y"<"MT". Dos mutaciones del mismo cromosoma deben ordenarse según su posición, de menor posición a mayor (orden natural de enteros).
-	
+
 };
 
 /**
