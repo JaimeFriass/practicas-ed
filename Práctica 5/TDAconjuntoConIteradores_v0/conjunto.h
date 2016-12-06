@@ -218,7 +218,7 @@ public:
 			typename vector<T>::iterator aux = it;
 			
 			if(aux != (*elvector).end()){
-				aux++;
+				++aux;
 			}
 			
 			it = aux;
@@ -235,7 +235,7 @@ public:
 			typename vector<T>::iterator aux = it;
 			
 			if(aux != (*elvector).begin()){
-				aux--;
+				--aux;
 			}
 			
 			it = aux;
@@ -248,7 +248,7 @@ public:
 			
 			for(int j = 0;  j < i; j++){
 				if((aux - 1) != (*elvector).begin()){
-					aux--;
+					--aux;
 				}
 			}
 			
@@ -318,7 +318,7 @@ public:
 			typename vector<T>::iterator aux = it;
 			
 			if(aux != (*elvector).end()){
-				aux++;
+				++aux;
 			}
 			
 			return aux;
@@ -333,7 +333,7 @@ public:
 			typename vector<T>::iterator aux = it;
 			
 			if(aux != (*elvector).begin())
-				aux--;
+				--aux;
 			
 			return aux;
 		}
@@ -343,7 +343,7 @@ public:
 			
 			for(int j = 0;  j < i; j++){
 				if((aux - 1) != (*elvector).begin()){
-					aux--;
+					--aux;
 				}
 			}
 			
