@@ -539,134 +539,150 @@ public:
 	};
 	
 	
-	//Impar iterator
-	
+		//Impar iterator
+
 	class impar_iterator{
 	public:
 		impar_iterator(){
-
+			it = NULL;
+			elvector = NULL;
 		}
-		
+
 		impar_iterator(const impar_iterator &  x){
 			it = x.it;
 			elvector = x.elvector;
 		}
-		
+
 		const T & operator*(){
 			return (*it);
 		}
-		
+
 		impar_iterator & operator++(){
 			typename vector<T>::iterator aux;
 			bool encontrado = false;
-			
+
 			for(aux = it; aux < (*elvector).size() && !encontrado; aux++){
 				if(((*elvector).getPos()) % 2 != 0){ //posicion impar
 					encontrado = true;
 					it = aux;
 				}
 			}
-			
+
 			return it;
 		}
-		
+
 		impar_iterator operator++(int i){
-			if( (*elvector).size() > *(it).size() + i  && (*(it.size() + i)).pos % 2 != 0) //tenga posicion impar y no se salga
-				it = it.size() + i;
+			impar_iterator aux(*this);
+
+			bool encontrado = false;
+
+			while(aux < (*elvector).size() && !encontrado){
+				++(*this);
+				if( (this.elvector -> pos % 2 ) != 0 )
+					encontrado = true;
+			}
+
+			return aux;
 		}
-		
+
 		bool operator==(const impar_iterator & x) const{
 			return (*it == *(x.it) && *elvector == *(x.elvector));
 		}
-		
+
 		bool operator!=(const impar_iterator & x) const{
-			return !(*this == x);
+			return !(this == x);
 		}
-		
+
 		impar_iterator & operator=(const impar_iterator & x){
 			if(this != &x){
 				it = x.it;
 				elvector = x.elvector;
 			}
-			
+
 			return *this;
 		}
-		
+
 	public:
 		friend class conjunto<T,CMP>;
 		typename vector<T>::iterator it;
 		vector<T> *elvector;
 	};
-	
+
 	/* Clase impar iterator constante :
 	 Lo que no puede cambiar es el objeto apuntado,el iterador puede
 	 */
-	
+
 	class const_impar_iterator{
 	public:
 		const_impar_iterator(){
-
+			it = NULL;
+			elvector = NULL;
 		}
-		
+
 		const_impar_iterator(const const_impar_iterator &  x){
 			it = x.it;
 			elvector = x.elvector;
 		}
-		
+
 		const T & operator*(){
 			return (*it);
 		}
-		
+
 		const_impar_iterator & operator++(){
 			bool encontrado = false;
-			
+
 			while(it < (*elvector).size() && !encontrado){
 				it++;
-				
+
 				if( (it.elvector -> pos % 2 ) != 0 )
 					encontrado = true;
 			}
 		}
-		
+
 		//este es el iterador post fijo es decir incrementa y devuelve el anterior (creo)
 		const_impar_iterator operator++(int i){
-			impar_iterator aux = this;
-			bool encontrado = false;
-			
+				const_impar_iterator aux(*this);
+				bool encontrado = false;
+
 			while(aux < (*elvector).size() && !encontrado){
-				aux++;
-				
-				if( (aux.elvector -> pos % 2 ) != 0 )
+				++(*this);
+				if( (this.elvector -> pos % 2 ) != 0 )
 					encontrado = true;
 			}
-			
-			return this;
+
+			return aux;
 		}
-		
+
 		bool operator==(const const_impar_iterator & x) const{
 			return (*it != *(x.it) && *elvector != *(x.elvector));
 		}
-		
+
 		bool operator!=(const const_impar_iterator & x) const{
 			return !(this == x);
 		}
-		
+
 		const_impar_iterator & operator=(const const_impar_iterator & x){
 			if(this != &x){
 				it = x.it;
 				elvector = x.elvector;
 			}
-			
+
 			return *this;
 		}
-		
+
 	public:
 		friend class conjunto<T,CMP>;
 		typename vector<T>::iterator it;
 		vector<T> *elvector;
 	};
-	
-	
+
+
+private:
+	friend class impar_iterator;
+	friend class secure_iterator;
+	friend class iterator;
+	vector<value_type> vm; // vector que almacena los elementos del conjunto
+	CMP comp; // criterio para guiar la ordenacion
 private:
 	friend class impar_iterator;
 	friend class secure_iterator;
