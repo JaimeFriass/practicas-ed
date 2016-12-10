@@ -76,7 +76,7 @@ bool load(conjunto<mutacion,CMP>  &  cm, const string & s) {
 
 		//leo la tabla de mutaciones, una línea cada vez
 		while ( !fe.eof() ){
-			//cout << "leo:: "<< cadena << endl;
+			cout << "leo:: "<< cadena << endl;
 			// Invoco el constructor de mutación que recibe una cadena completa, la parsea y crea la mutación.
 			mutacion mut = mutacion(cadena);
 			//cout << mut<< endl;
