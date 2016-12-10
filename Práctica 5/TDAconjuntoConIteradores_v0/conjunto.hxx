@@ -72,6 +72,7 @@ pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (const T
 	pair<conjunto<T,CMP>::iterator, bool> par;
 	bool fin=false;
 	conjunto<T,CMP>::iterator it;
+
 	conjunto<T,CMP>::iterator principio(vm.begin(), vm);
 	conjunto<T,CMP>::iterator ultimo(vm.end(), vm);
 	T aux(val);
@@ -117,7 +118,6 @@ pair <typename conjunto<T,CMP>::iterator, bool> conjunto<T,CMP>::insert (const T
 		par.second = true;
 	}
 	return par;
-
 }
 
 /*
@@ -178,7 +178,7 @@ conjunto<T, CMP> & conjunto<T, CMP>::operator=( const conjunto<T, CMP> & org){
 
 		vm = org.getVM();
 	}
-
+  
 	return *this;
 }
 
@@ -391,6 +391,7 @@ bool conjunto<T,CMP>::cheq_rep() const{
 		chr1 = vm[i].getChr();
 		chr2 = vm[i + 1].getChr();
 
+
 		if (chr1 == chr2 && vm[i+1].getPos() > vm[i].getPos()){
 			invariante = false;
 		}
@@ -403,6 +404,59 @@ bool conjunto<T,CMP>::cheq_rep() const{
 	}
 
 	return invariante;
+}
+
+template <typename T, typename CMP>
+
+impar_iterator conjunto<T,CMP>::impar_iterator ibegin(){
+	bool encontrado=false;
+	impar_iterator aux=elvector.begin();
+
+	while(!encontrado && aux != elvector.end() ){
+		aux++;
+		if((*aux).pos %2 == 0)
+			encontrado=true;
+	}
+	return 	aux;
+}
+template <typename T, typename CMP>
+const_impar_iterator conjunto<T,CMP>::const_impar_iterator cibegin( ) const{
+	bool encontrado=false;
+	const_impar_iterator aux=elvector.begin();
+
+	while(!encontrado && aux != elvector.end() ){
+		aux++;
+		if((*aux).pos %2 == 0)
+			encontrado=true;
+	}
+	return 	aux;
+}
+template <typename T, typename CMP>
+impar_iterator conjunto<T,CMP>::impar_iterator iend(){
+	bool encontrado=false;
+	const_impar_iterator aux=elvector.end();
+
+	while(!encontrado && aux != elvector.begin() ){
+		aux--;
+		if((*aux).pos %2 == 0)
+			encontrado=true;
+	}
+	return 	aux;
+
+
+}
+template <typename T, typename CMP>
+const_impar_iterator conjunto<T,CMP>::const_impar_iterator ciend( ) const{
+	bool encontrado=false;
+	const_impar_iterator aux=elvector.end();
+
+	while(!encontrado && aux != elvector.begin() ){
+		aux--;
+		if((*aux).pos %2 == 0)
+			encontrado=true;
+	}
+	return 	aux;
+
 }
 
 template <typename T, typename CMP>
